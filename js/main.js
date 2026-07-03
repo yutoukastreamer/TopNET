@@ -17,35 +17,33 @@
   };
   onScrollHeader();
 
-  /* ---------- Hero frame reveal (CRH-style) ---------- */
+  /* ---------- Hero parallax (CRH-style: About slides UP over pinned hero) ---------- */
   const heroSection = document.getElementById('hero');
-  const heroFrame   = document.getElementById('heroFrame');
   const heroBg      = document.getElementById('heroBg');
-
-  const MAX_INSET  = 28; // px around the framed image
-  const MAX_RADIUS = 36;
+  const heroContent = heroSection ? heroSection.querySelector('.hero__content') : null;
+  const heroHint    = heroSection ? heroSection.querySelector('.hero__scroll') : null;
 
   const updateHero = () => {
-    if (!heroSection || !heroFrame) return;
-    const rect = heroSection.getBoundingClientRect();
-    // progress goes 0 → 1 as hero scrolls away
+    if (!heroSection) return;
+    const rect  = heroSection.getBoundingClientRect();
+    // hero-section is 200vh; scroll progress 0..1 across the 100vh sticky window
     const total = heroSection.offsetHeight - window.innerHeight;
     const p = clamp(-rect.top / total, 0, 1);
     const e = ease(p);
 
-    // frame shrinks slightly and gets rounded corners
-    const inset  = e * MAX_INSET;
-    const radius = e * MAX_RADIUS;
-    heroFrame.style.inset = `${inset}px`;
-    heroFrame.style.borderRadius = `${radius}px`;
-
-    // subtle parallax on background
+    // Background: slow downward drift + slight zoom, giving depth as About covers.
     if (heroBg) {
-      heroBg.style.transform = `translate3d(0, ${p * 40}px, 0) scale(${1 + p * 0.06})`;
+      heroBg.style.transform = `translate3d(0, ${e * 60}px, 0) scale(${1 + e * 0.08})`;
     }
-    // fade the scroll hint out
-    const hint = heroSection.querySelector('.hero__scroll');
-    if (hint) hint.style.opacity = String(1 - clamp(p * 2, 0, 1));
+    // Content: gentle upward parallax + fade so it looks like About slides on top.
+    if (heroContent) {
+      heroContent.style.transform = `translate3d(0, ${-e * 70}px, 0)`;
+      heroContent.style.opacity   = String(1 - clamp(p * 1.2, 0, 1));
+    }
+    // Scroll hint disappears quickly once user starts scrolling.
+    if (heroHint) {
+      heroHint.style.opacity = String(1 - clamp(p * 3, 0, 1));
+    }
   };
 
   /* ---------- Stats counters ---------- */

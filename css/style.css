@@ -174,28 +174,27 @@ button { font-family: inherit; cursor: pointer; }
 }
 
 /* =============================================================
-   BLOCK 1 — HERO (CRH-style frame reveal on scroll)
+   BLOCK 1 — HERO (CRH-style: hero is pinned, About slides UP OVER it)
    ============================================================= */
 .hero {
   position: relative;
-  height: 180vh;       /* extra height gives scroll range for the effect */
-  background: var(--bg);
+  height: 200vh;       /* scroll room so About overlaps hero */
+  background: var(--brand);
+  z-index: 1;
 }
 .hero__sticky {
   position: sticky;
   top: 0;
   height: 100vh;
-  padding: 0;
-  background: var(--bg);
   overflow: hidden;
+  background: var(--brand);
 }
 .hero__frame {
   position: absolute;
   inset: 0;
   overflow: hidden;
-  border-radius: 0;
-  will-change: inset, border-radius, transform;
   background: var(--brand);
+  will-change: transform;
 }
 .hero__bg {
   position: absolute;
@@ -328,13 +327,27 @@ button { font-family: inherit; cursor: pointer; }
 }
 
 /* =============================================================
-   BLOCK 2 — ABOUT (title / text)
+   BLOCK 2 — ABOUT (slides UP over the pinned hero — parallax overlap)
    ============================================================= */
 .about {
   position: relative;
   z-index: 2;
+  margin-top: -100vh;               /* pull About up to overlap the pinned hero */
   background: var(--bg);
-  padding: clamp(80px, 12vh, 160px) 0 clamp(80px, 12vh, 160px);
+  border-radius: 48px 48px 0 0;     /* rounded top edge — the "cover" */
+  padding: clamp(120px, 16vh, 200px) 0 clamp(80px, 12vh, 160px);
+  box-shadow: 0 -30px 60px -30px rgba(0, 0, 0, 0.35);
+  will-change: transform;
+}
+.about::before {
+  /* thin accent bar centered above the section, like a "grip" hint */
+  content: "";
+  position: absolute;
+  top: 20px; left: 50%;
+  width: 60px; height: 4px;
+  background: rgba(13, 27, 42, 0.12);
+  border-radius: 999px;
+  transform: translateX(-50%);
 }
 .about__grid {
   display: grid;
@@ -381,6 +394,7 @@ button { font-family: inherit; cursor: pointer; }
    ============================================================= */
 .network {
   position: relative;
+  z-index: 2;
   background: #050d17;
   color: #fff;
 }
