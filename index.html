@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TopNET GSI — Интернет-провайдер нового поколения</title>
+  <meta name="description" content="TopNET GSI — оператор связи. Высокоскоростной интернет, стабильная сеть, поддержка 24/7." />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><path d='M4 16 L16 4 L28 16 L16 28 Z' fill='none' stroke='%2300b0ff' stroke-width='3'/><circle cx='16' cy='16' r='4' fill='%2300b0ff'/></svg>" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- ================= HEADER ================= -->
+  <header class="header" id="site-header">
+    <div class="header__inner">
+      <a href="#" class="logo" aria-label="TopNET GSI">
+        <svg class="logo__mark" viewBox="0 0 32 32" aria-hidden="true">
+          <path d="M4 16 L16 4 L28 16 L16 28 Z" fill="none" stroke="currentColor" stroke-width="2"/>
+          <circle cx="16" cy="16" r="3" fill="currentColor"/>
+          <circle cx="4"  cy="16" r="2" fill="currentColor"/>
+          <circle cx="28" cy="16" r="2" fill="currentColor"/>
+          <circle cx="16" cy="4"  r="2" fill="currentColor"/>
+          <circle cx="16" cy="28" r="2" fill="currentColor"/>
+        </svg>
+        <span class="logo__text">TopNET<span class="logo__accent">GSI</span></span>
+      </a>
+      <nav class="nav" aria-label="Главное меню">
+        <a class="nav__link" href="#">Тарифы</a>
+        <a class="nav__link" href="#">Услуги</a>
+        <a class="nav__link" href="#">О компании</a>
+        <a class="nav__link" href="#">Новости</a>
+        <a class="nav__link" href="#">Контакты</a>
+      </nav>
+      <button class="burger" aria-label="Меню" type="button">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- ================= BLOCK 1 — HERO (CRH-style frame reveal) ================= -->
+  <section class="hero" id="hero">
+    <div class="hero__sticky">
+      <div class="hero__frame" id="heroFrame">
+        <div class="hero__bg" id="heroBg"></div>
+        <div class="hero__grid" aria-hidden="true"></div>
+        <div class="hero__overlay" aria-hidden="true"></div>
+        <div class="hero__content">
+          <p class="hero__eyebrow">Интернет · Сеть · Инфраструктура</p>
+          <h1 class="hero__title">
+            Скорость,<br>что меняет<br>правила
+          </h1>
+          <p class="hero__subtitle">
+            Высокоскоростной интернет нового поколения для дома, бизнеса и городской инфраструктуры.
+          </p>
+          <div class="hero__actions">
+            <a href="#" class="btn btn--primary">Выбрать тариф</a>
+            <a href="#" class="btn btn--ghost">Узнать больше</a>
+          </div>
+        </div>
+        <div class="hero__scroll" aria-hidden="true">
+          <div class="hero__scroll-line"><span></span></div>
+          <span class="hero__scroll-label">Прокрутите</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= BLOCK 2 — ABOUT (title left / text right) ================= -->
+  <section class="about" id="about">
+    <div class="container">
+      <div class="about__grid">
+        <div class="about__left">
+          <span class="section-eyebrow">О компании</span>
+          <h2 class="about__title">
+            Мы соединяем <br>людей и данные
+          </h2>
+        </div>
+        <div class="about__right">
+          <p class="about__lead">
+            TopNET GSI — оператор связи, объединяющий современные технологии передачи данных
+            с надежной инфраструктурой. Мы обеспечиваем стабильную связь для домов, офисов
+            и промышленных объектов.
+          </p>
+          <p class="about__text">
+            Наша миссия — предоставить каждому клиенту доступ к цифровому миру без ограничений:
+            с высокой скоростью, безопасностью и качеством сервиса, к которому мы стремимся ежедневно.
+            От оптики до облачных решений — все под контролем одной команды.
+          </p>
+          <a href="#" class="about__link">Подробнее о компании →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= NETWORK PARTICLES (Holcim-style pinned scroll) ================= -->
+  <section class="network" id="network">
+    <div class="network__scroll">
+      <div class="network__sticky">
+        <canvas id="networkCanvas" class="network__canvas"></canvas>
+        <div class="network__content">
+          <span class="section-eyebrow section-eyebrow--light">Наша сеть</span>
+          <h2 class="network__title">
+            Единая сеть,<br>тысячи узлов,<br>миллионы соединений
+          </h2>
+          <p class="network__text">
+            Прокрутите — и увидите, как формируется живая инфраструктура TopNET GSI:
+            каждая точка — это район, дом, офис, подключенный к магистрали.
+          </p>
+          <div class="network__progress">
+            <div class="network__progress-bar" id="netProgress"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= BLOCK 3 — STATS ================= -->
+  <section class="stats" id="stats">
+    <div class="container">
+      <div class="stats__head">
+        <span class="section-eyebrow">Показатели</span>
+        <h2 class="stats__title">Цифры, которым можно доверять</h2>
+      </div>
+      <div class="stats__grid">
+        <div class="stat">
+          <div class="stat__value" data-count="15">0</div>
+          <div class="stat__label">лет на&nbsp;рынке</div>
+          <div class="stat__bar"><span></span></div>
+        </div>
+        <div class="stat">
+          <div class="stat__value" data-count="120" data-suffix="K">0</div>
+          <div class="stat__label">довольных абонентов</div>
+          <div class="stat__bar"><span></span></div>
+        </div>
+        <div class="stat">
+          <div class="stat__value" data-count="450">0</div>
+          <div class="stat__label">км оптоволокна</div>
+          <div class="stat__bar"><span></span></div>
+        </div>
+        <div class="stat">
+          <div class="stat__value" data-count="99.9" data-suffix="%">0</div>
+          <div class="stat__label">аптайм сети</div>
+          <div class="stat__bar"><span></span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= BLOCK 4 — NEWS ================= -->
+  <section class="news" id="news">
+    <div class="container">
+      <div class="news__head">
+        <div>
+          <span class="section-eyebrow">Новости</span>
+          <h2 class="news__title">Что нового<br>в TopNET GSI</h2>
+        </div>
+        <a href="#" class="news__all">Все новости →</a>
+      </div>
+      <div class="news__grid">
+        <article class="news-card">
+          <a href="#" class="news-card__link">
+            <div class="news-card__media news-card__media--1">
+              <span class="news-card__tag">Инфраструктура</span>
+            </div>
+            <div class="news-card__body">
+              <span class="news-card__date">15 июня 2026</span>
+              <h3 class="news-card__title">Расширение сети в новом жилом квартале</h3>
+              <p class="news-card__excerpt">
+                Мы подключили новостройки к магистрали — до 1&nbsp;Гбит/с в каждой квартире.
+              </p>
+              <span class="news-card__more">Читать →</span>
+            </div>
+          </a>
+        </article>
+
+        <article class="news-card">
+          <a href="#" class="news-card__link">
+            <div class="news-card__media news-card__media--2">
+              <span class="news-card__tag">Технологии</span>
+            </div>
+            <div class="news-card__body">
+              <span class="news-card__date">28 мая 2026</span>
+              <h3 class="news-card__title">Модернизация ядра сети: IPv6 и BGP-Anycast</h3>
+              <p class="news-card__excerpt">
+                Обновили ядро — снижение задержек и повышенная отказоустойчивость для клиентов.
+              </p>
+              <span class="news-card__more">Читать →</span>
+            </div>
+          </a>
+        </article>
+
+        <article class="news-card">
+          <a href="#" class="news-card__link">
+            <div class="news-card__media news-card__media--3">
+              <span class="news-card__tag">События</span>
+            </div>
+            <div class="news-card__body">
+              <span class="news-card__date">10 мая 2026</span>
+              <h3 class="news-card__title">TopNET GSI — партнер городского IT-форума</h3>
+              <p class="news-card__excerpt">
+                Приняли участие в отраслевой конференции — доклад о цифровой инфраструктуре региона.
+              </p>
+              <span class="news-card__more">Читать →</span>
+            </div>
+          </a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= BLOCK 5 — FOOTER ================= -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__top">
+        <div class="footer__brand">
+          <a href="#" class="logo logo--footer">
+            <svg class="logo__mark" viewBox="0 0 32 32" aria-hidden="true">
+              <path d="M4 16 L16 4 L28 16 L16 28 Z" fill="none" stroke="currentColor" stroke-width="2"/>
+              <circle cx="16" cy="16" r="3" fill="currentColor"/>
+              <circle cx="4"  cy="16" r="2" fill="currentColor"/>
+              <circle cx="28" cy="16" r="2" fill="currentColor"/>
+              <circle cx="16" cy="4"  r="2" fill="currentColor"/>
+              <circle cx="16" cy="28" r="2" fill="currentColor"/>
+            </svg>
+            <span class="logo__text">TopNET<span class="logo__accent">GSI</span></span>
+          </a>
+          <p class="footer__tag">Оператор связи. Интернет и сетевая инфраструктура.</p>
+        </div>
+        <div class="footer__cols">
+          <div class="footer__col">
+            <h4 class="footer__col-title">Навигация</h4>
+            <a href="#">Тарифы</a>
+            <a href="#">Услуги</a>
+            <a href="#">О компании</a>
+            <a href="#">Новости</a>
+            <a href="#">Контакты</a>
+          </div>
+          <div class="footer__col">
+            <h4 class="footer__col-title">Клиентам</h4>
+            <a href="#">Личный кабинет</a>
+            <a href="#">Оплата</a>
+            <a href="#">Поддержка</a>
+            <a href="#">Документы</a>
+          </div>
+          <div class="footer__col">
+            <h4 class="footer__col-title">Контакты</h4>
+            <a href="tel:+70000000000">+7 (000) 000-00-00</a>
+            <a href="mailto:info@topnet-gsi.ru">info@topnet-gsi.ru</a>
+            <span>г. Название, ул. Примерная, 1</span>
+            <span>Пн–Вс: 09:00 — 21:00</span>
+          </div>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <span>© 2026 TopNET GSI. Все права защищены.</span>
+        <div class="footer__legal">
+          <a href="#">Политика конфиденциальности</a>
+          <a href="#">Публичная оферта</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js" defer></script>
+</body>
+</html>
