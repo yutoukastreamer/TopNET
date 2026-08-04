@@ -132,6 +132,17 @@ button { font-family: inherit; cursor: pointer; }
 }
 .logo__text { line-height: 1; }
 .logo__accent { color: var(--accent); margin-left: 2px; }
+
+.logo__img {
+  display: block;
+  height: 40px;
+  width: auto;
+  max-width: 220px;
+  object-fit: contain;
+  transition: height 0.35s ease;
+}
+.header.is-scrolled .logo__img { height: 32px; }
+.logo--footer .logo__img { height: 44px; }
 .logo--footer { color: #fff; }
 
 .nav {
@@ -238,12 +249,16 @@ button { font-family: inherit; cursor: pointer; }
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 0 clamp(24px, 6vw, 96px);
+  align-items: flex-start;
+  text-align: left;
+  padding-left: clamp(24px, 4vw, 64px);
+  padding-right: clamp(24px, 6vw, 96px);
   color: #fff;
   z-index: 2;
-  max-width: 1240px;
-  margin: 0 auto;
 }
+.hero__title,
+.hero__subtitle,
+.hero__actions { max-width: 720px; }
 .hero__eyebrow {
   font-size: 13px;
   letter-spacing: 0.22em;
