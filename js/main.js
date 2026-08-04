@@ -251,6 +251,38 @@
     }
   }
 
+  /* ---------- News carousel ---------- */
+  const newsViewport = document.querySelector('[data-news-viewport]');
+  const newsTrack    = document.querySelector('[data-news-track]');
+  const newsPrev     = document.querySelector('[data-news-prev]');
+  const newsNext     = document.querySelector('[data-news-next]');
+
+  if (newsViewport && newsTrack && newsPrev && newsNext) {
+    const cards = Array.from(newsTrack.children);
+    let index = 0;
+
+    const gap = () => parseFloat(getComputedStyle(newsTrack).columnGap || getComputedStyle(newsTrack).gap) || 0;
+    const cardStep = () => (cards[0] ? cards[0].getBoundingClientRect().width + gap() : 0);
+    const visibleCount = () => {
+      if (!cards[0]) return 1;
+      const w = cards[0].getBoundingClientRect().width + gap();
+      return Math.max(1, Math.round((newsViewport.getBoundingClientRect().width + gap()) / w));
+    };
+    const maxIndex = () => Math.max(0, cards.length - visibleCount());
+
+    const apply = () => {
+      index = clamp(index, 0, maxIndex());
+      newsTrack.style.transform = `translate3d(${-index * cardStep()}px, 0, 0)`;
+      newsPrev.disabled = index <= 0;
+      newsNext.disabled = index >= maxIndex();
+    };
+
+    newsPrev.addEventListener('click', () => { index -= 1; apply(); });
+    newsNext.addEventListener('click', () => { index += 1; apply(); });
+    window.addEventListener('resize', apply);
+    apply();
+  }
+
   /* ---------- Master scroll handler ---------- */
   let ticking = false;
   const onScroll = () => {
