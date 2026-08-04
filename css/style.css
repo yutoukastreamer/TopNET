@@ -200,8 +200,14 @@ button { font-family: inherit; cursor: pointer; }
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(ellipse at 20% 30%, rgba(0, 176, 255, 0.35) 0%, transparent 55%),
-    radial-gradient(ellipse at 80% 70%, rgba(67, 97, 238, 0.35) 0%, transparent 55%),
+    /* soft blue/purple glow on top for brand tint */
+    radial-gradient(ellipse at 20% 30%, rgba(0, 176, 255, 0.18) 0%, transparent 55%),
+    radial-gradient(ellipse at 80% 70%, rgba(67, 97, 238, 0.18) 0%, transparent 55%),
+    /* darkening gradient so hero title stays readable on any photo */
+    linear-gradient(180deg, rgba(5, 11, 20, 0.55) 0%, rgba(5, 11, 20, 0.35) 40%, rgba(5, 11, 20, 0.75) 100%),
+    /* actual hero photo */
+    url('../assets/images/hero.jpg') center/cover no-repeat,
+    /* fallback if image missing */
     linear-gradient(160deg, #06111c 0%, #0a1929 40%, #0e2a44 100%);
   will-change: transform;
 }
