@@ -5,7 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>TopNET GSI — Интернет-провайдер нового поколения</title>
   <meta name="description" content="TopNET GSI — оператор связи. Высокоскоростной интернет, стабильная сеть, поддержка 24/7." />
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><path d='M4 16 L16 4 L28 16 L16 28 Z' fill='none' stroke='%2300b0ff' stroke-width='3'/><circle cx='16' cy='16' r='4' fill='%2300b0ff'/></svg>" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><path d='M4 16 L16 4 L28 16 L16 28 Z' fill='none' stroke='%230E5AA7' stroke-width='3'/><circle cx='16' cy='16' r='4' fill='%230E5AA7'/></svg>" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
@@ -65,25 +68,55 @@
     </div>
   </section>
 
-  <!-- ================= BLOCK 2 — ABOUT (title left / text right) ================= -->
+  <!-- ================= BLOCK 2 — ABOUT ================= -->
   <section class="about" id="about">
     <div class="container">
-      <div class="about__grid">
-        <div class="about__left">
-          <h2 class="about__title">
-            Сеть ГНСС <br>станций ГСИ
+      <div class="about__stack">
+        <h2 class="about__title">
+          Сеть ГНСС <br>станций ГСИ
+        </h2>
+        <p class="about__lead">
+          Начиная с 2008 года, компанией ООО «ГЕОСТРОЙИЗЫСКАНИЯ» развивался проект постоянно действующих базовых станций ГНСС,
+          который был создан для привлечения внимания геодезистов к современным технологиям выполнения ГНСС измерений
+          в режиме реального времени и помощи при выполнении работ.
+        </p>
+        <p class="about__text">
+          На текущий момент компания ООО «ГЕОСТРОЙИЗЫСКАНИЯ» готова предложить исполнителям новый сервис,
+          позволяющий расширить возможности по работе в режиме реального времени и постобработки —
+          Topnet Live-Россия (ранее «Сеть постоянно действующих дифференциальных станций ГСИ»).
+        </p>
+        <a href="#" class="about__link">Подробнее о компании →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= BLOCK 2.5 — FEATURE (text + two images, CRH-style) ================= -->
+  <section class="feature" id="feature">
+    <div class="container">
+      <div class="feature__grid">
+        <div class="feature__text">
+          <h2 class="feature__title">
+            Технологии,<br>которым доверяют
           </h2>
+          <p class="feature__lead">
+            Наша инфраструктура строится на промышленных решениях лидеров рынка. Каждая станция
+            сети TopNET GSI — это надёжное оборудование, круглосуточный мониторинг и стабильные
+            корректирующие поправки для ваших измерений.
+          </p>
+          <p class="feature__text-body">
+            Работаем со всеми ГНСС-системами: GPS, ГЛОНАСС, Galileo, BeiDou. Поддерживаем открытые
+            форматы данных и стандартные протоколы обмена — легко интегрируется с любым современным
+            приёмником.
+          </p>
+          <a href="#" class="feature__link">Узнать больше →</a>
         </div>
-        <div class="about__right">
-          <p class="about__lead">
-            Начиная с 2008 года, компанией ООО «ГЕОСТРОЙИЗЫСКАНИЯ» развивался проект постоянно действующих базовых станций ГНСС, 
-            который был создан для привлечения внимания геодезистов к современным технологиям выполнения ГНСС измерений в режиме реального времени и помощи при выполнении работ.
-          </p>
-          <p class="about__text">
-            На текущий момент компания ООО «ГЕОСТРОЙИЗЫСКАНИЯ» готова предложить исполнителям новый сервис, позволяющий расширить возможности по работе в режиме реального времени 
-            и постобработки - Topnet Live-Россия (ранее Сеть постоянно действующих дифференциальных станций ГСИ).
-          </p>
-          <a href="#" class="about__link">Подробнее о компании →</a>
+        <div class="feature__images">
+          <figure class="feature__img feature__img--tall">
+            <span class="feature__img-placeholder">Изображение 1</span>
+          </figure>
+          <figure class="feature__img feature__img--wide">
+            <span class="feature__img-placeholder">Изображение 2</span>
+          </figure>
         </div>
       </div>
     </div>
@@ -141,7 +174,7 @@
               <p class="news-card__excerpt">
                 Мы подключили новостройки к магистрали — до 1&nbsp;Гбит/с в каждой квартире.
               </p>
-              <span class="news-card__more">Читать →</span>
+              <span class="news-card__more">Читать</span>
             </div>
           </a>
         </article>
@@ -157,7 +190,7 @@
               <p class="news-card__excerpt">
                 Обновили ядро — снижение задержек и повышенная отказоустойчивость для клиентов.
               </p>
-              <span class="news-card__more">Читать →</span>
+              <span class="news-card__more">Читать</span>
             </div>
           </a>
         </article>
@@ -173,7 +206,7 @@
               <p class="news-card__excerpt">
                 Приняли участие в отраслевой конференции — доклад о цифровой инфраструктуре региона.
               </p>
-              <span class="news-card__more">Читать →</span>
+              <span class="news-card__more">Читать</span>
             </div>
           </a>
         </article>
