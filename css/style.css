@@ -53,17 +53,23 @@ button { font-family: inherit; cursor: pointer; }
   --h2: clamp(2rem, 4vw, 3.4rem);
   --h3: 1.5rem;
 
+  /* dark section (см. референс) */
+  --dark:    #143A6B;
+  --dark-2:  #0d2749;
+
   /* layout */
   --radius: 10px;
   --radius-lg: 20px;
-  --container: 1240px;
-  --gutter: 24px;
+  --container: 1200px;
+  /* общий отступ от краёв экрана — текст никогда не прилипает к краю */
+  --gutter: clamp(20px, 5vw, 72px);
 }
 
 .container {
   max-width: var(--container);
   margin: 0 auto;
   padding: 0 var(--gutter);
+  width: 100%;
 }
 
 /* ---------- Section eyebrow ---------- */
@@ -249,12 +255,20 @@ button { font-family: inherit; cursor: pointer; }
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: flex-end;
-  text-align: right;
-  padding-left: clamp(24px, 6vw, 96px);
-  padding-right: clamp(24px, 4vw, 64px);
+  align-items: center;      /* блок текста центрируется по ширине страницы */
+  text-align: right;        /* текст hero — по правому краю */
   color: #fff;
   z-index: 2;
+}
+/* внутренняя обёртка = .container: те же отступы от краёв, что и у остальных секций */
+.hero__inner {
+  width: 100%;
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;    /* контент прижат к правому краю контейнера */
 }
 .hero__title,
 .hero__subtitle,
@@ -359,7 +373,7 @@ button { font-family: inherit; cursor: pointer; }
   margin-top: -100vh;               /* pull About up to overlap the pinned hero */
   background: var(--bg);
   border-radius: 48px 48px 0 0;     /* rounded top edge — the "cover" */
-  padding: clamp(120px, 16vh, 200px) 0 clamp(80px, 12vh, 160px);
+  padding: clamp(110px, 15vh, 180px) 0 clamp(64px, 9vh, 110px);
   box-shadow: 0 -30px 60px -30px rgba(0, 0, 0, 0.35);
   will-change: transform;
 }
@@ -373,145 +387,99 @@ button { font-family: inherit; cursor: pointer; }
   border-radius: 999px;
   transform: translateX(-50%);
 }
-.about__stack {
-  max-width: 780px;
-  margin-left: 0;
-  margin-right: auto;
-}
-.about__title {
-  font-size: var(--h2);
-  line-height: 1.05;
-  margin: 0 0 32px;
-  font-weight: 700;
-  letter-spacing: -0.025em;
-  color: var(--ink);
-}
-.about__lead {
-  font-size: clamp(1.15rem, 1.4vw, 1.35rem);
-  color: var(--ink);
-  margin: 0 0 24px;
-  font-weight: 500;
-  line-height: 1.5;
-}
-.about__text {
-  font-size: 1.05rem;
-  color: var(--ink-2);
-  margin: 0 0 32px;
-  line-height: 1.65;
-  max-width: 640px;
-}
-.about__link {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  color: var(--brand);
-  font-weight: 600;
-  border-bottom: 2px solid var(--accent);
-  padding-bottom: 4px;
-  transition: gap 0.25s ease, color 0.25s ease;
-}
-.about__link:hover { color: var(--accent); gap: 14px; }
-
 /* =============================================================
-   BLOCK 2.5 — FEATURE (text + two images, CRH-style)
+   SPLIT — универсальный блок «текст + изображение»
+   (светлая и тёмная версии по референсам)
    ============================================================= */
-.feature {
-  background: var(--bg-alt);
-  padding: clamp(80px, 12vh, 140px) 0;
-  position: relative;
-  z-index: 2;
-}
-.feature__grid {
+.split {
   display: grid;
-  grid-template-columns: 5fr 6fr;
-  gap: clamp(40px, 6vw, 96px);
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(32px, 5vw, 80px);
   align-items: center;
 }
-.feature__text {
-  max-width: 520px;
+.split__text {
+  max-width: 560px;
 }
-.feature__title {
+.split__title {
   font-size: var(--h2);
   line-height: 1.05;
   letter-spacing: -0.025em;
-  margin: 0 0 28px;
-  color: var(--ink);
+  margin: 0 0 32px;
   font-weight: 700;
 }
-.feature__lead {
-  font-size: clamp(1.1rem, 1.3vw, 1.25rem);
-  color: var(--ink);
-  margin: 0 0 20px;
-  line-height: 1.55;
-  font-weight: 500;
+.split__lead {
+  font-size: clamp(1.05rem, 1.25vw, 1.2rem);
+  margin: 0 0 24px;
+  line-height: 1.6;
 }
-.feature__text-body {
-  font-size: 1rem;
-  color: var(--ink-2);
-  margin: 0 0 32px;
-  line-height: 1.65;
-}
-.feature__link {
+.split__lead:last-of-type { margin-bottom: 32px; }
+.split__link {
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  color: var(--brand);
   font-weight: 600;
   font-size: 1rem;
-  border-bottom: 2px solid var(--accent);
   padding-bottom: 4px;
+  border-bottom: 2px solid var(--accent);
   transition: gap 0.25s ease, color 0.25s ease;
 }
-.feature__link:hover { color: var(--accent); gap: 16px; }
+.split__link:hover { gap: 16px; }
 
-.feature__images {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: 80px 260px 80px;
-  gap: 16px;
-}
-.feature__img {
+.split__media {
   margin: 0;
-  border-radius: var(--radius);
-  position: relative;
+  border-radius: var(--radius-lg);
   overflow: hidden;
-  border: 1px solid var(--line);
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  /* подложка на случай, если картинка ещё не загрузилась */
+  background: linear-gradient(135deg, var(--brand) 0%, #1a7fd4 60%, #4aa3e8 100%);
+  aspect-ratio: 3 / 2;
 }
-/* Tall on the left, spans all 3 rows */
-.feature__img--tall {
-  grid-column: 1;
-  grid-row: 1 / 4;
-  background: linear-gradient(135deg, #0E5AA7 0%, #1a7fd4 60%, #4aa3e8 100%);
+.split__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
 }
-/* Wide-shorter on the right, occupies only middle row so it sits centered next to the tall */
-.feature__img--wide {
-  grid-column: 2;
-  grid-row: 2;
-  background: linear-gradient(135deg, #F5871F 0%, #ffa845 100%);
+
+/* ---------- Светлая версия ---------- */
+.split--light .split__title { color: var(--ink); }
+.split--light .split__lead  { color: var(--ink-2); }
+.split--light .split__lead:first-of-type { color: var(--ink); }
+.split--light .split__link  { color: var(--brand); }
+.split--light .split__link:hover { color: var(--accent); }
+
+/* ---------- Тёмная версия ---------- */
+.split--dark .split__title { color: #fff; }
+.split--dark .split__lead  { color: rgba(255, 255, 255, 0.82); }
+.split--dark .split__link  { color: #fff; }
+.split--dark .split__link:hover { color: var(--accent); }
+/* по референсу: изображение слева, текст справа */
+.split--dark .split__media { grid-column: 1; grid-row: 1; }
+.split--dark .split__text  { grid-column: 2; grid-row: 1; }
+.split--dark .split__media {
+  background: linear-gradient(135deg, var(--dark-2) 0%, var(--dark) 100%);
+  box-shadow: 0 30px 60px -30px rgba(0, 0, 0, 0.6);
 }
-.feature__img::before {
-  content: "";
+
+/* =============================================================
+   BLOCK 4 — FEATURE (тёмная секция «Технологии, которым доверяют»)
+   ============================================================= */
+.feature {
+  position: relative;
+  z-index: 2;
+  background: var(--dark);
+  padding: clamp(80px, 13vh, 160px) 0;
+  overflow: hidden;
+}
+/* приглушённая фоновая «подложка» из того же изображения — как в референсе */
+.feature__backdrop {
   position: absolute;
   inset: 0;
-  background-image:
-    linear-gradient(rgba(255,255,255,0.08) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,0.08) 1px, transparent 1px);
-  background-size: 20px 20px;
-  opacity: 0.6;
+  background:
+    linear-gradient(180deg, rgba(20, 58, 107, 0.93) 0%, rgba(13, 39, 73, 0.95) 100%),
+    url('../assets/images/img-black.png') center/cover no-repeat;
   pointer-events: none;
 }
-.feature__img-placeholder {
-  position: relative;
-  z-index: 1;
-  color: rgba(255, 255, 255, 0.9);
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-}
+.feature .container { position: relative; z-index: 1; }
 
 /* =============================================================
    NETWORK PARTICLES (Holcim-style pinned scroll)
@@ -586,8 +554,10 @@ button { font-family: inherit; cursor: pointer; }
    BLOCK 3 — STATS
    ============================================================= */
 .stats {
-  padding: clamp(80px, 12vh, 140px) 0;
-  background: var(--bg-alt);
+  position: relative;
+  z-index: 2;
+  padding: 0 0 clamp(80px, 12vh, 140px);
+  background: var(--bg);   /* продолжение светлого блока «О сети» */
 }
 .stats__head {
   max-width: 720px;
@@ -865,7 +835,11 @@ button { font-family: inherit; cursor: pointer; }
 @media (max-width: 960px) {
   .nav { display: none; }
   .burger { display: inline-flex; }
-  .about__grid { grid-template-columns: 1fr; gap: 32px; }
+  .split { grid-template-columns: 1fr; gap: 36px; }
+  .split__text { max-width: none; }
+  /* на мобильных изображение всегда над текстом */
+  .split--dark .split__media { grid-column: 1; grid-row: 1; }
+  .split--dark .split__text  { grid-column: 1; grid-row: 2; }
   .stats__grid { grid-template-columns: repeat(2, 1fr); }
   .news__grid { grid-template-columns: 1fr; }
   .footer__top { grid-template-columns: 1fr; }
