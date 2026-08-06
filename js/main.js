@@ -8,6 +8,7 @@
     const clamp = (v, min, max) => Math.max(min, Math.min(max, v));
     const lerp  = (a, b, t) => a + (b - a) * t;
     const ease  = t => t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2;
+    const easeInOutCubic = t => t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
   
     /* ---------- Header: toggle scrolled state ---------- */
     const header = document.getElementById('site-header');
@@ -23,21 +24,113 @@
     const heroContent = heroSection ? heroSection.querySelector('.hero__content') : null;
     const heroHint    = heroSection ? heroSection.querySelector('.hero__scroll') : null;
   
+    /* Auto-snap: whenever About's top edge crosses the middle of the pinned hero
+       (p === 0.5), finish the movement in the direction the user is going —
+       down completes the lift (p → 1), up puts the hero back (p → 0).
+       Disabled for reduced motion. */
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    // Asymmetric hysteresis: the two trigger points differ, so hovering around
+    // one threshold can never re-fire the snap.
+    const SNAP_DOWN    = 0.50;  // scrolling down: About's edge at 50% of hero
+    const SNAP_UP      = 0.40;  // scrolling up: fires lower, at 40%
+    const SNAP_DUR     = 600;
+
+    const SNAP_GRACE   = 150;   // ignore the tail of the gesture that triggered us
+
+    let snapDownArmed = true;
+    let snapUpArmed   = true;
+    let snapping   = false;
+    let snapRAF    = 0;
+    let snapStart  = 0;
+    let snapDir    = 1;         // +1 snapping down, -1 snapping up
+    let prevWheel  = Infinity;  // for telling real input from decaying momentum
+    let lastScrollY = window.scrollY;
+
+    const cancelSnap = () => {
+      if (!snapping) return;
+      cancelAnimationFrame(snapRAF);
+      snapping = false;
+    };
+
+    const snapTo = (target) => {
+      if (Math.abs(target - window.scrollY) < 2) return;
+      snapping  = true;
+      snapDir   = Math.sign(target - window.scrollY);
+      snapStart = performance.now();
+      prevWheel = Infinity;
+
+      let from = 0;
+      let t0   = 0;
+
+      const step = (now) => {
+        if (!snapping) return;               // user took over
+        if (!t0) {
+          // First frame reads the *live* start state. Capturing it back in the
+          // scroll handler meant frame one scrolled back to a position one
+          // frame stale — that snap-back was the visible jerk.
+          t0 = snapStart = now;
+          from = window.scrollY;
+          if (Math.abs(target - from) < 2) { snapping = false; return; }
+          snapDir = Math.sign(target - from);
+        }
+
+        const live = window.scrollY;
+        if ((live - target) * snapDir >= 0) { snapping = false; return; } // momentum got us there
+
+        const t = clamp((now - t0) / SNAP_DUR, 0, 1);
+        const u = easeInOutCubic(t);
+        let y = from + (target - from) * u;
+
+        // Momentum can run ahead of the curve; follow it instead of pulling
+        // back (moving against snapDir is what reads as a jerk). Re-anchor so
+        // the curve still lands exactly on target at t === 1.
+        if ((live - y) * snapDir > 0) {
+          y = live;
+          if (u < 0.999) from = target - (target - live) / (1 - u);
+        }
+
+        window.scrollTo(0, y);
+        if (t < 1) snapRAF = requestAnimationFrame(step);
+        else snapping = false;
+      };
+
+      snapRAF = requestAnimationFrame(step);
+    };
+
     const updateHero = () => {
       if (!heroSection) return;
       const rect  = heroSection.getBoundingClientRect();
       // hero-section is 200vh; scroll progress 0..1 across the 100vh sticky window
       const total = heroSection.offsetHeight - window.innerHeight;
       const p = clamp(-rect.top / total, 0, 1);
-      const e = ease(p);
-  
-      // Background: slow downward drift + slight zoom, giving depth as About covers.
+
+      // Auto-snap in whichever direction the user is scrolling.
+      if (!reduceMotion.matches) {
+        // each direction re-arms only once p is past the *other* threshold
+        if (p < SNAP_UP)   snapDownArmed = true;
+        if (p > SNAP_DOWN) snapUpArmed   = true;
+
+        const top = window.scrollY + rect.top;   // scroll position where p === 0
+        if (!snapping) {
+          if (snapDownArmed && p >= SNAP_DOWN && p < 1 && window.scrollY > lastScrollY) {
+            snapDownArmed = false;
+            snapTo(top + total);                 // finish the lift
+          } else if (snapUpArmed && p <= SNAP_UP && p > 0 && window.scrollY < lastScrollY) {
+            snapUpArmed = false;
+            snapTo(top);                         // put the hero back
+          }
+        }
+      }
+
+      // Parallax is scroll-linked, so it maps linearly off p — easing a scroll
+      // position makes the velocity uneven and reads as stutter.
+      // Background: slow downward drift only; the zoom is a fixed scale in CSS.
       if (heroBg) {
-        heroBg.style.transform = `translate3d(0, ${e * 60}px, 0) scale(${1 + e * 0.08})`;
+        heroBg.style.transform = `translate3d(0, ${p * 60}px, 0) scale(1.08)`;
       }
       // Content: gentle upward parallax + fade so it looks like About slides on top.
       if (heroContent) {
-        heroContent.style.transform = `translate3d(0, ${-e * 70}px, 0)`;
+        heroContent.style.transform = `translate3d(0, ${-p * 70}px, 0)`;
         heroContent.style.opacity   = String(1 - clamp(p * 1.2, 0, 1));
       }
       // Scroll hint disappears quickly once user starts scrolling.
@@ -291,13 +384,32 @@
           onScrollHeader();
           updateHero();
           updateNetworkProgress();
+          lastScrollY = window.scrollY;
           ticking = false;
         });
         ticking = true;
       }
     };
-  
+
     window.addEventListener('scroll', onScroll, { passive: true });
+
+    /* Auto-snap yields to the user — but macOS momentum keeps firing `wheel`
+       for a while after the flick that triggered the snap, so only a *fresh*
+       gesture counts: an upward flick, or a delta bigger than the last one
+       (momentum only ever decays). */
+    const SNAP_KEYS = ['ArrowUp', 'ArrowDown', 'PageUp', 'PageDown', 'Home', 'End', ' '];
+    window.addEventListener('wheel', (ev) => {
+      if (!snapping) return;
+      if (performance.now() - snapStart < SNAP_GRACE) return;
+      const d = Math.abs(ev.deltaY);
+      // opposite to where we're snapping, or a delta bigger than the last one
+      if (Math.sign(ev.deltaY) === -snapDir || d > prevWheel + 0.5) cancelSnap();
+      prevWheel = d;
+    }, { passive: true });
+    window.addEventListener('touchstart', cancelSnap, { passive: true });
+    window.addEventListener('keydown', (ev) => {
+      if (SNAP_KEYS.includes(ev.key)) cancelSnap();
+    }, { passive: true });
     window.addEventListener('resize', () => {
       updateHero();
       updateNetworkProgress();
