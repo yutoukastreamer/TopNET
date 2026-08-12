@@ -311,8 +311,8 @@
             const alpha = t * 0.55 * a.appearFactor * b.appearFactor;
             if (alpha < 0.01) continue;
             const grad = ctx.createLinearGradient(a.x, a.y, b.x, b.y);
-            grad.addColorStop(0, `rgba(0, 176, 255, ${alpha})`);
-            grad.addColorStop(1, `rgba(111, 220, 255, ${alpha * 0.7})`);
+            grad.addColorStop(0, `rgba(14, 90, 167, ${alpha})`);
+            grad.addColorStop(1, `rgba(122, 164, 207, ${alpha * 0.7})`);
             ctx.strokeStyle = grad;
             ctx.lineWidth = 1;
             ctx.beginPath();
@@ -330,15 +330,15 @@
         // glow halo
         ctx.beginPath();
         const halo = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.radius * 4);
-        halo.addColorStop(0, `rgba(0, 176, 255, ${0.35 * p.appearFactor})`);
-        halo.addColorStop(1, 'rgba(0, 176, 255, 0)');
+        halo.addColorStop(0, `rgba(14, 90, 167, ${0.35 * p.appearFactor})`);
+        halo.addColorStop(1, 'rgba(14, 90, 167, 0)');
         ctx.fillStyle = halo;
         ctx.arc(p.x, p.y, p.radius * 4, 0, Math.PI * 2);
         ctx.fill();
   
         // node
         ctx.beginPath();
-        ctx.fillStyle = `rgba(220, 245, 255, ${alpha})`;
+        ctx.fillStyle = `rgba(207, 222, 237, ${alpha})`;
         ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
         ctx.fill();
       }

@@ -1,3 +1,8 @@
+/* базовый курсор */
+* {
+  cursor: default;
+}
+
 /* =============================================================
    TopNET GSI — Landing styles
    ============================================================= */
@@ -53,9 +58,9 @@ button { font-family: inherit; cursor: pointer; }
   --h2: clamp(2rem, 4vw, 3.4rem);
   --h3: 1.5rem;
 
-  /* dark section (см. референс) */
-  --dark:    #143A6B;
-  --dark-2:  #0d2749;
+  /* dark section (см. референс) — brand rule: тёмные секции = Text */
+  --dark:    #1A2733;
+  --dark-2:  #111921;
 
   /* layout */
   --radius: 10px;
@@ -92,8 +97,8 @@ button { font-family: inherit; cursor: pointer; }
   background: var(--accent);
   transform: translateY(-50%);
 }
-.section-eyebrow--light { color: #6fdcff; }
-.section-eyebrow--light::before { background: #6fdcff; }
+.section-eyebrow--light { color: var(--accent); }
+.section-eyebrow--light::before { background: var(--accent); }
 
 /* =============================================================
    HEADER
@@ -106,7 +111,7 @@ button { font-family: inherit; cursor: pointer; }
   transition: background 0.35s ease, backdrop-filter 0.35s ease, padding 0.35s ease;
 }
 .header.is-scrolled {
-  background: rgba(10, 25, 41, 0.78);
+  background: rgba(26, 39, 51, 0.78);
   backdrop-filter: saturate(140%) blur(14px);
   -webkit-backdrop-filter: saturate(140%) blur(14px);
   padding: 12px 0;
@@ -217,15 +222,15 @@ button { font-family: inherit; cursor: pointer; }
   position: absolute;
   inset: 0;
   background:
-    /* soft blue/purple glow on top for brand tint */
-    radial-gradient(ellipse at 20% 30%, rgba(0, 176, 255, 0.18) 0%, transparent 55%),
-    radial-gradient(ellipse at 80% 70%, rgba(67, 97, 238, 0.18) 0%, transparent 55%),
+    /* soft brand-tint glow on top (Primary + Accent) */
+    radial-gradient(ellipse at 20% 30%, rgba(14, 90, 167, 0.18) 0%, transparent 55%),
+    radial-gradient(ellipse at 80% 70%, rgba(245, 135, 31, 0.18) 0%, transparent 55%),
     /* darkening gradient so hero title stays readable on any photo */
-    linear-gradient(180deg, rgba(5, 11, 20, 0.55) 0%, rgba(5, 11, 20, 0.35) 40%, rgba(5, 11, 20, 0.75) 100%),
+    linear-gradient(180deg, rgba(26, 39, 51, 0.55) 0%, rgba(26, 39, 51, 0.35) 40%, rgba(26, 39, 51, 0.75) 100%),
     /* actual hero photo */
     url('../assets/images/hero.jpg') center/cover no-repeat,
     /* fallback if image missing */
-    linear-gradient(160deg, #06111c 0%, #0a1929 40%, #0e2a44 100%);
+    linear-gradient(160deg, #111921 0%, #1A2733 40%, #223449 100%);
   /* fixed overscale: JS only translates, so the layer is rasterized once
      instead of re-rasterizing on every new scale value */
   transform: scale(1.08);
@@ -251,7 +256,7 @@ button { font-family: inherit; cursor: pointer; }
 .hero__overlay {
   position: absolute; inset: 0;
   background:
-    linear-gradient(180deg, rgba(10, 25, 41, 0.55) 0%, transparent 40%, rgba(10, 25, 41, 0.6) 100%);
+    linear-gradient(180deg, rgba(26, 39, 51, 0.55) 0%, transparent 40%, rgba(26, 39, 51, 0.6) 100%);
   pointer-events: none;
 }
 
@@ -392,7 +397,7 @@ button { font-family: inherit; cursor: pointer; }
   position: absolute;
   top: 20px; left: 50%;
   width: 60px; height: 4px;
-  background: rgba(13, 27, 42, 0.12);
+  background: rgba(26, 39, 51, 0.12);
   border-radius: 999px;
   transform: translateX(-50%);
 }
@@ -422,24 +427,47 @@ button { font-family: inherit; cursor: pointer; }
   line-height: 1.6;
 }
 .split__lead:last-of-type { margin-bottom: 32px; }
-.split__link {
+/* "Подробнее" link component — arrow chip (same visual as .news-card__arrow,
+   reused here inline instead of overhanging a card corner) + text, one <a>. */
+.link-arrow {
   display: inline-flex;
   align-items: center;
-  gap: 10px;
+  gap: 14px;
   font-weight: 600;
   font-size: 1rem;
-  padding-bottom: 4px;
-  border-bottom: 2px solid var(--accent);
   transition: gap 0.25s ease, color 0.25s ease;
 }
-.split__link:hover { gap: 16px; }
+.link-arrow:hover { gap: 20px; }
+.link-arrow__chip {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 14px;
+  background: #FEEDDD;
+  /* accent tint at rest, matching .news-card__arrow's chip family */
+  color: var(--accent);
+  transition: background 0.3s ease, color 0.3s ease;
+}
+.link-arrow__chip svg {
+  width: 20px;
+  height: 20px;
+  display: block;
+  transition: transform 0.35s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.link-arrow:hover .link-arrow__chip,
+.link-arrow:focus-visible .link-arrow__chip { background: var(--accent); color: #fff; }
+.link-arrow:hover .link-arrow__chip svg,
+.link-arrow:focus-visible .link-arrow__chip svg { transform: translate(3px, -3px); }
 
 .split__media {
   margin: 0;
   border-radius: var(--radius-lg);
   overflow: hidden;
   /* подложка на случай, если картинка ещё не загрузилась */
-  background: linear-gradient(135deg, var(--brand) 0%, #1a7fd4 60%, #4aa3e8 100%);
+  background: linear-gradient(135deg, var(--brand) 0%, #4A83BD 60%, #7AA4CF 100%);
   aspect-ratio: 3 / 2;
 }
 .split__img {
@@ -447,20 +475,22 @@ button { font-family: inherit; cursor: pointer; }
   height: 100%;
   object-fit: cover;
   display: block;
+  transition: transform 0.5s ease-out;
 }
+.split__media:hover .split__img { transform: scale(1.05); }
 
 /* ---------- Светлая версия ---------- */
 .split--light .split__title { color: var(--ink); }
 .split--light .split__lead  { color: var(--ink-2); }
 .split--light .split__lead:first-of-type { color: var(--ink); }
-.split--light .split__link  { color: var(--brand); }
-.split--light .split__link:hover { color: var(--accent); }
+.split--light .link-arrow  { color: var(--brand); }
+.split--light .link-arrow:hover { color: var(--accent); }
 
 /* ---------- Тёмная версия ---------- */
 .split--dark .split__title { color: #fff; }
 .split--dark .split__lead  { color: rgba(255, 255, 255, 0.82); }
-.split--dark .split__link  { color: #fff; }
-.split--dark .split__link:hover { color: var(--accent); }
+.split--dark .link-arrow  { color: #fff; }
+.split--dark .link-arrow:hover { color: var(--accent); }
 /* по референсу: изображение слева, текст справа */
 .split--dark .split__media { grid-column: 1; grid-row: 1; }
 .split--dark .split__text  { grid-column: 2; grid-row: 1; }
@@ -484,7 +514,7 @@ button { font-family: inherit; cursor: pointer; }
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(180deg, rgba(20, 58, 107, 0.93) 0%, rgba(13, 39, 73, 0.95) 100%),
+    linear-gradient(180deg, rgba(26, 39, 51, 0.93) 0%, rgba(17, 25, 33, 0.95) 100%),
     url('../assets/images/img-black.png') center/cover no-repeat;
   pointer-events: none;
 }
@@ -496,7 +526,7 @@ button { font-family: inherit; cursor: pointer; }
 .network {
   position: relative;
   z-index: 2;
-  background: #050d17;
+  background: var(--ink);
   color: #fff;
 }
 .network__scroll {
@@ -508,7 +538,7 @@ button { font-family: inherit; cursor: pointer; }
   top: 0;
   height: 100vh;
   overflow: hidden;
-  background: radial-gradient(ellipse at 50% 50%, #0b1a2a 0%, #050d17 70%);
+  background: radial-gradient(ellipse at 50% 50%, #153B61 0%, var(--ink) 70%);
 }
 .network__canvas {
   position: absolute;
@@ -554,7 +584,7 @@ button { font-family: inherit; cursor: pointer; }
 .network__progress-bar {
   position: absolute;
   inset: 0 100% 0 0;
-  background: linear-gradient(90deg, var(--accent), #6fdcff);
+  background: linear-gradient(90deg, var(--accent), #F9B16D);
   border-radius: 2px;
   transition: right 0.05s linear;
 }
@@ -595,7 +625,7 @@ button { font-family: inherit; cursor: pointer; }
 }
 .stat:hover {
   transform: translateY(-4px);
-  box-shadow: 0 20px 40px -20px rgba(10, 25, 41, 0.25);
+  box-shadow: 0 20px 40px -20px rgba(26, 39, 51, 0.25);
 }
 .stat__value {
   font-size: clamp(2.6rem, 4vw, 3.6rem);
@@ -657,6 +687,10 @@ button { font-family: inherit; cursor: pointer; }
   align-items: center;
   gap: clamp(8px, 1.2vw, 16px);
   padding: 0 clamp(16px, 3vw, 40px);
+  /* capped like the rest of the site's grid so cards stop growing past
+     ~1200px viewports instead of stretching to fill ultra-wide screens */
+  max-width: var(--container);
+  margin: 0 auto;
 }
 /* padding + equal negative margin widen the clipping box so the arrow chip
    can overhang the card corner without being cut off, while the content box
@@ -686,7 +720,7 @@ button { font-family: inherit; cursor: pointer; }
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 6px 18px -12px rgba(10, 25, 41, 0.35);
+  box-shadow: 0 6px 18px -12px rgba(26, 39, 51, 0.35);
   transition: background 0.25s ease, color 0.25s ease, transform 0.25s ease, border-color 0.25s ease;
 }
 .news__nav svg {
@@ -722,8 +756,8 @@ button { font-family: inherit; cursor: pointer; }
   aspect-ratio: 3 / 4;
   border-radius: var(--radius-lg);
   overflow: hidden;
-  background: linear-gradient(135deg, #d4dde5 0%, #a9b6c4 55%, #7d8b9a 100%);
-  box-shadow: 0 20px 40px -24px rgba(10, 25, 41, 0.35);
+  background: linear-gradient(135deg, #CFDEED 0%, #93B5D7 55%, #568CC1 100%);
+  box-shadow: 0 20px 40px -24px rgba(26, 39, 51, 0.35);
 }
 /* subtle grid pattern on the placeholder */
 .news-card__media::before {
@@ -742,7 +776,7 @@ button { font-family: inherit; cursor: pointer; }
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, rgba(10, 25, 41, 0) 45%, rgba(10, 25, 41, 0.7) 100%);
+  background: linear-gradient(180deg, rgba(26, 39, 51, 0) 45%, rgba(26, 39, 51, 0.7) 100%);
   pointer-events: none;
 }
 /* full-card scrim that fades in on hover (reference: whole photo darkens) */
@@ -751,7 +785,7 @@ button { font-family: inherit; cursor: pointer; }
   position: absolute;
   inset: 0;
   border-radius: var(--radius-lg);
-  background: rgba(10, 25, 41, 0.55);
+  background: rgba(26, 39, 51, 0.55);
   opacity: 0;
   z-index: 1;
   pointer-events: none;
@@ -783,14 +817,14 @@ button { font-family: inherit; cursor: pointer; }
   height: clamp(52px, 4.4vw, 64px);
   border-radius: 20px;
   /* flat, fully opaque fill — the photo must not show through */
-  background: #E6E8EA;
+  background: #FEEDDD;
   box-shadow: 0 0 0 9px var(--bg);
-  color: #fff;
+  color: var(--accent);
   display: inline-flex;
   align-items: center;
   justify-content: center;
   z-index: 3;
-  transition: background 0.3s ease;
+  transition: background 0.3s ease, color 0.3s ease;
 }
 .news-card__arrow svg {
   width: 24px;
@@ -798,10 +832,11 @@ button { font-family: inherit; cursor: pointer; }
   display: block;
   transition: transform 0.35s cubic-bezier(0.2, 0.7, 0.2, 1);
 }
-/* on hover the chip darkens and the arrow drifts to its top-right corner */
+/* on hover the chip fills solid accent and the arrow drifts to its top-right corner */
 .news-card__link:hover .news-card__arrow,
 .news-card__link:focus-visible .news-card__arrow {
-  background: #9BA1A7;
+  background: var(--accent);
+  color: #fff;
 }
 .news-card__link:hover .news-card__arrow svg,
 .news-card__link:focus-visible .news-card__arrow svg {
@@ -825,7 +860,7 @@ button { font-family: inherit; cursor: pointer; }
   line-height: 1.15;
   font-weight: 700;
   letter-spacing: -0.015em;
-  text-shadow: 0 2px 12px rgba(10, 25, 41, 0.35);
+  text-shadow: 0 2px 12px rgba(26, 39, 51, 0.35);
 }
 .news-card__excerpt-wrap {
   display: grid;
@@ -936,4 +971,197 @@ button { font-family: inherit; cursor: pointer; }
   .news-card { flex-basis: 100%; }
   .news__carousel { padding: 0 8px; }
   .news__nav { width: 40px; height: 56px; }
+}
+
+/* =============================================================
+   BACKGROUND NETWORK — точки/дуги в боковых полях страницы.
+   Только отрисовка на canvas: layout и разметка секций не меняются.
+   ============================================================= */
+.net-bg {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  pointer-events: none;
+  /* выше фонов секций (z-index 1–2), ниже шапки (z-index 100) */
+  z-index: 3;
+}
+
+/* на узких экранах анимация не нужна */
+@media (max-width: 767px) {
+  .net-bg { display: none; }
+}
+
+/* уважаем системную настройку «уменьшить движение» */
+@media (prefers-reduced-motion: reduce) {
+  .net-bg { display: none; }
+}
+
+/* =============================================================
+   PAGE SWIPE — горизонтальный переход между страницами.
+   Трансформируется <body>, поэтому обёртка в разметке не нужна
+   (лишний контейнер с transform создал бы containing block
+   и задел бы sticky-hero и фиксированную шапку).
+   ============================================================= */
+/* ВАЖНО: только transition, без will-change/transform в состоянии покоя —
+   иначе body становится containing block и фиксированная шапка
+   и sticky-hero главной перестают работать. */
+.page-swipe body {
+  transition: transform 0.45s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+/* на время перехода прячем полосу прокрутки от уехавшего контента */
+html.is-swiping { overflow: hidden; }
+html.is-swiping body { overflow: hidden; }
+
+body.page-exit-left  { transform: translate3d(-100%, 0, 0); }
+body.page-exit-right { transform: translate3d(100%, 0, 0); }
+
+/* стартовые позиции въезда (снимаются скриптом в следующем кадре) */
+body.page-enter-from-right { transform: translate3d(100%, 0, 0); }
+body.page-enter-from-left  { transform: translate3d(-100%, 0, 0); }
+
+@media (prefers-reduced-motion: reduce) {
+  .page-swipe body { transition: none; }
+  body.page-exit-left,
+  body.page-exit-right,
+  body.page-enter-from-right,
+  body.page-enter-from-left { transform: none; }
+}
+
+/* =============================================================
+   CONTACTS PAGE — светлая страница «Контакты»
+   ============================================================= */
+/* шапка на светлой странице всегда с тёмной подложкой */
+.header--solid {
+  background: rgba(26, 39, 51, 0.92);
+  backdrop-filter: saturate(140%) blur(14px);
+  -webkit-backdrop-filter: saturate(140%) blur(14px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+.nav__link.is-active {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.14);
+}
+
+.contacts {
+  background: var(--bg);
+  color: var(--ink);
+  padding: clamp(120px, 18vh, 190px) 0 clamp(80px, 12vh, 130px);
+  min-height: 100vh;
+}
+.contacts__back {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: clamp(28px, 4vh, 44px);
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--brand);
+  font-size: 15px;
+  font-weight: 600;
+  transition: gap 0.25s ease, color 0.25s ease;
+}
+.contacts__back:hover { gap: 18px; color: var(--accent); }
+.contacts__back-chip {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 14px;
+  background: #FEEDDD;
+  color: var(--accent);
+  transition: background 0.3s ease, color 0.3s ease;
+}
+.contacts__back:hover .contacts__back-chip { background: var(--accent); color: #fff; }
+.contacts__back-chip svg { width: 20px; height: 20px; display: block; }
+
+.contacts__title {
+  font-size: var(--h2);
+  line-height: 1.05;
+  margin: 0 0 14px;
+  font-weight: 800;
+  letter-spacing: -0.025em;
+  color: var(--brand-2);
+}
+.contacts__lead {
+  max-width: 640px;
+  margin: 0 0 clamp(40px, 6vh, 64px);
+  font-size: clamp(1.05rem, 1.25vw, 1.2rem);
+  color: var(--ink-2);
+  line-height: 1.6;
+}
+
+.contacts__section-title {
+  font-size: 12px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent);
+  font-weight: 600;
+  margin: 0 0 20px;
+}
+.contacts__group { margin-bottom: clamp(48px, 7vh, 80px); }
+.contacts__group:last-of-type { margin-bottom: 0; }
+
+.contacts__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 20px;
+}
+.contact-card {
+  background: var(--bg-alt);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  padding: 28px;
+  box-shadow: 0 20px 40px -30px rgba(26, 39, 51, 0.35);
+}
+.contact-card__city {
+  margin: 0 0 18px;
+  font-size: 1.35rem;
+  font-weight: 700;
+  letter-spacing: -0.015em;
+  color: var(--ink);
+}
+.contact-card__row {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-bottom: 16px;
+}
+.contact-card__row:last-child { margin-bottom: 0; }
+.contact-card__label {
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+  font-weight: 600;
+}
+.contact-card__value {
+  font-size: 1rem;
+  color: var(--ink);
+  transition: color 0.2s ease;
+}
+a.contact-card__value:hover { color: var(--accent); }
+
+/* заготовка под будущие филиалы */
+.contact-card--empty {
+  border-style: dashed;
+  background: transparent;
+  box-shadow: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 180px;
+  color: var(--muted);
+  font-size: 0.95rem;
+  text-align: center;
+}
+
+.contacts__cta { margin-top: clamp(40px, 6vh, 64px); }
+
+@media (max-width: 560px) {
+  .contacts__grid { grid-template-columns: 1fr; }
 }

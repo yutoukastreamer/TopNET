@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="ru" class="page-swipe">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -13,6 +13,9 @@
 </head>
 <body>
 
+  <!-- фоновая «сеть» по бокам страницы (только отрисовка, layout не меняет) -->
+  <canvas class="net-bg" id="netBg" aria-hidden="true"></canvas>
+
   <!-- ================= HEADER ================= -->
   <header class="header" id="site-header">
     <div class="header__inner">
@@ -23,8 +26,8 @@
         <a class="nav__link" href="#">Описание</a>
         <a class="nav__link" href="#">Стоимость</a>
         <a class="nav__link" href="#">Новости</a>
-        <a class="nav__link" href="#">Контакты</a>
-        <a class="nav__link" href="#">Личный кабинет</a>
+        <a class="nav__link" href="contacts.html">Контакты</a>
+        <a class="nav__link" href="login.html">Личный кабинет</a>
       </nav>
       <button class="burger" aria-label="Меню" type="button">
         <span></span><span></span><span></span>
@@ -80,7 +83,14 @@
             позволяющий расширить возможности по работе в режиме реального времени и постобработки —
             Topnet Live-Россия (ранее «Сеть постоянно действующих дифференциальных станций ГСИ»).
           </p>
-          <a href="#" class="split__link">Подробнее о компании →</a>
+          <a href="#" class="link-arrow">
+            <span class="link-arrow__chip" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none">
+                <path d="M8 16 16 8M16 8H9.4M16 8v6.6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </span>
+            Подробнее о компании
+          </a>
         </div>
         <figure class="split__media">
           <img src="assets/images/img-wight.png" alt="" class="split__img" loading="lazy" />
@@ -137,7 +147,14 @@
             форматы данных и стандартные протоколы обмена — легко интегрируется с любым современным
             приёмником.
           </p>
-          <a href="#" class="split__link">Узнать больше →</a>
+          <a href="#" class="link-arrow">
+            <span class="link-arrow__chip" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none">
+                <path d="M8 16 16 8M16 8H9.4M16 8v6.6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </span>
+            Узнать больше
+          </a>
         </div>
       </div>
     </div>
@@ -147,7 +164,7 @@
   <section class="news" id="news">
     <div class="container">
       <div class="news__head">
-        <h2 class="news__title">Наши проекты<br>в действии</h2>
+        <h2 class="news__title">Последние<br>Новости</h2>
       </div>
     </div>
 
@@ -299,6 +316,9 @@
     </div>
   </footer>
 
+  <!-- page-swipe идёт первым: восстанавливает скролл до инициализации main.js -->
+  <script src="js/page-swipe.js" defer></script>
   <script src="js/main.js" defer></script>
+  <script src="js/net-bg.js" defer></script>
 </body>
 </html>
