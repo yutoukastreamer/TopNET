@@ -106,7 +106,8 @@ button { font-family: inherit; cursor: pointer; }
 .header {
   position: fixed;
   inset: 0 0 auto 0;
-  z-index: 100;
+  /* выше всех слоёв страницы, включая подвал и canvas-сети */
+  z-index: 1000;
   padding: 20px 0;
   transition: background 0.35s ease, backdrop-filter 0.35s ease, padding 0.35s ease;
 }
@@ -193,6 +194,62 @@ button { font-family: inherit; cursor: pointer; }
   width: 18px; height: 2px;
   background: #fff;
   border-radius: 2px;
+  transition:
+    width 0.3s cubic-bezier(0.2, 0.7, 0.2, 1),
+    height 0.3s cubic-bezier(0.2, 0.7, 0.2, 1),
+    border-radius 0.3s cubic-bezier(0.2, 0.7, 0.2, 1),
+    background 0.3s ease,
+    box-shadow 0.3s ease,
+    transform 0.3s cubic-bezier(0.2, 0.7, 0.2, 1),
+    opacity 0.2s ease;
+}
+.burger:hover { background: rgba(255,255,255,0.16); }
+
+/* открытое состояние: линии складываются в круг — он же кнопка закрытия */
+.header.is-menu-open .burger span:first-child,
+.header.is-menu-open .burger span:last-child {
+  opacity: 0;
+  transform: scaleX(0.2);
+}
+.header.is-menu-open .burger span:nth-child(2) {
+  width: 22px; height: 22px;
+  border-radius: 50%;
+  background: transparent;
+  box-shadow: inset 0 0 0 2px #fff;
+  transform: rotate(180deg);
+}
+
+/* ---------- выпадающее меню (ширины, где показан бургер) ---------- */
+@media (max-width: 960px) {
+  .header.is-menu-open .nav {
+    display: flex;
+    position: absolute;
+    top: 100%;
+    left: 0; right: 0;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 4px;
+    padding: 14px var(--gutter) 22px;
+    background: rgba(26, 39, 51, 0.96);
+    backdrop-filter: saturate(140%) blur(14px);
+    -webkit-backdrop-filter: saturate(140%) blur(14px);
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    box-shadow: 0 20px 40px -24px rgba(0,0,0,0.6);
+    animation: navDrop 0.28s cubic-bezier(0.2, 0.7, 0.2, 1);
+  }
+  .header.is-menu-open .nav__link {
+    border-radius: 12px;
+    padding: 14px 16px;
+    font-size: 16px;
+  }
+}
+@keyframes navDrop {
+  from { opacity: 0; transform: translateY(-10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .header.is-menu-open .nav { animation: none; }
+  .burger span { transition: none; }
 }
 
 /* =============================================================
@@ -886,9 +943,13 @@ button { font-family: inherit; cursor: pointer; }
    BLOCK 5 — FOOTER
    ============================================================= */
 .footer {
-  background: var(--brand);
-  color: rgba(255,255,255,0.7);
+  /* тот же цвет, что у шапки: rgba(26, 39, 51, …) = var(--dark) */
+  background: var(--dark);
+  color: rgba(255,255,255,0.78);
   padding: 80px 0 32px;
+  /* шапка (z-index 100) всегда остаётся выше подвала */
+  position: relative;
+  z-index: 0;
 }
 .footer__top {
   display: grid;
@@ -896,12 +957,12 @@ button { font-family: inherit; cursor: pointer; }
   gap: 60px;
   align-items: start;
   padding-bottom: 48px;
-  border-bottom: 1px solid rgba(255,255,255,0.08);
+  border-bottom: 1px solid rgba(255,255,255,0.12);
 }
 .footer__brand .logo { color: #fff; margin-bottom: 20px; }
 .footer__tag {
   max-width: 320px;
-  color: rgba(255,255,255,0.6);
+  color: rgba(255,255,255,0.72);
   font-size: 14px;
   margin: 0;
   line-height: 1.6;
@@ -920,13 +981,13 @@ button { font-family: inherit; cursor: pointer; }
   font-size: 12px;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: rgba(255,255,255,0.4);
+  color: rgba(255,255,255,0.58);
   font-weight: 600;
   margin: 0 0 10px;
 }
 .footer__col a,
 .footer__col span {
-  color: rgba(255,255,255,0.75);
+  color: rgba(255,255,255,0.84);
   font-size: 14px;
   transition: color 0.2s ease;
 }
@@ -940,7 +1001,7 @@ button { font-family: inherit; cursor: pointer; }
   flex-wrap: wrap;
   padding-top: 28px;
   font-size: 13px;
-  color: rgba(255,255,255,0.45);
+  color: rgba(255,255,255,0.62);
 }
 .footer__legal { display: flex; gap: 24px; flex-wrap: wrap; }
 .footer__legal a:hover { color: var(--accent); }
@@ -984,18 +1045,33 @@ button { font-family: inherit; cursor: pointer; }
   height: 100%;
   display: block;
   pointer-events: none;
-  /* выше фонов секций (z-index 1–2), ниже шапки (z-index 100) */
+  /* выше фонов секций (z-index 1–2), ниже шапки (z-index 100);
+     точки рисуются только в боковых полях за пределами --container,
+     поэтому слой физически не может попасть на текст и кнопки */
   z-index: 3;
+}
+
+/* сеть hero: внутри .hero__frame, ниже .hero__content (z-index 2) */
+.net-hero {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  pointer-events: none;
+  z-index: 1;
 }
 
 /* на узких экранах анимация не нужна */
 @media (max-width: 767px) {
-  .net-bg { display: none; }
+  .net-bg,
+  .net-hero { display: none; }
 }
 
 /* уважаем системную настройку «уменьшить движение» */
 @media (prefers-reduced-motion: reduce) {
-  .net-bg { display: none; }
+  .net-bg,
+  .net-hero { display: none; }
 }
 
 /* =============================================================
@@ -1033,7 +1109,10 @@ body.page-enter-from-left  { transform: translate3d(-100%, 0, 0); }
    CONTACTS PAGE — светлая страница «Контакты»
    ============================================================= */
 /* шапка на светлой странице всегда с тёмной подложкой */
-.header--solid {
+/* на светлой странице подложка одинаковая и до, и после скролла:
+   main.js вешает .is-scrolled и там, вид шапки от этого меняться не должен */
+.header--solid,
+.header--solid.is-scrolled {
   background: rgba(26, 39, 51, 0.92);
   backdrop-filter: saturate(140%) blur(14px);
   -webkit-backdrop-filter: saturate(140%) blur(14px);

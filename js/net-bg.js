@@ -1,5 +1,6 @@
 /* =============================================================
-   TopNET GSI — фоновая «сеть» поверх всего изображения HERO.
+   TopNET GSI — «сеть» по всей площади изображения HERO, слой лежит
+   ПОД контентом hero (заголовок, кнопки) — см. .net-hero в style.css.
    Только hero: слой плавно гаснет, пока белая плашка наезжает
    на hero, поэтому на остальных секциях точек нет вообще.
    Каждая точка живёт своим циклом (появление → пауза → угасание →
@@ -10,7 +11,8 @@
 (function () {
   'use strict';
 
-  const canvas = document.getElementById('netBg');
+  // холст живёт внутри .hero__frame, поэтому рисунок всегда под контентом hero
+  const canvas = document.getElementById('netHero');
   if (!canvas) return;
 
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');

@@ -13,9 +13,6 @@
 </head>
 <body>
 
-  <!-- фоновая «сеть» по бокам страницы (только отрисовка, layout не меняет) -->
-  <canvas class="net-bg" id="netBg" aria-hidden="true"></canvas>
-
   <!-- ================= HEADER ================= -->
   <header class="header" id="site-header">
     <div class="header__inner">
@@ -42,6 +39,8 @@
         <div class="hero__bg" id="heroBg"></div>
         <div class="hero__grid" aria-hidden="true"></div>
         <div class="hero__overlay" aria-hidden="true"></div>
+        <!-- сеть точек/связей hero: строго под контентом (z-index 1 против 2) -->
+        <canvas class="net-hero" id="netHero" aria-hidden="true"></canvas>
         <div class="hero__content">
           <div class="hero__inner">
             <h1 class="hero__title">

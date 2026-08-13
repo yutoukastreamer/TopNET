@@ -17,7 +17,51 @@
       else header.classList.remove('is-scrolled');
     };
     onScrollHeader();
-  
+
+    /* ---------- Burger menu (ширины, где .nav скрыта) ---------- */
+    const burger = header ? header.querySelector('.burger') : null;
+    const nav    = header ? header.querySelector('.nav') : null;
+
+    if (burger && nav) {
+      burger.setAttribute('aria-expanded', 'false');
+      burger.setAttribute('aria-controls', 'site-nav');
+      if (!nav.id) nav.id = 'site-nav';
+
+      const setMenu = (open) => {
+        header.classList.toggle('is-menu-open', open);
+        burger.setAttribute('aria-expanded', String(open));
+        burger.setAttribute('aria-label', open ? 'Закрыть меню' : 'Меню');
+      };
+      const isOpen = () => header.classList.contains('is-menu-open');
+
+      // тот же круг закрывает меню — отдельной кнопки не нужно
+      burger.addEventListener('click', (ev) => {
+        ev.stopPropagation();
+        setMenu(!isOpen());
+      });
+
+      // клик по ссылке — переход и закрытие (page-swipe отработает как обычно)
+      nav.addEventListener('click', (ev) => {
+        if (ev.target.closest('.nav__link')) setMenu(false);
+      });
+
+      // клик вне меню
+      document.addEventListener('click', (ev) => {
+        if (!isOpen()) return;
+        if (!ev.target.closest('.header')) setMenu(false);
+      });
+
+      document.addEventListener('keydown', (ev) => {
+        if (ev.key === 'Escape' && isOpen()) setMenu(false);
+      });
+
+      // вернулись на широкий экран — состояние сбрасываем
+      const wide = window.matchMedia('(min-width: 961px)');
+      const onWide = (e) => { if (e.matches) setMenu(false); };
+      if (wide.addEventListener) wide.addEventListener('change', onWide);
+      else wide.addListener(onWide);
+    }
+
     /* ---------- Hero parallax (CRH-style: About slides UP over pinned hero) ---------- */
     const heroSection = document.getElementById('hero');
     const heroBg      = document.getElementById('heroBg');
