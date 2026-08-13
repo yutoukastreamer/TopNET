@@ -1,21 +1,22 @@
 /* =============================================================
-   TopNET GSI — горизонтальный свайп-переход между страницами.
-   • уход:  body уезжает влево/вправо, затем переход по ссылке
-   • въезд: body приезжает с противоположной стороны
-   • позиция скролла главной хранится в sessionStorage и при
-     возврате восстанавливается мгновенно, без анимации
-   Трансформируется <body> — новых обёрток в разметке не требуется.
+   TopNET GSI — переход между главной и контактами.
+   Анимация горизонтального свайпа отключена (ANIMATE = false) —
+   переход происходит мгновенно, как обычная навигация по ссылке.
+   Позиция скролла главной по-прежнему хранится в sessionStorage
+   и восстанавливается при возврате.
    ============================================================= */
 
 (function () {
   'use strict';
 
+  const ANIMATE    = false; // включить обратно — вернуть true
   const DURATION   = 450;   // синхронно с transition в style.css
   const SAFETY     = 250;   // страховка поверх transitionend
   const SCROLL_KEY = 'topnet:indexScroll';
   const BACK_KEY   = 'topnet:returning';
 
-  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+  const reduceMotionMQ = window.matchMedia('(prefers-reduced-motion: reduce)');
+  const reduceMotion = { get matches() { return !ANIMATE || reduceMotionMQ.matches; } };
   const html = document.documentElement;
   const body = document.body;
 

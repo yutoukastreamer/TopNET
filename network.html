@@ -10,6 +10,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/network-page.css" />
 </head>
 <body>
 
@@ -118,18 +119,377 @@
     </div>
   </section>
 
-  <!-- ================= PAGE BODY ================= -->
-  <section class="page-body page-body--soft">
-    <div class="container">
-      <div class="page-placeholder">
-        <span class="page-placeholder__icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none"><circle cx="6" cy="7" r="2" stroke="currentColor" stroke-width="1.8"/><circle cx="18" cy="7" r="2" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="18" r="2" stroke="currentColor" stroke-width="1.8"/><path d="M7.6 8.4 10.4 16.4M16.4 8.4 13.6 16.4M8 7H16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
-        </span>
-        <h2 class="page-placeholder__title">Раздел наполняется</h2>
-        <p class="page-placeholder__text">Здесь скоро появится подробное описание того, как работает сеть и кому она подойдёт.</p>
+  <!-- ================= СВЕТЛАЯ ЧАСТЬ ================= -->
+  <div class="np-plate">
+
+    <!-- ---------- Липкие якоря ---------- -->
+    <nav class="np-anchors" aria-label="Разделы страницы">
+      <div class="container">
+        <div class="np-anchors__row">
+          <a class="anchor-chip is-active" href="#numbers">Цифры</a>
+          <a class="anchor-chip" href="#tech">Технологии</a>
+          <a class="anchor-chip" href="#access">Точки доступа</a>
+          <a class="anchor-chip" href="#join">Подключение</a>
+          <a class="anchor-chip" href="#audience">Для кого</a>
+        </div>
       </div>
-    </div>
-  </section>
+    </nav>
+
+    <!-- ---------- 1. Сеть в цифрах ---------- -->
+    <section class="np-section" id="numbers">
+      <div class="container">
+        <div class="np-head">
+          <p class="np-eyebrow">01 — факты</p>
+          <h2 class="np-title">Сеть в цифрах</h2>
+        </div>
+
+        <div class="odo-grid">
+          <article class="odo">
+            <span class="odo__value odo__value--date" data-count="2008" data-prefix="март " data-plain>март 0</span>
+            <span class="odo__label">основана</span>
+            <span class="odo__bar"><span></span></span>
+          </article>
+          <article class="odo">
+            <span class="odo__value" data-count="314">0</span>
+            <span class="odo__label">станций</span>
+            <span class="odo__bar"><span></span></span>
+          </article>
+          <article class="odo">
+            <span class="odo__value" data-count="66">0</span>
+            <span class="odo__label">регионов РФ</span>
+            <span class="odo__bar"><span></span></span>
+          </article>
+          <article class="odo">
+            <span class="odo__value" data-count="5381">0</span>
+            <span class="odo__label">пользователей</span>
+            <span class="odo__bar"><span></span></span>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ---------- 2. Технологии RTK и VRS ---------- -->
+    <section class="np-section" id="tech">
+      <div class="container">
+        <div class="np-head">
+          <p class="np-eyebrow">02 — как это работает</p>
+          <h2 class="np-title">Технологии RTK и VRS</h2>
+        </div>
+
+        <div class="tabs" role="tablist" aria-label="Технологии формирования поправок">
+          <button type="button" class="tab is-active" id="tabRtk" role="tab"
+                  aria-selected="true" aria-controls="panelRtk">RTK</button>
+          <button type="button" class="tab" id="tabVrs" role="tab"
+                  aria-selected="false" aria-controls="panelVrs" tabindex="-1">VRS</button>
+        </div>
+
+        <!-- RTK -->
+        <div class="tech tech__panel" id="panelRtk" role="tabpanel" aria-labelledby="tabRtk">
+          <div class="scheme">
+            <svg viewBox="0 0 460 260" role="img" aria-label="Схема RTK: одна базовая станция передаёт поправки роверу">
+              <line class="s-ground" x1="30" y1="212" x2="430" y2="212" stroke-width="1.5"/>
+
+              <!-- базовая станция -->
+              <g class="s-pop">
+                <path class="s-tower" d="M92 212 L108 140 M128 212 L112 140 M100 176h20"/>
+                <path class="s-tower" d="M110 140v-14"/>
+                <circle class="s-node" cx="110" cy="120" r="6"/>
+              </g>
+              <circle class="s-wave" cx="110" cy="120" r="18"/>
+              <circle class="s-wave s-wave--2" cx="110" cy="120" r="26"/>
+
+              <!-- поправки -->
+              <path class="s-link" d="M124 116 Q235 52 344 128"/>
+
+              <!-- ровер -->
+              <g class="s-pop s-pop--4">
+                <path class="s-rover" d="M352 212v-58"/>
+                <path class="s-rover" d="M340 212h24"/>
+                <circle class="s-node" cx="352" cy="140" r="7"/>
+              </g>
+
+              <!-- расстояние -->
+              <path class="s-dim" d="M110 236h242"/>
+              <g class="s-fade">
+                <path class="s-dim" d="M110 231v10M352 231v10" stroke-dasharray="0"/>
+                <text class="s-label s-label--accent" x="231" y="254" text-anchor="middle">расстояние до станции</text>
+              </g>
+              <text class="s-label s-fade" x="110" y="94" text-anchor="middle" dy="-14">базовая станция</text>
+              <text class="s-label s-fade" x="352" y="128" text-anchor="middle" dy="-14">ровер</text>
+            </svg>
+          </div>
+
+          <div class="tech__text">
+            <h3 class="tech__text-title">RTK — поправки от ближайшей станции</h3>
+            <p>
+              Поправки передаются в реальном времени от ближайшей базовой станции сети.
+            </p>
+            <p>
+              Точность зависит от удаления ровера от станции.
+            </p>
+            <span class="tech__note">1 станция → ровер</span>
+          </div>
+        </div>
+
+        <!-- VRS -->
+        <div class="tech tech__panel" id="panelVrs" role="tabpanel" aria-labelledby="tabVrs" hidden>
+          <div class="scheme">
+            <svg viewBox="0 0 460 260" role="img" aria-label="Схема VRS: три станции формируют виртуальную станцию рядом с ровером">
+              <line class="s-ground" x1="30" y1="228" x2="430" y2="228" stroke-width="1.5"/>
+
+              <!-- три станции -->
+              <g class="s-pop">
+                <path class="s-tower" d="M52 150 L64 96 M78 150 L68 96 M58 124h14"/>
+                <circle class="s-node" cx="66" cy="88" r="5.5"/>
+              </g>
+              <g class="s-pop s-pop--2">
+                <path class="s-tower" d="M52 228 L64 178 M78 228 L68 178 M58 204h14"/>
+                <circle class="s-node" cx="66" cy="170" r="5.5"/>
+              </g>
+              <g class="s-pop s-pop--3">
+                <path class="s-tower" d="M382 150 L394 96 M408 150 L398 96 M388 124h14"/>
+                <circle class="s-node" cx="396" cy="88" r="5.5"/>
+              </g>
+
+              <!-- связи станций с виртуальной -->
+              <path class="s-link" d="M74 92 Q150 100 208 130"/>
+              <path class="s-link s-link--2" d="M74 168 Q150 160 208 142"/>
+              <path class="s-link s-link--3" d="M388 92 Q300 96 236 128"/>
+
+              <!-- виртуальная станция -->
+              <g class="s-pop s-pop--4">
+                <circle class="s-vrs" cx="222" cy="136" r="24"/>
+                <circle class="s-node" cx="222" cy="136" r="4" fill="#F5871F"/>
+              </g>
+
+              <!-- к роверу -->
+              <path class="s-link s-link--accent s-link--out" d="M240 152 Q272 186 296 196"/>
+
+              <!-- ровер -->
+              <g class="s-pop s-pop--5">
+                <path class="s-rover" d="M308 228v-38"/>
+                <path class="s-rover" d="M296 228h24"/>
+                <circle class="s-node" cx="308" cy="180" r="6"/>
+              </g>
+
+              <!-- база между станциями -->
+              <path class="s-dim" d="M66 62h330"/>
+              <g class="s-fade">
+                <path class="s-dim" d="M66 57v10M396 57v10" stroke-dasharray="0"/>
+                <text class="s-label s-label--accent" x="231" y="50" text-anchor="middle">не более 75 км между станциями</text>
+              </g>
+              <text class="s-label s-fade" x="166" y="202" text-anchor="middle">виртуальная станция</text>
+              <text class="s-label s-fade" x="352" y="170" text-anchor="middle">ровер</text>
+            </svg>
+          </div>
+
+          <div class="tech__text">
+            <h3 class="tech__text-title">VRS — поправки от виртуальной станции</h3>
+            <p>
+              Поправки формируются виртуальной станцией, которая создаётся по нескольким ближайшим
+              базовым станциям сети.
+            </p>
+            <p>
+              Точность зависит от расстояния между станциями — не более 75 км — и от состояния ионосферы.
+              Вокруг ровера должно быть не менее трёх станций.
+            </p>
+            <span class="tech__note">3 станции → виртуальная → ровер</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ---------- 3. Точки доступа и NTRIP ---------- -->
+    <section class="np-section" id="access">
+      <div class="container">
+        <div class="np-head">
+          <p class="np-eyebrow">03 — доступ к потоку</p>
+          <h2 class="np-title">Точки доступа и NTRIP</h2>
+          <p class="np-lead">
+            Сеть транслирует поправки по протоколу NTRIP.
+          </p>
+        </div>
+
+        <div class="ntrip">
+          <div class="ntrip__flow">
+            <div class="ntrip__step">
+              <span class="ntrip__num">1</span>
+              <span>Пользователь выбирает точку доступа (Mountpoint).</span>
+            </div>
+            <div class="ntrip__step">
+              <span class="ntrip__num">2</span>
+              <span>Сервер проверяет логин и пароль.</span>
+            </div>
+            <div class="ntrip__step">
+              <span class="ntrip__num">3</span>
+              <span>Пользователь подключается к потоку поправок.</span>
+            </div>
+            <div class="ntrip__step ntrip__step--deny">
+              <span class="ntrip__num">!</span>
+              <span>Без активной подписки — отказ в подключении.</span>
+            </div>
+          </div>
+
+          <div class="mount-box">
+            <p class="mount-box__hint">Имя точки доступа — наведите или нажмите на сегмент</p>
+
+            <div class="mount" role="group" aria-label="Разбор имени точки доступа МСК50Z1RTKPlus">
+              <button type="button" class="mount__seg mount__seg--msk is-active" data-seg="msk">МСК50</button>
+              <button type="button" class="mount__seg mount__seg--zone" data-seg="zone">Z1</button>
+              <button type="button" class="mount__seg mount__seg--tech" data-seg="tech">RTK</button>
+              <button type="button" class="mount__seg mount__seg--plus" data-seg="plus">Plus</button>
+            </div>
+
+            <div class="mount__desc" aria-live="polite">
+              <div class="mount__item is-active" data-for="msk">
+                <h3>МСК50 — местная система координат</h3>
+                <p>
+                  Параметры местной системы координат транслируются в потоке.
+                  Если МСК в начале имени нет — поправки передаются без местной СК.
+                </p>
+              </div>
+              <div class="mount__item" data-for="zone">
+                <h3>Z1 — номер зоны</h3>
+                <p>Номер зоны указывается после буквы Z.</p>
+              </div>
+              <div class="mount__item" data-for="tech">
+                <h3>RTK — технология формирования поправок</h3>
+                <p>Технология, по которой формируются поправки: RTK или VRS.</p>
+              </div>
+              <div class="mount__item" data-for="plus">
+                <h3>Plus — расширенный состав спутников</h3>
+                <p>Кроме GPS и ГЛОНАСС добавляются Beidou и Galileo.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ---------- 4. Условия подключения ---------- -->
+    <section class="np-section" id="join">
+      <div class="container">
+        <div class="np-head">
+          <p class="np-eyebrow">04 — как начать</p>
+          <h2 class="np-title">Условия подключения</h2>
+        </div>
+
+        <ol class="steps">
+          <li class="step">
+            <span class="step__num">Шаг 1</span>
+            <p class="step__text"><a href="register.html">Регистрация</a> на сайте.</p>
+          </li>
+          <li class="step">
+            <span class="step__num">Шаг 2</span>
+            <p class="step__text">На почту приходят пробный период 14 дней и параметры подключения.</p>
+          </li>
+          <li class="step">
+            <span class="step__num">Шаг 3</span>
+            <p class="step__text">
+              Пользователям Topcon и Sokkia: прислать данные о приборах на
+              <a href="mailto:topnet@gsi.ru">topnet@gsi.ru</a> — дополнительные 14 дней.
+            </p>
+          </li>
+          <li class="step">
+            <span class="step__num">Шаг 4</span>
+            <p class="step__text">
+              После пробного периода — выбрать <a href="tariffs.html">тариф</a> и запросить счёт.
+              Для физических лиц и ИП доступна оплата картой.
+            </p>
+          </li>
+          <li class="step">
+            <span class="step__num">Шаг 5</span>
+            <p class="step__text">
+              После оплаты — активировать подписку в <a href="login.html">Личном кабинете</a>
+              или через менеджера.
+            </p>
+          </li>
+        </ol>
+        <p class="steps__note">При первом запросе счёта нужны реквизиты организации.</p>
+      </div>
+    </section>
+
+    <!-- ---------- 5. Для кого ---------- -->
+    <section class="np-section" id="audience">
+      <div class="container">
+        <div class="np-head">
+          <p class="np-eyebrow">05 — применение</p>
+          <h2 class="np-title">Для кого</h2>
+        </div>
+
+        <div class="who-grid">
+          <article class="who">
+            <span class="who__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none">
+                <path d="M12 3v4M12 17v4M3 12h4M17 12h4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                <circle cx="12" cy="12" r="5" stroke="currentColor" stroke-width="1.8"/>
+              </svg>
+            </span>
+            <h3 class="who__title">Геодезия и изыскания</h3>
+            <p class="who__text">Съёмка и вынос в натуру с поправками в реальном времени.</p>
+          </article>
+
+          <article class="who">
+            <span class="who__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none">
+                <path d="M4 5h16v14H4V5Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+                <path d="M4 12h16M12 5v14" stroke="currentColor" stroke-width="1.8"/>
+              </svg>
+            </span>
+            <h3 class="who__title">Кадастр</h3>
+            <p class="who__text">Определение координат границ земельных участков.</p>
+          </article>
+
+          <article class="who">
+            <span class="who__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none">
+                <path d="M4 20V9l8-5 8 5v11" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+                <path d="M9.5 20v-6h5v6" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+              </svg>
+            </span>
+            <h3 class="who__title">Строительство</h3>
+            <p class="who__text">Разбивочные работы и контроль положения на площадке.</p>
+          </article>
+
+          <article class="who">
+            <span class="who__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none">
+                <path d="M3 18h18" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                <path d="M5 18c0-5 3-8 7-8s7 3 7 8" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+                <path d="M12 10V5M12 5l4 2M12 5 8 7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </span>
+            <h3 class="who__title">Сельское хозяйство</h3>
+            <p class="who__text">Точное вождение техники при работах в поле.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ---------- 6. Анонс покрытия + CTA ---------- -->
+    <section class="np-section">
+      <div class="container">
+        <div class="promo">
+          <div>
+            <h2 class="promo__title">Зона покрытия</h2>
+            <p class="promo__text">
+              Карта постоянно действующих базовых станций и территория, на которой доступны поправки.
+            </p>
+          </div>
+          <a href="coverage.html" class="btn btn--primary">Смотреть зону покрытия</a>
+        </div>
+
+        <div class="cta-dark">
+          <div>
+            <h2 class="cta-dark__title">Готовы подключиться?</h2>
+            <p class="cta-dark__text">Пробный период — 14 дней, параметры подключения придут на почту.</p>
+          </div>
+          <a href="register.html" class="btn btn--accent">Подключиться</a>
+        </div>
+      </div>
+    </section>
+
+  </div>
 
   <footer class="footer">
     <div class="container">
@@ -178,5 +538,6 @@
   <script src="js/main.js" defer></script>
   <!-- network.js — только фоновая сеть: элементов формы ЛК на странице нет -->
   <script src="js/network.js" defer></script>
+  <script src="js/network-page.js" defer></script>
 </body>
 </html>
