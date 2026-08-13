@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Описание сети — TopNET GSI</title>
+  <meta name="description" content="Как устроена сеть TopNET GSI и для кого предназначен сервис." />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><path d='M4 16 L16 4 L28 16 L16 28 Z' fill='none' stroke='%230E5AA7' stroke-width='3'/><circle cx='16' cy='16' r='4' fill='%230E5AA7'/></svg>" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- ================= HEADER ================= -->
+  <header class="header" id="site-header">
+    <div class="header__inner">
+      <a href="index.html" class="logo" aria-label="TopNET GSI — на главную">
+        <img src="assets/images/logo.png" alt="TopNET GSI" class="logo__img" />
+      </a>
+      <nav class="nav" aria-label="Главное меню">
+        <div class="nav__item nav__item--dropdown">
+          <button type="button" class="nav__link nav__trigger is-active" aria-haspopup="true" aria-expanded="false">
+            Описание
+            <svg class="nav__trigger-caret" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+          <div class="nav__dropdown">
+            <a class="nav__dd-link is-active" href="network.html" aria-current="page">
+              <span class="nav__dd-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none"><circle cx="6" cy="7" r="2" stroke="currentColor" stroke-width="1.8"/><circle cx="18" cy="7" r="2" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="18" r="2" stroke="currentColor" stroke-width="1.8"/><path d="M7.6 8.4 10.4 16.4M16.4 8.4 13.6 16.4M8 7H16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+              </span>
+              <span class="nav__dd-text">
+                <span class="nav__dd-title">Описание сети</span>
+                <span class="nav__dd-desc">— как работает и для кого</span>
+              </span>
+              <svg class="nav__dd-arrow" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M8 16 16 8M16 8H9.4M16 8v6.6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+            <a class="nav__dd-link" href="coverage.html">
+              <span class="nav__dd-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none"><path d="M12 21s7-6.1 7-11a7 7 0 1 0-14 0c0 4.9 7 11 7 11Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><circle cx="12" cy="10" r="2.4" stroke="currentColor" stroke-width="1.8"/></svg>
+              </span>
+              <span class="nav__dd-text">
+                <span class="nav__dd-title">Зона покрытия</span>
+                <span class="nav__dd-desc">— карта станций и покрытия</span>
+              </span>
+              <svg class="nav__dd-arrow" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M8 16 16 8M16 8H9.4M16 8v6.6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+            <a class="nav__dd-link" href="docs.html">
+              <span class="nav__dd-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none"><path d="M7 3h7l4 4v14H7V3Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M14 3v4h4M9.5 12h5M9.5 15.5h5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+              </span>
+              <span class="nav__dd-text">
+                <span class="nav__dd-title">Документация</span>
+                <span class="nav__dd-desc">— договор, акты, инструкции</span>
+              </span>
+              <svg class="nav__dd-arrow" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M8 16 16 8M16 8H9.4M16 8v6.6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+          </div>
+        </div>
+        <a class="nav__link" href="index.html">Стоимость</a>
+        <a class="nav__link" href="index.html">Новости</a>
+        <a class="nav__link" href="contacts.html">Контакты</a>
+        <a class="nav__link" href="login.html">Личный кабинет</a>
+        <a class="nav__link nav__link--cta" href="register.html">Подключиться</a>
+      </nav>
+      <button class="burger" aria-label="Меню" type="button">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- ================= PAGE HERO ================= -->
+  <section class="page-hero">
+    <div class="container">
+      <nav class="crumbs" aria-label="Хлебные крошки">
+        <a href="index.html">Главная</a>
+        <span class="crumbs__sep" aria-hidden="true">→</span>
+        <span class="crumbs__current">Описание сети</span>
+      </nav>
+      <h1 class="page-hero__title">Описание сети</h1>
+    </div>
+  </section>
+
+  <!-- ================= PAGE BODY ================= -->
+  <section class="page-body">
+    <div class="container">
+      <div class="page-placeholder">
+        <span class="page-placeholder__icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none"><circle cx="6" cy="7" r="2" stroke="currentColor" stroke-width="1.8"/><circle cx="18" cy="7" r="2" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="18" r="2" stroke="currentColor" stroke-width="1.8"/><path d="M7.6 8.4 10.4 16.4M16.4 8.4 13.6 16.4M8 7H16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+        </span>
+        <h2 class="page-placeholder__title">Раздел наполняется</h2>
+        <p class="page-placeholder__text">Здесь скоро появится подробное описание того, как работает сеть и кому она подойдёт.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__top">
+        <div class="footer__brand">
+          <a href="index.html" class="logo logo--footer">
+            <img src="assets/images/logo.png" alt="TopNET GSI" class="logo__img" />
+          </a>
+          <p class="footer__tag">Оператор связи. Интернет и сетевая инфраструктура.</p>
+        </div>
+        <div class="footer__cols">
+          <div class="footer__col">
+            <h4 class="footer__col-title">Навигация</h4>
+            <a href="#">Тарифы</a>
+            <a href="#">Услуги</a>
+            <a href="#">О компании</a>
+            <a href="#">Новости</a>
+            <a href="contacts.html">Контакты</a>
+          </div>
+          <div class="footer__col">
+            <h4 class="footer__col-title">Клиентам</h4>
+            <a href="login.html">Личный кабинет</a>
+            <a href="#">Оплата</a>
+            <a href="#">Поддержка</a>
+            <a href="#">Документы</a>
+          </div>
+          <div class="footer__col">
+            <h4 class="footer__col-title">Контакты</h4>
+            <a href="tel:+70000000000">+7 (000) 000-00-00</a>
+            <a href="mailto:info@topnet-gsi.ru">info@topnet-gsi.ru</a>
+            <span>г. Название, ул. Примерная, 1</span>
+            <span>Пн–Вс: 09:00 — 21:00</span>
+          </div>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <span>© 2026 TopNET GSI. Все права защищены.</span>
+        <div class="footer__legal">
+          <a href="#">Политика конфиденциальности</a>
+          <a href="#">Публичная оферта</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js" defer></script>
+</body>
+</html>

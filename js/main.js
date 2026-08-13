@@ -62,6 +62,86 @@
       else wide.addListener(onWide);
     }
 
+    /* ---------- Nav dropdown «Описание» (hover-intent + accordion на мобильных) ---------- */
+    const dropdowns = header ? Array.from(header.querySelectorAll('.nav__item--dropdown')) : [];
+    if (dropdowns.length) {
+      const desktopMQ = window.matchMedia('(min-width: 961px)');
+      const OPEN_DELAY  = 150;
+      const CLOSE_DELAY = 120;
+
+      const closeAllDropdowns = () => {
+        dropdowns.forEach((item) => {
+          item.classList.remove('is-open');
+          const t = item.querySelector('.nav__trigger');
+          if (t) t.setAttribute('aria-expanded', 'false');
+        });
+      };
+
+      dropdowns.forEach((item) => {
+        const trigger = item.querySelector('.nav__trigger');
+        const panel   = item.querySelector('.nav__dropdown');
+        if (!trigger || !panel) return;
+
+        let openTimer  = null;
+        let closeTimer = null;
+        trigger.setAttribute('aria-expanded', 'false');
+
+        const openDD  = () => { item.classList.add('is-open'); trigger.setAttribute('aria-expanded', 'true'); };
+        const closeDD = () => { item.classList.remove('is-open'); trigger.setAttribute('aria-expanded', 'false'); };
+
+        // десктоп: открытие/закрытие по hover-intent (~150мс)
+        item.addEventListener('mouseenter', () => {
+          if (!desktopMQ.matches) return;
+          clearTimeout(closeTimer);
+          openTimer = setTimeout(openDD, OPEN_DELAY);
+        });
+        item.addEventListener('mouseleave', () => {
+          if (!desktopMQ.matches) return;
+          clearTimeout(openTimer);
+          closeTimer = setTimeout(closeDD, CLOSE_DELAY);
+        });
+
+        // клавиатура: фокус внутри пункта открывает, выход — закрывает
+        item.addEventListener('focusin', () => { if (desktopMQ.matches) openDD(); });
+        item.addEventListener('focusout', (ev) => {
+          if (!desktopMQ.matches) return;
+          if (!item.contains(ev.relatedTarget)) closeDD();
+        });
+
+        // клик по триггеру — переключение (аккордеон на мобильных, страховка на десктопе);
+        // stopPropagation не даёт общему обработчику .nav__link закрыть всё бургер-меню
+        trigger.addEventListener('click', (ev) => {
+          ev.preventDefault();
+          ev.stopPropagation();
+          if (item.classList.contains('is-open')) closeDD(); else openDD();
+        });
+
+        // выбор пункта — закрыть дропдаун (переход по ссылке произойдёт как обычно)
+        panel.addEventListener('click', (ev) => {
+          if (ev.target.closest('.nav__dd-link')) closeDD();
+        });
+      });
+
+      // клик вне открытого дропдауна
+      document.addEventListener('click', (ev) => {
+        dropdowns.forEach((item) => {
+          if (item.classList.contains('is-open') && !item.contains(ev.target)) {
+            item.classList.remove('is-open');
+            const t = item.querySelector('.nav__trigger');
+            if (t) t.setAttribute('aria-expanded', 'false');
+          }
+        });
+      });
+
+      document.addEventListener('keydown', (ev) => {
+        if (ev.key === 'Escape') closeAllDropdowns();
+      });
+
+      const onDesktopChange = () => closeAllDropdowns();
+      if (desktopMQ.addEventListener) desktopMQ.addEventListener('change', onDesktopChange);
+      else desktopMQ.addListener(onDesktopChange);
+    }
+
     /* ---------- Hero parallax (CRH-style: About slides UP over pinned hero) ---------- */
     const heroSection = document.getElementById('hero');
     const heroBg      = document.getElementById('heroBg');

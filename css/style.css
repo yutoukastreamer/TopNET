@@ -176,6 +176,123 @@ button { font-family: inherit; cursor: pointer; }
   background: rgba(255,255,255,0.08);
 }
 
+/* =============================================================
+   NAV — dropdown «Описание» + CTA-пилюля
+   ============================================================= */
+.nav__item { display: flex; }
+.nav__item--dropdown { position: relative; }
+.nav__trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: none;
+  border: none;
+  color: inherit;
+  font: inherit;
+}
+.nav__trigger-caret {
+  width: 13px; height: 13px;
+  transition: transform 0.2s ease;
+}
+.nav__item--dropdown.is-open .nav__trigger-caret { transform: rotate(180deg); }
+
+.nav__dropdown {
+  position: absolute;
+  top: calc(100% + 10px);
+  left: 50%;
+  transform: translateX(-50%) translateY(-6px);
+  width: min(380px, 88vw);
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  background: rgba(26, 39, 51, 0.92);
+  backdrop-filter: saturate(140%) blur(16px);
+  -webkit-backdrop-filter: saturate(140%) blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  border-radius: 16px;
+  padding: 8px;
+  box-shadow: 0 26px 50px -20px rgba(0, 0, 0, 0.55);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.18s ease, transform 0.18s ease, visibility 0.18s;
+  z-index: 20;
+}
+.nav__item--dropdown.is-open .nav__dropdown {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translateX(-50%) translateY(0);
+}
+.nav__dd-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 11px 12px;
+  border-radius: 12px;
+  color: #fff;
+  transition: background 0.2s ease;
+}
+.nav__dd-link:hover,
+.nav__dd-link:focus-visible,
+.nav__dd-link.is-active {
+  background: rgba(255, 255, 255, 0.08);
+}
+.nav__dd-icon {
+  flex: none;
+  width: 36px; height: 36px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--accent);
+}
+.nav__dd-icon svg { width: 18px; height: 18px; }
+.nav__dd-text {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  min-width: 0;
+  flex: 1;
+}
+.nav__dd-title {
+  font-size: 14px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+.nav__dd-desc {
+  font-size: 12.5px;
+  color: rgba(255, 255, 255, 0.55);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.nav__dd-arrow {
+  flex: none;
+  width: 15px; height: 15px;
+  color: transparent;
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+.nav__dd-link:hover .nav__dd-arrow,
+.nav__dd-link:focus-visible .nav__dd-arrow,
+.nav__dd-link.is-active .nav__dd-arrow { color: var(--accent); transform: translateX(2px); }
+
+.nav__link--cta {
+  background: var(--accent);
+  color: #fff;
+  padding: 10px 22px;
+  margin-left: 4px;
+  box-shadow: 0 10px 24px -10px var(--accent-glow);
+  transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+.nav__link--cta:hover {
+  background: var(--accent-2);
+  color: #fff;
+  transform: translateY(-1px);
+}
+.nav__link--cta.is-active { background: var(--accent-2); }
+
 .burger {
   display: none;
   width: 42px; height: 42px;
@@ -241,6 +358,35 @@ button { font-family: inherit; cursor: pointer; }
     border-radius: 12px;
     padding: 14px 16px;
     font-size: 16px;
+  }
+  /* дропдаун «Описание» → аккордеон внутри бургер-меню */
+  .header.is-menu-open .nav__item--dropdown { position: static; }
+  .header.is-menu-open .nav__trigger { width: 100%; justify-content: space-between; }
+  .header.is-menu-open .nav__dropdown {
+    position: static;
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: none;
+    max-height: 0;
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.04);
+    border: none;
+    box-shadow: none;
+    padding: 0;
+    margin: 0;
+    transition: max-height 0.3s ease, padding 0.3s ease, margin 0.3s ease;
+  }
+  .header.is-menu-open .nav__item--dropdown.is-open .nav__dropdown {
+    max-height: 320px;
+    padding: 6px 0 4px;
+    margin: 2px 0 4px;
+  }
+  .header.is-menu-open .nav__link--cta {
+    margin-left: 0;
+    margin-top: 6px;
+    text-align: center;
+    justify-content: center;
   }
 }
 @keyframes navDrop {
@@ -1243,4 +1389,72 @@ a.contact-card__value:hover { color: var(--accent); }
 
 @media (max-width: 560px) {
   .contacts__grid { grid-template-columns: 1fr; }
+}
+
+/* =============================================================
+   PAGE STUB — каркас подстраниц (network / coverage / docs / register)
+   ============================================================= */
+.crumbs {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13px;
+  letter-spacing: 0.02em;
+  color: rgba(255, 255, 255, 0.55);
+  margin: 0 0 22px;
+}
+.crumbs a { color: rgba(255, 255, 255, 0.75); transition: color 0.2s ease; }
+.crumbs a:hover { color: var(--accent); }
+.crumbs__sep { color: rgba(255, 255, 255, 0.35); }
+.crumbs__current { color: #fff; font-weight: 600; }
+
+.page-hero {
+  background: var(--dark);
+  color: #fff;
+  padding: clamp(150px, 20vh, 210px) 0 clamp(64px, 9vh, 96px);
+}
+.page-hero__title {
+  font-size: var(--h2);
+  line-height: 1.05;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  margin: 0;
+  max-width: 720px;
+}
+
+.page-body {
+  background: var(--bg);
+  padding: clamp(64px, 10vh, 120px) 0 clamp(90px, 13vh, 150px);
+}
+.page-placeholder {
+  max-width: 640px;
+  margin: 0 auto;
+  text-align: center;
+  background: var(--bg-alt);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  padding: clamp(48px, 7vw, 72px) clamp(28px, 5vw, 56px);
+  box-shadow: 0 20px 40px -30px rgba(26, 39, 51, 0.35);
+}
+.page-placeholder__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px; height: 56px;
+  border-radius: 16px;
+  background: #FEEDDD;
+  color: var(--accent);
+  margin-bottom: 22px;
+}
+.page-placeholder__icon svg { width: 26px; height: 26px; }
+.page-placeholder__title {
+  margin: 0 0 8px;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--ink);
+}
+.page-placeholder__text {
+  margin: 0;
+  font-size: 0.98rem;
+  color: var(--ink-2);
 }
