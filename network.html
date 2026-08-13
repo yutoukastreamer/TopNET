@@ -60,7 +60,36 @@
             </a>
           </div>
         </div>
-        <a class="nav__link" href="index.html">Стоимость</a>
+        <div class="nav__item nav__item--dropdown">
+          <button type="button" class="nav__link nav__trigger" aria-haspopup="true" aria-expanded="false">
+            Стоимость
+            <svg class="nav__trigger-caret" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+          <div class="nav__dropdown">
+            <a class="nav__dd-link" href="tariffs.html">
+              <span class="nav__dd-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none"><path d="M4 6h10l6 6-6 6H4V6Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><circle cx="8.5" cy="12" r="1.4" fill="currentColor"/></svg>
+              </span>
+              <span class="nav__dd-text">
+                <span class="nav__dd-title">Тарифы и услуги</span>
+                <span class="nav__dd-desc">— безлимитные RTK-тарифы</span>
+              </span>
+              <svg class="nav__dd-arrow" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M8 16 16 8M16 8H9.4M16 8v6.6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+            <a class="nav__dd-link" href="payment.html">
+              <span class="nav__dd-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none"><rect x="3" y="6" width="18" height="12" rx="2.5" stroke="currentColor" stroke-width="1.8"/><path d="M3 10h18M6.5 14.5h3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+              </span>
+              <span class="nav__dd-text">
+                <span class="nav__dd-title">Оплата</span>
+                <span class="nav__dd-desc">— оплата подписки по аккаунту</span>
+              </span>
+              <svg class="nav__dd-arrow" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M8 16 16 8M16 8H9.4M16 8v6.6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+          </div>
+        </div>
         <a class="nav__link" href="index.html">Новости</a>
         <a class="nav__link" href="contacts.html">Контакты</a>
         <a class="nav__link" href="login.html">Личный кабинет</a>
@@ -73,19 +102,24 @@
   </header>
 
   <!-- ================= PAGE HERO ================= -->
-  <section class="page-hero">
+  <section class="page-hero page-hero--net">
+    <!-- живая сеть по бокам: тот же скрипт, что в ЛК -->
+    <canvas class="page-hero__net" id="netCanvas" aria-hidden="true"></canvas>
     <div class="container">
-      <nav class="crumbs" aria-label="Хлебные крошки">
+      <nav class="crumbs crumbs--pill" aria-label="Хлебные крошки">
         <a href="index.html">Главная</a>
         <span class="crumbs__sep" aria-hidden="true">→</span>
         <span class="crumbs__current">Описание сети</span>
       </nav>
-      <h1 class="page-hero__title">Описание сети</h1>
+      <h1 class="page-hero__title page-hero__title--xl">
+        Описание <span class="page-hero__accent">сети</span>
+      </h1>
+      <p class="page-hero__lead">Как работает сеть Topnet Live-Россия, из чего она состоит и кому подойдёт сервис.</p>
     </div>
   </section>
 
   <!-- ================= PAGE BODY ================= -->
-  <section class="page-body">
+  <section class="page-body page-body--soft">
     <div class="container">
       <div class="page-placeholder">
         <span class="page-placeholder__icon" aria-hidden="true">
@@ -142,5 +176,7 @@
   </footer>
 
   <script src="js/main.js" defer></script>
+  <!-- network.js — только фоновая сеть: элементов формы ЛК на странице нет -->
+  <script src="js/network.js" defer></script>
 </body>
 </html>

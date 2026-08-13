@@ -1458,3 +1458,170 @@ a.contact-card__value:hover { color: var(--accent); }
   font-size: 0.98rem;
   color: var(--ink-2);
 }
+
+/* =============================================================
+   TARIFFS — тёмный hero с живой сетью + карточки тарифов
+   ============================================================= */
+
+/* hero с canvas-сетью: холст размером с экран, лишнее срезает overflow */
+.page-hero--net {
+  position: relative;
+  overflow: hidden;
+  /* сети нужно место: холст во весь экран, hero не должен срезать почти всё */
+  min-height: 66vh;
+}
+.page-hero__net {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: block;
+  pointer-events: none;
+  z-index: 0;
+}
+.page-hero--net .container { position: relative; z-index: 1; }
+
+/* крошки-пилюли */
+.crumbs--pill {
+  gap: 8px;
+  margin-bottom: 26px;
+}
+.crumbs--pill a,
+.crumbs--pill .crumbs__current {
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 14px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  font-size: 12.5px;
+  transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+.crumbs--pill a:hover {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+.crumbs--pill .crumbs__current {
+  background: rgba(245, 135, 31, 0.14);
+  border-color: rgba(245, 135, 31, 0.35);
+  color: #FFCF9E;
+}
+
+.page-hero__title--xl {
+  font-size: clamp(2.4rem, 5.4vw, 4.4rem);
+  max-width: 860px;
+}
+.page-hero__accent { color: var(--accent); }
+
+.page-hero__lead {
+  margin: 22px 0 0;
+  max-width: 640px;
+  font-size: clamp(0.98rem, 1.15vw, 1.1rem);
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.68);
+}
+.page-hero__lead a {
+  color: #fff;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-color: rgba(245, 135, 31, 0.6);
+  transition: color 0.2s ease;
+}
+.page-hero__lead a:hover { color: var(--accent); }
+
+/* мягкий переход в светлую секцию — скруглённая «плашка» поверх hero */
+.page-body--soft {
+  position: relative;
+  z-index: 1;
+  margin-top: -44px;
+  border-radius: 44px 44px 0 0;
+  padding-top: clamp(64px, 9vh, 104px);
+  box-shadow: 0 -30px 60px -34px rgba(0, 0, 0, 0.45);
+}
+
+.section-head {
+  max-width: 720px;
+  margin-bottom: clamp(32px, 5vh, 48px);
+}
+.section-head__title {
+  font-size: var(--h2);
+  line-height: 1.06;
+  letter-spacing: -0.025em;
+  font-weight: 700;
+  margin: 0;
+  color: var(--ink);
+}
+
+/* ---------- Карточки тарифов ---------- */
+.tariffs {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(16px, 2vw, 24px);
+}
+.tariff {
+  display: flex;
+  flex-direction: column;
+  background: var(--bg-alt);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  padding: clamp(26px, 3vw, 34px);
+  box-shadow: 0 20px 40px -32px rgba(26, 39, 51, 0.4);
+  transition: transform 0.3s cubic-bezier(0.2, 0.7, 0.2, 1), box-shadow 0.3s ease, border-color 0.3s ease;
+}
+.tariff:hover {
+  transform: translateY(-4px);
+  border-color: rgba(245, 135, 31, 0.35);
+  box-shadow: 0 30px 50px -30px rgba(26, 39, 51, 0.45);
+}
+.tariff__period {
+  font-size: 12px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: var(--accent);
+  margin: 0 0 18px;
+}
+.tariff__price {
+  font-size: clamp(1.7rem, 2.6vw, 2.3rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+  color: var(--ink);
+  margin: 0;
+}
+.tariff__price-alt {
+  color: var(--brand);
+  white-space: nowrap;
+}
+.tariff__star {
+  color: var(--accent);
+  font-weight: 700;
+}
+.tariff__vat {
+  margin: 10px 0 0;
+  font-size: 13px;
+  color: var(--muted);
+}
+.tariff__cta {
+  margin-top: auto;
+  padding-top: clamp(24px, 3vw, 32px);
+}
+.btn--accent {
+  background: var(--accent);
+  color: #fff;
+  box-shadow: 0 10px 26px -10px var(--accent-glow);
+}
+.btn--accent:hover {
+  background: var(--accent-2);
+  color: #fff;
+  transform: translateY(-2px);
+  box-shadow: 0 18px 36px -12px var(--accent-glow);
+}
+.btn--wide { width: 100%; }
+
+@media (max-width: 960px) {
+  .tariffs { grid-template-columns: 1fr; }
+}
+@media (max-width: 767px) {
+  .page-hero__net { display: none; }
+}
