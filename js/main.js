@@ -40,7 +40,7 @@
         setMenu(!isOpen());
       });
 
-      // клик по ссылке — переход и закрытие (page-swipe отработает как обычно)
+      // клик по ссылке — обычный переход и закрытие меню
       nav.addEventListener('click', (ev) => {
         if (ev.target.closest('.nav__link')) setMenu(false);
       });

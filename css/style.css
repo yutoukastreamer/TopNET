@@ -1221,40 +1221,8 @@ button { font-family: inherit; cursor: pointer; }
 }
 
 /* =============================================================
-   PAGE SWIPE — горизонтальный переход между страницами.
-   Трансформируется <body>, поэтому обёртка в разметке не нужна
-   (лишний контейнер с transform создал бы containing block
-   и задел бы sticky-hero и фиксированную шапку).
+   Шапка с постоянной тёмной подложкой (светлые подстраницы)
    ============================================================= */
-/* ВАЖНО: только transition, без will-change/transform в состоянии покоя —
-   иначе body становится containing block и фиксированная шапка
-   и sticky-hero главной перестают работать. */
-.page-swipe body {
-  transition: transform 0.45s cubic-bezier(0.2, 0.7, 0.2, 1);
-}
-/* на время перехода прячем полосу прокрутки от уехавшего контента */
-html.is-swiping { overflow: hidden; }
-html.is-swiping body { overflow: hidden; }
-
-body.page-exit-left  { transform: translate3d(-100%, 0, 0); }
-body.page-exit-right { transform: translate3d(100%, 0, 0); }
-
-/* стартовые позиции въезда (снимаются скриптом в следующем кадре) */
-body.page-enter-from-right { transform: translate3d(100%, 0, 0); }
-body.page-enter-from-left  { transform: translate3d(-100%, 0, 0); }
-
-@media (prefers-reduced-motion: reduce) {
-  .page-swipe body { transition: none; }
-  body.page-exit-left,
-  body.page-exit-right,
-  body.page-enter-from-right,
-  body.page-enter-from-left { transform: none; }
-}
-
-/* =============================================================
-   CONTACTS PAGE — светлая страница «Контакты»
-   ============================================================= */
-/* шапка на светлой странице всегда с тёмной подложкой */
 /* на светлой странице подложка одинаковая и до, и после скролла:
    main.js вешает .is-scrolled и там, вид шапки от этого меняться не должен */
 .header--solid,
@@ -1269,126 +1237,142 @@ body.page-enter-from-left  { transform: translate3d(-100%, 0, 0); }
   background: rgba(255, 255, 255, 0.14);
 }
 
-.contacts {
-  background: var(--bg);
-  color: var(--ink);
-  padding: clamp(120px, 18vh, 190px) 0 clamp(80px, 12vh, 130px);
-  min-height: 100vh;
+/* =============================================================
+   CONTACTS PAGE — карточки контактов слева + карта справа
+   ============================================================= */
+.contacts-layout {
+  display: grid;
+  grid-template-columns: minmax(300px, 400px) 1fr;
+  gap: clamp(24px, 3vw, 40px);
+  align-items: start;
 }
-.contacts__back {
-  display: inline-flex;
-  align-items: center;
-  gap: 12px;
-  margin-bottom: clamp(28px, 4vh, 44px);
-  padding: 0;
-  border: 0;
-  background: none;
-  color: var(--brand);
-  font-size: 15px;
-  font-weight: 600;
-  transition: gap 0.25s ease, color 0.25s ease;
+
+/* ---------- стопка карточек ---------- */
+.contacts-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 }
-.contacts__back:hover { gap: 18px; color: var(--accent); }
-.contacts__back-chip {
+.info-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  background: var(--bg-alt);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  padding: 22px 24px;
+  box-shadow: 0 20px 40px -30px rgba(26, 39, 51, 0.35);
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+.info-card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(245, 135, 31, 0.35);
+  box-shadow: 0 26px 50px -30px rgba(26, 39, 51, 0.45);
+}
+.info-card__icon {
   flex: none;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 40px;
-  height: 40px;
+  width: 44px;
+  height: 44px;
   border-radius: 14px;
   background: #FEEDDD;
   color: var(--accent);
-  transition: background 0.3s ease, color 0.3s ease;
 }
-.contacts__back:hover .contacts__back-chip { background: var(--accent); color: #fff; }
-.contacts__back-chip svg { width: 20px; height: 20px; display: block; }
-
-.contacts__title {
-  font-size: var(--h2);
-  line-height: 1.05;
-  margin: 0 0 14px;
-  font-weight: 800;
-  letter-spacing: -0.025em;
-  color: var(--brand-2);
+.info-card__icon svg {
+  width: 22px;
+  height: 22px;
+  display: block;
 }
-.contacts__lead {
-  max-width: 640px;
-  margin: 0 0 clamp(40px, 6vh, 64px);
-  font-size: clamp(1.05rem, 1.25vw, 1.2rem);
-  color: var(--ink-2);
-  line-height: 1.6;
-}
-
-.contacts__section-title {
-  font-size: 12px;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--accent);
-  font-weight: 600;
-  margin: 0 0 20px;
-}
-.contacts__group { margin-bottom: clamp(48px, 7vh, 80px); }
-.contacts__group:last-of-type { margin-bottom: 0; }
-
-.contacts__grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 20px;
-}
-.contact-card {
-  background: var(--bg-alt);
-  border: 1px solid var(--line);
-  border-radius: var(--radius-lg);
-  padding: 28px;
-  box-shadow: 0 20px 40px -30px rgba(26, 39, 51, 0.35);
-}
-.contact-card__city {
-  margin: 0 0 18px;
-  font-size: 1.35rem;
-  font-weight: 700;
-  letter-spacing: -0.015em;
-  color: var(--ink);
-}
-.contact-card__row {
+.info-card__body {
+  min-width: 0;
   display: flex;
   flex-direction: column;
-  gap: 4px;
-  margin-bottom: 16px;
+  gap: 5px;
 }
-.contact-card__row:last-child { margin-bottom: 0; }
-.contact-card__label {
-  font-size: 12px;
-  letter-spacing: 0.14em;
+.info-card__label {
+  font-size: 11.5px;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
   color: var(--muted);
   font-weight: 600;
 }
-.contact-card__value {
-  font-size: 1rem;
+.info-card__value {
+  font-size: 1.02rem;
+  line-height: 1.45;
   color: var(--ink);
+  font-weight: 500;
+  overflow-wrap: anywhere;
   transition: color 0.2s ease;
 }
-a.contact-card__value:hover { color: var(--accent); }
-
-/* заготовка под будущие филиалы */
-.contact-card--empty {
-  border-style: dashed;
-  background: transparent;
-  box-shadow: none;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 180px;
-  color: var(--muted);
-  font-size: 0.95rem;
-  text-align: center;
+a.info-card__value {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-color: rgba(245, 135, 31, 0.45);
+}
+a.info-card__value:hover { color: var(--accent); }
+.info-card__note {
+  font-size: 13px;
+  color: var(--ink-2);
 }
 
-.contacts__cta { margin-top: clamp(40px, 6vh, 64px); }
+/* ---------- карта ---------- */
+.map-card {
+  border-radius: 24px;
+  overflow: hidden;
+  background: var(--bg-alt);
+  border: 1px solid var(--line);
+  box-shadow: 0 30px 60px -34px rgba(26, 39, 51, 0.45);
+  height: 66vh;
+  min-height: 420px;
+}
+.map-card iframe {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
 
+/* ---------- тёмная CTA-плашка ---------- */
+.cta-band {
+  background: var(--dark, #1A2733);
+  color: #fff;
+  padding: clamp(52px, 8vh, 88px) 0;
+}
+.cta-band__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: clamp(24px, 4vw, 48px);
+  flex-wrap: wrap;
+}
+.cta-band__title {
+  margin: 0 0 10px;
+  font-size: clamp(1.6rem, 3vw, 2.4rem);
+  line-height: 1.1;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+.cta-band__text {
+  margin: 0;
+  max-width: 520px;
+  font-size: 1rem;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.68);
+}
+
+@media (max-width: 960px) {
+  .contacts-layout { grid-template-columns: 1fr; }
+  .map-card {
+    height: auto;
+    min-height: 0;
+    aspect-ratio: 4 / 3;
+  }
+}
 @media (max-width: 560px) {
-  .contacts__grid { grid-template-columns: 1fr; }
+  .map-card { aspect-ratio: 1 / 1; }
+  .cta-band__inner { flex-direction: column; align-items: flex-start; }
 }
 
 /* =============================================================

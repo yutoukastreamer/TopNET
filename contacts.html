@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ru" class="page-swipe">
+<html lang="ru">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -14,7 +14,7 @@
 <body>
 
   <!-- ================= HEADER ================= -->
-  <header class="header header--solid" id="site-header">
+  <header class="header" id="site-header">
     <div class="header__inner">
       <a href="index.html" class="logo" aria-label="TopNET GSI — на главную">
         <img src="assets/images/logo.png" alt="TopNET GSI" class="logo__img" />
@@ -118,70 +118,121 @@
     </div>
   </header>
 
-  <!-- ================= CONTACTS ================= -->
-  <main class="contacts">
+  <!-- ================= HERO ================= -->
+  <section class="page-hero page-hero--net">
+    <!-- живая сеть по бокам: тот же скрипт, что в ЛК и на тарифах -->
+    <canvas class="page-hero__net" id="netCanvas" aria-hidden="true"></canvas>
     <div class="container">
-
-      <button type="button" class="contacts__back" id="contactsBack">
-        <span class="contacts__back-chip" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none">
-            <path d="M15 6l-6 6 6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </span>
-        Назад на главную
-      </button>
-
-      <h1 class="contacts__title">Контакты</h1>
-      <p class="contacts__lead">
+      <nav class="crumbs crumbs--pill" aria-label="Хлебные крошки">
+        <a href="index.html">Главная</a>
+        <span class="crumbs__sep" aria-hidden="true">→</span>
+        <span class="crumbs__current">Контакты</span>
+      </nav>
+      <h1 class="page-hero__title page-hero__title--xl">
+        Кон<span class="page-hero__accent">такты</span>
+      </h1>
+      <p class="page-hero__lead">
         Свяжитесь с нами удобным способом — ответим в рабочие часы
         и поможем подобрать решение под вашу задачу.
       </p>
+    </div>
+  </section>
 
-      <!-- ---------- Главный офис ---------- -->
-      <section class="contacts__group">
-        <h2 class="contacts__section-title">Главный офис</h2>
-        <div class="contacts__grid">
-          <div class="contact-card">
-            <h3 class="contact-card__city">Москва</h3>
-
-            <div class="contact-card__row">
-              <span class="contact-card__label">Телефон</span>
-              <a class="contact-card__value" href="tel:+70000000000">+7 (000) 000-00-00</a>
-            </div>
-            <div class="contact-card__row">
-              <span class="contact-card__label">Почта</span>
-              <a class="contact-card__value" href="mailto:info@topnet-gsi.ru">info@topnet-gsi.ru</a>
-            </div>
-            <div class="contact-card__row">
-              <span class="contact-card__label">Адрес</span>
-              <span class="contact-card__value">г. Название, ул. Примерная, 1</span>
-            </div>
-            <div class="contact-card__row">
-              <span class="contact-card__label">Часы работы</span>
-              <span class="contact-card__value">Пн–Вс: 09:00 — 21:00</span>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- ---------- Представительства ----------
-           Заготовка: скопируйте блок .contact-card из «Главного офиса»
-           и замените город/данные. Пустые карточки ниже — плейсхолдеры. -->
-      <section class="contacts__group">
-        <h2 class="contacts__section-title">Представительства</h2>
-        <div class="contacts__grid">
-          <div class="contact-card contact-card--empty">Город — скоро</div>
-          <div class="contact-card contact-card--empty">Город — скоро</div>
-          <div class="contact-card contact-card--empty">Город — скоро</div>
-        </div>
-      </section>
-
-      <div class="contacts__cta">
-        <a href="index.html" class="btn btn--primary">Подключиться</a>
+  <!-- ================= КОНТАКТЫ + КАРТА ================= -->
+  <main class="page-body page-body--soft">
+    <div class="container">
+      <div class="section-head">
+        <h2 class="section-head__title">Как нас найти</h2>
       </div>
 
+      <div class="contacts-layout">
+
+        <!-- ---------- карточки контактов ---------- -->
+        <div class="contacts-stack">
+
+          <div class="info-card">
+            <span class="info-card__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none">
+                <path d="M12 21s7-6.1 7-11a7 7 0 1 0-14 0c0 4.9 7 11 7 11Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+                <circle cx="12" cy="10" r="2.4" stroke="currentColor" stroke-width="1.8"/>
+              </svg>
+            </span>
+            <div class="info-card__body">
+              <span class="info-card__label">Адрес</span>
+              <span class="info-card__value">г. Название, ул. Примерная, 1</span>
+              <span class="info-card__note">Главный офис</span>
+            </div>
+          </div>
+
+          <div class="info-card">
+            <span class="info-card__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none">
+                <path d="M6.5 3.5h3l1.5 4-2 1.5a11 11 0 0 0 6 6l1.5-2 4 1.5v3a2 2 0 0 1-2.2 2A16.5 16.5 0 0 1 4.5 5.7 2 2 0 0 1 6.5 3.5Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+              </svg>
+            </span>
+            <div class="info-card__body">
+              <span class="info-card__label">Телефон</span>
+              <a class="info-card__value" href="tel:+70000000000">+7 (000) 000-00-00</a>
+            </div>
+          </div>
+
+          <div class="info-card">
+            <span class="info-card__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none">
+                <rect x="3" y="5" width="18" height="14" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+                <path d="m4 7.5 8 5.5 8-5.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </span>
+            <div class="info-card__body">
+              <span class="info-card__label">Почта</span>
+              <a class="info-card__value" href="mailto:topnet@gsi.ru">topnet@gsi.ru</a>
+            </div>
+          </div>
+
+          <div class="info-card">
+            <span class="info-card__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none">
+                <circle cx="12" cy="12" r="8.5" stroke="currentColor" stroke-width="1.8"/>
+                <path d="M12 7.5V12l3.2 2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </span>
+            <div class="info-card__body">
+              <span class="info-card__label">Режим работы</span>
+              <span class="info-card__value">Пн–Вс: 09:00 — 21:00</span>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- ---------- карта ---------- -->
+        <div class="map-card">
+          <iframe
+            title="Карта филиалов"
+            src="https://yandex.ru/map-widget/v1/?um=constructor%3A83c7553878eeecd3cc812e6cc62157b9de612009a204140b6bd220bf5f4b015c&amp;source=constructor"
+            width="100%"
+            height="357"
+            frameborder="0"
+            style="display: block"></iframe>
+        </div>
+
+      </div>
     </div>
   </main>
+
+  <!-- ================= CTA ================= -->
+  <section class="cta-band">
+    <div class="container">
+      <div class="cta-band__inner">
+        <div>
+          <h2 class="cta-band__title">Готовы подключиться?</h2>
+          <p class="cta-band__text">
+            Оставьте заявку — подберём тариф и поможем с настройкой оборудования.
+          </p>
+        </div>
+        <a href="register.html" class="btn btn--accent">Подключиться</a>
+      </div>
+    </div>
+  </section>
 
   <!-- ================= FOOTER ================= -->
   <footer class="footer">
@@ -212,7 +263,7 @@
           <div class="footer__col">
             <h4 class="footer__col-title">Контакты</h4>
             <a href="tel:+70000000000">+7 (000) 000-00-00</a>
-            <a href="mailto:info@topnet-gsi.ru">info@topnet-gsi.ru</a>
+            <a href="mailto:topnet@gsi.ru">topnet@gsi.ru</a>
             <span>г. Название, ул. Примерная, 1</span>
             <span>Пн–Вс: 09:00 — 21:00</span>
           </div>
@@ -228,8 +279,9 @@
     </div>
   </footer>
 
-  <script src="js/page-swipe.js" defer></script>
   <!-- main.js — ради бургер-меню; hero/статистика/карусель здесь просто отсутствуют -->
   <script src="js/main.js" defer></script>
+  <!-- network.js — только фоновая сеть в hero: элементов формы ЛК на странице нет -->
+  <script src="js/network.js" defer></script>
 </body>
 </html>
