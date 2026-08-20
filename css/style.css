@@ -878,9 +878,9 @@ button { font-family: inherit; cursor: pointer; }
   font-size: var(--h2);
   line-height: 1.05;
   margin: 0;
-  font-weight: 800;
+  font-weight: 700;
   letter-spacing: -0.025em;
-  color: var(--brand-2);
+  color: var(--ink);
 }
 
 /* Carousel shell — outer arrows sit next to the viewport */

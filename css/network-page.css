@@ -61,19 +61,10 @@
 .np-section { padding: clamp(56px, 8vh, 96px) 0 0; }
 .np-section:first-of-type { padding-top: clamp(40px, 6vh, 64px); }
 .np-head { margin-bottom: clamp(28px, 4vh, 44px); max-width: 760px; }
-.np-eyebrow {
-  display: inline-block;
-  font-size: 12px;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  font-weight: 600;
-  color: var(--accent);
-  margin: 0 0 12px;
-}
 .np-title {
   margin: 0;
-  font-size: clamp(1.8rem, 3.4vw, 2.8rem);
-  line-height: 1.08;
+  font-size: var(--h2);
+  line-height: 1.06;
   letter-spacing: -0.025em;
   font-weight: 700;
   color: var(--ink);
@@ -99,50 +90,48 @@
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  background: var(--bg-alt);
+  background: #fff;
   border: 1px solid var(--line);
-  border-radius: var(--radius-lg);
-  padding: clamp(24px, 2.6vw, 32px);
-  box-shadow: 0 20px 40px -34px rgba(26, 39, 51, 0.4);
-  transition: transform 0.3s cubic-bezier(0.2, 0.7, 0.2, 1), border-color 0.3s ease;
+  border-radius: var(--radius);
+  padding: 32px 28px 28px;
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
 }
 .odo:hover {
   transform: translateY(-4px);
-  border-color: rgba(14, 90, 167, 0.28);
+  box-shadow: 0 20px 40px -20px rgba(26, 39, 51, 0.25);
 }
 .odo__value {
   display: block;
-  font-size: clamp(1.9rem, 3vw, 2.6rem);
-  font-weight: 800;
+  font-size: clamp(2.6rem, 4vw, 3.6rem);
+  font-weight: 700;
   letter-spacing: -0.03em;
-  line-height: 1.05;
-  color: var(--ink);
+  line-height: 1;
+  color: var(--brand);
   font-variant-numeric: tabular-nums;
 }
 /* «март 2008» длиннее прочих — держим в одну строку */
-.odo__value--date { font-size: clamp(1.5rem, 2.2vw, 2.05rem); }
+.odo__value--date { font-size: clamp(1.9rem, 2.8vw, 2.6rem); }
 .odo__label {
   display: block;
-  margin-top: 10px;
-  font-size: 14px;
+  margin-top: 12px;
+  font-size: 15px;
+  line-height: 1.4;
   color: var(--ink-2);
 }
 .odo__bar {
   display: block;          /* span по умолчанию inline — высота бы не применилась */
-  margin-top: auto;        /* полосы выровнены по низу карточек */
-  padding-top: 20px;
-  height: 23px;
-  border-radius: 999px;
+  margin-top: 28px;
+  height: 2px;
+  border-radius: 2px;
   background: var(--line);
   overflow: hidden;
 }
 .odo__bar span {
   display: block;
-  height: 3px;
+  height: 100%;
   width: 0;
-  border-radius: 999px;
-  background: linear-gradient(90deg, var(--brand), var(--accent));
-  transition: width 1.4s cubic-bezier(0.2, 0.7, 0.2, 1);
+  background: linear-gradient(90deg, var(--accent), var(--accent-2));
+  transition: width 1.6s cubic-bezier(0.2, 0.7, 0.2, 1);
 }
 .odo.is-in .odo__bar span { width: 100%; }
 
