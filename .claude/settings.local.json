@@ -1,0 +1,16 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(node --check js/main.js)",
+      "Bash(grep -n \"\\\\be\\\\b *[*\\)]\\\\|ease\\(p\\)\\\\|\\\\${e\" js/main.js)",
+      "Bash(sed -i '' 's/let y=500, mom=40/let y=500, mom=0/' sim.js)",
+      "Bash(node sim.js)",
+      "Bash(npx --yes playwright --version)",
+      "Bash(command -v chromium-cli)",
+      "Bash(chromium-cli --help)",
+      "Bash(npx --yes playwright install chromium --with-deps)",
+      "Read(//tmp/**)",
+      "Bash(node check_counter.js)"
+    ]
+  }
+}
