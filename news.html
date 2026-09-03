@@ -127,145 +127,215 @@
         <h2 class="section-head__title">Все новости</h2>
       </div>
 
-      <div class="news-feed">
+      <!-- Лента отсортирована по дате: свежие сверху -->
+      <div class="timeline">
 
-        <!-- ---------- Новость 1 (новая) ---------- -->
-        <article class="news-post">
-          <div class="news-post__media" aria-hidden="true">
-            <span class="news-post__media-icon">
-              <svg viewBox="0 0 24 24" fill="none">
-                <path d="M6 10a6 6 0 1 1 12 0c0 3.2 1 5 2 6H4c1-1 2-2.8 2-6Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
-                <path d="M10 19a2 2 0 0 0 4 0" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
-              </svg>
-              <span class="news-post__media-label">Новости</span>
-            </span>
-          </div>
+        <!-- ============ 2026 ============ -->
+        <div class="tl-year"><span class="tl-year__num">2026</span></div>
 
-          <div class="news-post__content">
-            <span class="news-post__date">
-              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="3" y="4.5" width="18" height="16" rx="2.5" stroke="currentColor" stroke-width="1.8"/><path d="M3 9.5h18M8 3v3M16 3v3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
-              1 апреля 2025
-            </span>
-            <h3 class="news-post__title">Развитие сети Topnet Live Россия. Март 2025.</h3>
-            <div class="news-post__body">
-              <p>Коллеги, в марте 2025 года карта покрытия проекта сети базовых станций Topnet Live - Россия пополнилась новыми станциями:</p>
-              <ul style="margin: 12px 0; padding-left: 24px; color: var(--ink-2);">
-                <li>Луховицы — Московская область</li>
-                <li>Кобань — Республика Северная Осетия</li>
-                <li>Туймазы — Республика Башкортостан</li>
-                <li>Студенцы — Самарская область</li>
-              </ul>
-              <p>Хотите увидеть новую базовую станцию проекта Topnet Live-Россия в Вашем городе и располагаете местом для её размещения? Обращайтесь к нам!</p>
-              <p>Ваши заявки по размещению новой базовой станции можете отправлять на почту <a href="mailto:topnet@gsi.ru">topnet@gsi.ru</a></p>
-            </div>
-          </div>
-        </article>
+        <!-- ---------- 24 июня 2026 — самая свежая ---------- -->
+        <article class="tl-item tl-item--latest">
+          <span class="tl-item__dot" aria-hidden="true"></span>
 
-        <!-- ---------- Новость 2 (новая) ---------- -->
-        <article class="news-post">
-          <div class="news-post__media" aria-hidden="true">
-            <span class="news-post__media-icon">
-              <svg viewBox="0 0 24 24" fill="none">
-                <path d="M6 10a6 6 0 1 1 12 0c0 3.2 1 5 2 6H4c1-1 2-2.8 2-6Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
-                <path d="M10 19a2 2 0 0 0 4 0" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
-              </svg>
-              <span class="news-post__media-label">Новости</span>
-            </span>
-          </div>
-
-          <div class="news-post__content">
-            <span class="news-post__date">
-              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="3" y="4.5" width="18" height="16" rx="2.5" stroke="currentColor" stroke-width="1.8"/><path d="M3 9.5h18M8 3v3M16 3v3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
-              16 июля 2024
-            </span>
-            <h3 class="news-post__title">Сеть на территории Нижегородской области получила статус СДГС</h3>
-            <div class="news-post__body">
-              <p>Уважаемые коллеги, с радостью сообщаем Вам, что нижеперечисленные Базовые станции сети Topnet Live-Россия, расположенные в Нижегородской области, а именно: БС Нижний Новгород, БС Сокольское, БС Арья, БС Семенов, БС Городец, БС Володарск, БС Лысково, БС Маргуша, БС Сосновское, БС Выкса, БС Слизнево, БС Арзамас 1, БС Лукоянов, БС Сергач, БС Сеченово получили статус пунктов сети дифференциальных геодезических станций и приняты в Федеральный фонд пространственных данных. Координаты станций определены в МСК-52, ГСК-2011, WGS84 и ITRF2014. Высоты станций определены в Балтийской системе высот 1977 года.</p>
-              <p>Также определены параметры перехода от ITRF2014 к МСК-52 для использования при выполнении измерений в RTK. Для этих целей была вычислена «матрица деформаций», которая транслируется в потоке корректирующей информации в виде RTCM3 сообщений 1023, связанных с параметрами датума/ИГД (сообщение 1021) и параметрами проекции (сообщение 1025). Все указанные данные транслируются точками доступа:</p>
-              <div style="margin: 12px 0; padding-left: 20px; color: var(--ink-2); line-height: 1.8;">
-                <div>MCK52Z1RTK – 1 зона, поправки GPS/ГЛОНАСС от ближайшей станции;</div>
-                <div>MCK52Z1RTKPlus– 1 зона, поправки GPS/ГЛОНАСС/Galileo/Beidou от ближайшей станции;</div>
-                <div>MCK52Z1VRS1 – 1 зона, поправки GPS/ГЛОНАСС от виртуальной станции;</div>
-                <div>MCK52Z1VRSPlus – 1 зона, поправки GPS/ГЛОНАСС/Galileo/Beidou от виртуальной станции;</div>
-                <div>MCK52Z2RTK – 2 зона, поправки GPS/ГЛОНАСС от ближайшей станции;</div>
-                <div>MCK52Z2RTKPlus– 2 зона, поправки GPS/ГЛОНАСС/Galileo/Beidou от ближайшей станции;</div>
-                <div>MCK52Z2VRS1 – 2 зона, поправки GPS/ГЛОНАСС от виртуальной станции;</div>
-                <div>MCK52Z2VRSPlus – 2 зона, поправки GPS/ГЛОНАСС/Galileo/Beidou от виртуальной станции.</div>
-              </div>
-              <p>С инструкцией по настройке точек доступа, а также зонами покрытия пунктов СДГС сети Topnet Live-Россия, определенных в системе МСК и ГСК-2011, можно ознакомиться на нашем сайте: <a href="https://topnet.gsi.ru" target="_blank" rel="noopener">https://topnet.gsi.ru</a>.</p>
-              <p>Команда проекта Сеть Topnet Live - Россия не перестает работать над развитием сети базовых станций и регулярно добавляет новые станции!</p>
-            </div>
-          </div>
-        </article>
-
-        <!-- ---------- Новость 3 ---------- -->
-        <article class="news-post">
-          <div class="news-post__media" aria-hidden="true">
-            <span class="news-post__media-icon">
-              <svg viewBox="0 0 24 24" fill="none">
-                <path d="M6 10a6 6 0 1 1 12 0c0 3.2 1 5 2 6H4c1-1 2-2.8 2-6Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
-                <path d="M10 19a2 2 0 0 0 4 0" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
-              </svg>
-              <span class="news-post__media-label">Новости</span>
-            </span>
-          </div>
-
-          <div class="news-post__content">
-            <span class="news-post__date">
+          <div class="tl-item__head">
+            <time class="tl-date" datetime="2026-06-24">
               <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="3" y="4.5" width="18" height="16" rx="2.5" stroke="currentColor" stroke-width="1.8"/><path d="M3 9.5h18M8 3v3M16 3v3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
               24 июня 2026
-            </span>
-            <h3 class="news-post__title">Развитие сети в Калининградской области</h3>
-            <div class="news-post__body">
-              <p>Уважаемые коллеги!</p>
-              <p>С радостью сообщаем о завершении работ по созданию Сети дифференциальных геодезических станций ООО «ГЕОСТРОЙИЗЫСКАНИЯ» на территории Калининградской области.</p>
-              <p>Геодезические работы производились совместно с филиалом ППК «Роскадастр» «Балтийское АГП».</p>
-              <p>Результатом данных работ стало определение координат 9-ти станций на территории Калининградской области в системах координат МСК-39, ГСК-2011, WGS84 и ITRF2014. Высоты станций определены в Балтийской системе высот 1977 года. В общей сложности было использовано 80 пунктов ГГС (62 пункта в рамках Технического проекта и 18 пунктов для контроля созданной матрицы деформаций МСК) и 5 пунктов ФАГС.</p>
-              <p>Кроме этого, были определены параметры перехода от ITRF2014 к МСК-39 для использования при выполнении измерений в RTK. Из-за особенностей исходной основы для этих целей была вычислена «матрица деформаций», которая транслируется в потоке корректирующей информации в виде RTCM3 сообщений 1023, связанных с параметрами датума/ИГД (сообщение 1021) и параметрами проекции (сообщение 1025). Все указанные сообщения транслируются точками доступа MCK_39_RTK, MCK_39_RTKPlus, MCK_39_VRS и MCK_39_VRSPlus.</p>
+            </time>
+            <span class="tl-new">Новое</span>
+          </div>
+
+          <div class="tl-card">
+            <div class="tl-card__media tl-card__media--grid" aria-hidden="true">
+              <span class="tl-card__media-icon">
+                <svg viewBox="0 0 24 24" fill="none">
+                  <path d="M12 21s7-6.1 7-11a7 7 0 1 0-14 0c0 4.9 7 11 7 11Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+                  <circle cx="12" cy="10" r="2.4" stroke="currentColor" stroke-width="1.8"/>
+                </svg>
+                <span class="tl-card__media-label">Сеть</span>
+              </span>
             </div>
-            <p class="news-post__signoff">С уважением, команда проекта Сеть Topnet Live - Россия.</p>
+
+            <div class="tl-card__content">
+              <h3 class="tl-card__title">Развитие сети в Калининградской области</h3>
+              <p class="tl-card__excerpt">Завершены работы по созданию Сети дифференциальных геодезических станций ООО «ГЕОСТРОЙИЗЫСКАНИЯ» на территории Калининградской области. Координаты 9-ти станций определены в системах МСК-39, ГСК-2011, WGS84 и ITRF2014.</p>
+
+              <div class="tl-card__full" id="news-kaliningrad" hidden>
+                <p>Уважаемые коллеги!</p>
+                <p>С радостью сообщаем о завершении работ по созданию Сети дифференциальных геодезических станций ООО «ГЕОСТРОЙИЗЫСКАНИЯ» на территории Калининградской области.</p>
+                <p>Геодезические работы производились совместно с филиалом ППК «Роскадастр» «Балтийское АГП».</p>
+                <p>Результатом данных работ стало определение координат 9-ти станций на территории Калининградской области в системах координат МСК-39, ГСК-2011, WGS84 и ITRF2014. Высоты станций определены в Балтийской системе высот 1977 года. В общей сложности было использовано 80 пунктов ГГС (62 пункта в рамках Технического проекта и 18 пунктов для контроля созданной матрицы деформаций МСК) и 5 пунктов ФАГС.</p>
+                <p>Кроме этого, были определены параметры перехода от ITRF2014 к МСК-39 для использования при выполнении измерений в RTK. Из-за особенностей исходной основы для этих целей была вычислена «матрица деформаций», которая транслируется в потоке корректирующей информации в виде RTCM3 сообщений 1023, связанных с параметрами датума/ИГД (сообщение 1021) и параметрами проекции (сообщение 1025). Все указанные сообщения транслируются точками доступа MCK_39_RTK, MCK_39_RTKPlus, MCK_39_VRS и MCK_39_VRSPlus.</p>
+                <p class="tl-card__signoff">С уважением, команда проекта Сеть Topnet Live - Россия.</p>
+              </div>
+
+              <button type="button" class="tl-more" aria-expanded="false" aria-controls="news-kaliningrad">
+                <span class="tl-more__label">Читать подробнее</span>
+                <span class="tl-more__arrow" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none"><path d="M5 12h13M13 6.5 18.5 12 13 17.5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </span>
+              </button>
+            </div>
           </div>
         </article>
 
-        <!-- ---------- Новость 4 ---------- -->
-        <article class="news-post">
-          <div class="news-post__media" aria-hidden="true">
-            <span class="news-post__media-icon">
-              <svg viewBox="0 0 24 24" fill="none">
-                <path d="M6 10a6 6 0 1 1 12 0c0 3.2 1 5 2 6H4c1-1 2-2.8 2-6Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
-                <path d="M10 19a2 2 0 0 0 4 0" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
-              </svg>
-              <span class="news-post__media-label">Новости</span>
-            </span>
-          </div>
+        <!-- ---------- 1 февраля 2026 ---------- -->
+        <article class="tl-item">
+          <span class="tl-item__dot" aria-hidden="true"></span>
 
-          <div class="news-post__content">
-            <span class="news-post__date">
+          <div class="tl-item__head">
+            <time class="tl-date" datetime="2026-02-01">
               <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="3" y="4.5" width="18" height="16" rx="2.5" stroke="currentColor" stroke-width="1.8"/><path d="M3 9.5h18M8 3v3M16 3v3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
               1 февраля 2026
-            </span>
-            <h3 class="news-post__title">Изменения тарифов</h3>
-            <div class="news-post__body">
-              <p>Коллеги, у нас для вас отличные новости!</p>
+            </time>
+          </div>
 
-              <p class="news-post__subhead">📉 СНИЖЕНИЕ СТОИМОСТИ</p>
-              <p>Мы провели анализ рынка и решили снизить стоимость всех тарифов RTK.</p>
-
-              <p class="news-post__subhead">🚀 НОВАЯ ВОЗМОЖНОСТЬ</p>
-              <p>Представляем новые тарифы «RTK без МСК». Это идеальный вариант для тех регионов, где трансляция параметров Местной СК в RTCM сообщениях еще не введена или не требуется.</p>
-
-              <p class="news-post__subhead">⛔️ ИСКЛЮЧЕНИЕ ТАРИФОВ</p>
-              <p>Исключены малоиспользуемые тарифы.</p>
-
-              <p>Мы приняли эти решения, чтобы наш сервис стал еще доступнее. Благодарим вас за доверие!</p>
-              <p>Подробности: <a href="https://topnet.gsi.ru/page.php?23" target="_blank" rel="noopener">https://topnet.gsi.ru/page.php?23</a></p>
-              <p>Вопросы: <a href="https://t.me/topnetlivechat" target="_blank" rel="noopener">https://t.me/topnetlivechat</a> или <a href="mailto:topnet@gsi.ru">topnet@gsi.ru</a></p>
+          <div class="tl-card">
+            <div class="tl-card__media tl-card__media--grid" aria-hidden="true">
+              <span class="tl-card__media-icon">
+                <svg viewBox="0 0 24 24" fill="none">
+                  <path d="M4 6h10l6 6-6 6H4V6Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+                  <circle cx="8.5" cy="12" r="1.4" fill="currentColor"/>
+                </svg>
+                <span class="tl-card__media-label">Тарифы</span>
+              </span>
             </div>
-            <div class="news-post__tags">
-              <span class="news-post__tag">#гси</span>
-              <span class="news-post__tag">#тарифы</span>
-              <span class="news-post__tag">#обновление</span>
-              <span class="news-post__tag">#подписка</span>
+
+            <div class="tl-card__content">
+              <h3 class="tl-card__title">Изменения тарифов</h3>
+              <p class="tl-card__excerpt">Снижена стоимость всех тарифов RTK, появились новые тарифы «RTK без МСК» для регионов, где трансляция параметров Местной СК не введена или не требуется, а малоиспользуемые тарифы исключены.</p>
+
+              <div class="tl-card__full" id="news-tariffs" hidden>
+                <p>Коллеги, у нас для вас отличные новости!</p>
+
+                <p class="tl-card__subhead">📉 СНИЖЕНИЕ СТОИМОСТИ</p>
+                <p>Мы провели анализ рынка и решили снизить стоимость всех тарифов RTK.</p>
+
+                <p class="tl-card__subhead">🚀 НОВАЯ ВОЗМОЖНОСТЬ</p>
+                <p>Представляем новые тарифы «RTK без МСК». Это идеальный вариант для тех регионов, где трансляция параметров Местной СК в RTCM сообщениях еще не введена или не требуется.</p>
+
+                <p class="tl-card__subhead">⛔️ ИСКЛЮЧЕНИЕ ТАРИФОВ</p>
+                <p>Исключены малоиспользуемые тарифы.</p>
+
+                <p>Мы приняли эти решения, чтобы наш сервис стал еще доступнее. Благодарим вас за доверие!</p>
+                <p>Подробности: <a href="https://topnet.gsi.ru/page.php?23" target="_blank" rel="noopener">https://topnet.gsi.ru/page.php?23</a></p>
+                <p>Вопросы: <a href="https://t.me/topnetlivechat" target="_blank" rel="noopener">https://t.me/topnetlivechat</a> или <a href="mailto:topnet@gsi.ru">topnet@gsi.ru</a></p>
+
+                <div class="tl-card__tags">
+                  <span class="tl-card__tag">#гси</span>
+                  <span class="tl-card__tag">#тарифы</span>
+                  <span class="tl-card__tag">#обновление</span>
+                  <span class="tl-card__tag">#подписка</span>
+                </div>
+              </div>
+
+              <button type="button" class="tl-more" aria-expanded="false" aria-controls="news-tariffs">
+                <span class="tl-more__label">Читать подробнее</span>
+                <span class="tl-more__arrow" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none"><path d="M5 12h13M13 6.5 18.5 12 13 17.5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </span>
+              </button>
+            </div>
+          </div>
+        </article>
+
+        <!-- ============ 2025 ============ -->
+        <div class="tl-year"><span class="tl-year__num">2025</span></div>
+
+        <!-- ---------- 1 апреля 2025 ---------- -->
+        <article class="tl-item">
+          <span class="tl-item__dot" aria-hidden="true"></span>
+
+          <div class="tl-item__head">
+            <time class="tl-date" datetime="2025-04-01">
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="3" y="4.5" width="18" height="16" rx="2.5" stroke="currentColor" stroke-width="1.8"/><path d="M3 9.5h18M8 3v3M16 3v3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+              1 апреля 2025
+            </time>
+          </div>
+
+          <div class="tl-card">
+            <div class="tl-card__media" aria-hidden="true">
+              <img src="assets/images/News1.png" alt="" class="tl-card__img" loading="lazy" decoding="async" />
+            </div>
+
+            <div class="tl-card__content">
+              <h3 class="tl-card__title">Развитие сети Topnet Live Россия. Март 2025.</h3>
+              <p class="tl-card__excerpt">В марте 2025 года карта покрытия проекта сети базовых станций Topnet Live - Россия пополнилась новыми станциями: Луховицы, Кобань, Туймазы и Студенцы.</p>
+
+              <div class="tl-card__full" id="news-march-2025" hidden>
+                <p>Коллеги, в марте 2025 года карта покрытия проекта сети базовых станций Topnet Live - Россия пополнилась новыми станциями:</p>
+                <ul>
+                  <li>Луховицы — Московская область</li>
+                  <li>Кобань — Республика Северная Осетия</li>
+                  <li>Туймазы — Республика Башкортостан</li>
+                  <li>Студенцы — Самарская область</li>
+                </ul>
+                <p>Хотите увидеть новую базовую станцию проекта Topnet Live-Россия в Вашем городе и располагаете местом для её размещения? Обращайтесь к нам!</p>
+                <p>Ваши заявки по размещению новой базовой станции можете отправлять на почту <a href="mailto:topnet@gsi.ru">topnet@gsi.ru</a></p>
+              </div>
+
+              <button type="button" class="tl-more" aria-expanded="false" aria-controls="news-march-2025">
+                <span class="tl-more__label">Читать подробнее</span>
+                <span class="tl-more__arrow" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none"><path d="M5 12h13M13 6.5 18.5 12 13 17.5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </span>
+              </button>
+            </div>
+          </div>
+        </article>
+
+        <!-- ============ 2024 ============ -->
+        <div class="tl-year"><span class="tl-year__num">2024</span></div>
+
+        <!-- ---------- 16 июля 2024 ---------- -->
+        <article class="tl-item">
+          <span class="tl-item__dot" aria-hidden="true"></span>
+
+          <div class="tl-item__head">
+            <time class="tl-date" datetime="2024-07-16">
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="3" y="4.5" width="18" height="16" rx="2.5" stroke="currentColor" stroke-width="1.8"/><path d="M3 9.5h18M8 3v3M16 3v3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+              16 июля 2024
+            </time>
+          </div>
+
+          <div class="tl-card">
+            <div class="tl-card__media tl-card__media--grid" aria-hidden="true">
+              <span class="tl-card__media-icon">
+                <svg viewBox="0 0 24 24" fill="none">
+                  <path d="M7 3h7l4 4v14H7V3Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+                  <path d="M14 3v4h4M9.5 12h5M9.5 15.5h5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                </svg>
+                <span class="tl-card__media-label">СДГС</span>
+              </span>
+            </div>
+
+            <div class="tl-card__content">
+              <h3 class="tl-card__title">Сеть на территории Нижегородской области получила статус СДГС</h3>
+              <p class="tl-card__excerpt">Базовые станции сети Topnet Live-Россия в Нижегородской области получили статус пунктов сети дифференциальных геодезических станций и приняты в Федеральный фонд пространственных данных.</p>
+
+              <div class="tl-card__full" id="news-nn-sdgs" hidden>
+                <p>Уважаемые коллеги, с радостью сообщаем Вам, что нижеперечисленные Базовые станции сети Topnet Live-Россия, расположенные в Нижегородской области, а именно: БС Нижний Новгород, БС Сокольское, БС Арья, БС Семенов, БС Городец, БС Володарск, БС Лысково, БС Маргуша, БС Сосновское, БС Выкса, БС Слизнево, БС Арзамас 1, БС Лукоянов, БС Сергач, БС Сеченово получили статус пунктов сети дифференциальных геодезических станций и приняты в Федеральный фонд пространственных данных. Координаты станций определены в МСК-52, ГСК-2011, WGS84 и ITRF2014. Высоты станций определены в Балтийской системе высот 1977 года.</p>
+                <p>Также определены параметры перехода от ITRF2014 к МСК-52 для использования при выполнении измерений в RTK. Для этих целей была вычислена «матрица деформаций», которая транслируется в потоке корректирующей информации в виде RTCM3 сообщений 1023, связанных с параметрами датума/ИГД (сообщение 1021) и параметрами проекции (сообщение 1025). Все указанные данные транслируются точками доступа:</p>
+                <div class="tl-card__list">
+                  <div>MCK52Z1RTK – 1 зона, поправки GPS/ГЛОНАСС от ближайшей станции;</div>
+                  <div>MCK52Z1RTKPlus– 1 зона, поправки GPS/ГЛОНАСС/Galileo/Beidou от ближайшей станции;</div>
+                  <div>MCK52Z1VRS1 – 1 зона, поправки GPS/ГЛОНАСС от виртуальной станции;</div>
+                  <div>MCK52Z1VRSPlus – 1 зона, поправки GPS/ГЛОНАСС/Galileo/Beidou от виртуальной станции;</div>
+                  <div>MCK52Z2RTK – 2 зона, поправки GPS/ГЛОНАСС от ближайшей станции;</div>
+                  <div>MCK52Z2RTKPlus– 2 зона, поправки GPS/ГЛОНАСС/Galileo/Beidou от ближайшей станции;</div>
+                  <div>MCK52Z2VRS1 – 2 зона, поправки GPS/ГЛОНАСС от виртуальной станции;</div>
+                  <div>MCK52Z2VRSPlus – 2 зона, поправки GPS/ГЛОНАСС/Galileo/Beidou от виртуальной станции.</div>
+                </div>
+                <p>С инструкцией по настройке точек доступа, а также зонами покрытия пунктов СДГС сети Topnet Live-Россия, определенных в системе МСК и ГСК-2011, можно ознакомиться на нашем сайте: <a href="https://topnet.gsi.ru" target="_blank" rel="noopener">https://topnet.gsi.ru</a>.</p>
+                <p>Команда проекта Сеть Topnet Live - Россия не перестает работать над развитием сети базовых станций и регулярно добавляет новые станции!</p>
+              </div>
+
+              <button type="button" class="tl-more" aria-expanded="false" aria-controls="news-nn-sdgs">
+                <span class="tl-more__label">Читать подробнее</span>
+                <span class="tl-more__arrow" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none"><path d="M5 12h13M13 6.5 18.5 12 13 17.5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </span>
+              </button>
             </div>
           </div>
         </article>
@@ -320,5 +390,6 @@
 
   <script src="js/main.js" defer></script>
   <script src="js/network.js" defer></script>
+  <script src="js/news-page.js" defer></script>
 </body>
 </html>

@@ -53,6 +53,22 @@ img { max-width: 100%; display: block; }
 a { color: inherit; text-decoration: none; }
 button { font-family: inherit; cursor: pointer; }
 
+/* ---------- Курсор: pointer на всём кликабельном ----------
+   `* { cursor: default }` выше отключает браузерный pointer для КАЖДОГО
+   элемента, включая детей ссылок/кнопок (иконки, span, svg): раз `*`
+   задаёт курсор явно, наследование от родителя-ссылки не срабатывает —
+   pointer нужно вернуть отдельным правилом. Плюс — оверлей модалки,
+   клик по которому её закрывает (не ссылка и не кнопка). */
+a, a *,
+button, button *,
+select,
+summary, summary *,
+[role="button"], [role="button"] *,
+[role="link"], [role="link"] *,
+[data-modal-close] {
+  cursor: pointer;
+}
+
 /* ---------- Сетевая анимация — фон, по бокам от формы ---------- */
 .auth__canvas {
   position: fixed;

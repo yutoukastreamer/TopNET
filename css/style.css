@@ -33,6 +33,26 @@ img { max-width: 100%; display: block; }
 a { color: inherit; text-decoration: none; }
 button { font-family: inherit; cursor: pointer; }
 
+/* ---------- Курсор: pointer на всём кликабельном ----------
+   `* { cursor: default }` выше отключает браузерный pointer для КАЖДОГО
+   элемента, включая детей ссылок/кнопок (иконки, span, svg): раз `*`
+   задаёт курсор явно, наследование от родителя-ссылки не срабатывает —
+   pointer нужно вернуть отдельным правилом. */
+a, a *,
+button, button *,
+select,
+summary, summary *,
+[role="button"], [role="button"] *,
+[role="link"], [role="link"] * {
+  cursor: pointer;
+}
+/* лейблы-тумблеры — отдельным правилом: если :has() не поддерживается,
+   остальной список выше не должен пострадать */
+label:has(> input[type="checkbox"]), label:has(> input[type="checkbox"]) *,
+label:has(> input[type="radio"]), label:has(> input[type="radio"]) * {
+  cursor: pointer;
+}
+
 :root {
   /* palette — заданная брендом */
   --brand:   #0E5AA7;      /* primary  */
@@ -1441,6 +1461,20 @@ a.info-card__value:hover { color: var(--accent); }
   margin: 0;
   font-size: 0.98rem;
   color: var(--ink-2);
+}
+
+/* модификатор: та же скруглённая карточка, но под карту — без паддинга
+   и ограничения ширины, чтобы iframe заполнял её целиком */
+.page-placeholder--map {
+  max-width: none;
+  padding: 0;
+  overflow: hidden;
+}
+.page-placeholder--map .map-embed {
+  display: block;
+  width: 100%;
+  height: clamp(360px, 55vw, 560px);
+  border: 0;
 }
 
 /* =============================================================

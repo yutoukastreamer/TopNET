@@ -116,12 +116,18 @@
 }
 
 /* ---------- Тумблеры ---------- */
+.switch,
+.switch * {
+  /* `* { cursor: default }` в login.css задаёт курсор явно каждому
+     потомку лейбла (трек, ползунок, текст) — pointer от .switch
+     к ним не наследуется, возвращаем его отдельно. */
+  cursor: pointer;
+}
 .switch {
   display: flex;
   align-items: flex-start;
   gap: 12px;
   margin-bottom: 18px;
-  cursor: pointer;
 }
 .switch__input {
   position: absolute;

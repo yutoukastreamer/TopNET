@@ -121,12 +121,15 @@
   <!-- ================= PAGE BODY ================= -->
   <section class="page-body page-body--soft">
     <div class="container">
-      <div class="page-placeholder">
-        <span class="page-placeholder__icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none"><path d="M12 21s7-6.1 7-11a7 7 0 1 0-14 0c0 4.9 7 11 7 11Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><circle cx="12" cy="10" r="2.4" stroke="currentColor" stroke-width="1.8"/></svg>
-        </span>
-        <h2 class="page-placeholder__title">Раздел наполняется</h2>
-        <p class="page-placeholder__text">Здесь появится интерактивная карта станций и зоны покрытия сети.</p>
+      <div class="page-placeholder page-placeholder--map">
+        <!-- ЗАМЕНИТЕ этот iframe на готовую карту конструктора -->
+        <iframe
+          class="map-embed"
+          src="https://yandex.ru/map-widget/v1/?ll=90.000000%2C61.500000&z=4"
+          title="Карта покрытия сети"
+          loading="lazy"
+          allowfullscreen="true"
+        ></iframe>
       </div>
     </div>
   </section>

@@ -1,40 +1,222 @@
 /* =============================================================
-   TopNET GSI — «Новости» (news.html).
+   TopNET GSI — «Новости» (news.html): вертикальный таймлайн.
    Подключается ПОСЛЕ css/style.css и использует его токены.
    ============================================================= */
 
-/* ---------- Лента новостей ---------- */
-.news-feed {
-  display: flex;
-  flex-direction: column;
-  gap: clamp(24px, 3vw, 36px);
+/* ---------- Каркас таймлайна ---------- */
+.timeline {
+  /* --rail  — левый край линии, --shift — отступ контента от края.
+     Вся геометрия точек и годов считается от них. */
+  --rail: clamp(19px, 2.2vw, 27px);
+  --shift: clamp(56px, 6vw, 84px);
+
+  position: relative;
+  /* место слева под линию, точку и «плечо» до карточки */
+  padding-left: var(--shift);
 }
 
-.news-post {
-  display: grid;
-  grid-template-columns: minmax(220px, 280px) 1fr;
-  gap: clamp(22px, 3vw, 36px);
+/* вертикальная линия — 2px, лёгкий градиент Primary */
+.timeline::before {
+  content: "";
+  position: absolute;
+  top: 4px;
+  bottom: 4px;
+  left: var(--rail);
+  width: 2px;
+  border-radius: 2px;
+  background: linear-gradient(
+    180deg,
+    rgba(14, 90, 167, 0) 0%,
+    rgba(14, 90, 167, 0.38) 6%,
+    rgba(14, 90, 167, 0.28) 62%,
+    rgba(14, 90, 167, 0.10) 92%,
+    rgba(14, 90, 167, 0) 100%
+  );
+  pointer-events: none;
+}
+
+/* ---------- Разделитель года ---------- */
+.tl-year {
+  position: relative;
+  margin: clamp(30px, 4vw, 44px) 0 clamp(18px, 2.4vw, 26px);
+}
+.tl-year:first-child { margin-top: 0; }
+
+/* «пробивка» линии под крупным числом */
+.tl-year::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: calc(var(--rail) - var(--shift) - 7px);
+  width: 16px;
+  height: 74px;
+  transform: translateY(-50%);
+  background: var(--bg);
+  border-radius: 8px;
+}
+.tl-year::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: calc(var(--rail) - var(--shift) - 4px);
+  width: 10px;
+  height: 10px;
+  transform: translateY(-50%);
+  border-radius: 50%;
+  background: var(--bg);
+  border: 2px solid rgba(14, 90, 167, 0.45);
+}
+
+.tl-year__num {
+  display: inline-block;
+  font-size: clamp(2rem, 4.6vw, 3.1rem);
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  line-height: 1;
+  color: rgba(14, 90, 167, 0.20);
+}
+
+/* ---------- Элемент ленты ---------- */
+.tl-item {
+  position: relative;
+  padding-bottom: clamp(26px, 3.4vw, 40px);
+}
+.tl-item:last-child { padding-bottom: 0; }
+
+/* точка на линии */
+.tl-item__dot {
+  position: absolute;
+  top: 10px;
+  left: calc(var(--rail) - var(--shift) - 5px);
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--bg);
+  border: 2px solid var(--brand);
+  box-shadow: 0 0 0 4px var(--bg);
+  transition: box-shadow 0.3s ease, transform 0.3s ease, background 0.3s ease;
+}
+
+/* соединитель «точка → карточка» */
+.tl-item__dot::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 100%;
+  /* «плечо» до даты-пилюли */
+  width: calc(var(--shift) - var(--rail) - 7px);
+  height: 2px;
+  transform: translateY(-50%);
+  background: linear-gradient(90deg, rgba(14, 90, 167, 0.30), rgba(14, 90, 167, 0));
+  pointer-events: none;
+}
+
+/* самая свежая новость — акцентная точка */
+.tl-item--latest .tl-item__dot {
+  background: var(--accent);
+  border-color: var(--accent);
+  box-shadow: 0 0 0 4px var(--bg), 0 0 0 8px rgba(245, 135, 31, 0.18);
+}
+.tl-item--latest .tl-item__dot::after {
+  background: linear-gradient(90deg, rgba(245, 135, 31, 0.45), rgba(245, 135, 31, 0));
+}
+
+/* ---------- Шапка элемента: дата-пилюля + чип «Новое» ---------- */
+.tl-item__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.tl-date {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 13px;
+  border-radius: 999px;
   background: var(--bg-alt);
   border: 1px solid var(--line);
-  border-radius: var(--radius-lg);
-  padding: clamp(20px, 2.4vw, 28px);
-  box-shadow: 0 20px 40px -30px rgba(26, 39, 51, 0.35);
-  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+  color: var(--ink-2);
+  font-size: 12.5px;
+  font-weight: 600;
+  white-space: nowrap;
 }
-.news-post:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 24px 48px -26px rgba(26, 39, 51, 0.32);
+.tl-date svg { width: 13px; height: 13px; flex: none; color: var(--muted); }
+
+.tl-new {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 12px;
+  border-radius: 999px;
+  background: rgba(245, 135, 31, 0.12);
+  border: 1px solid rgba(245, 135, 31, 0.34);
+  color: var(--accent-2);
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.tl-new::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
 }
 
-/* ---------- Заглушка изображения (оранжевый акцент вместо фото) ---------- */
-.news-post__media {
+/* ---------- Карточка ---------- */
+.tl-card {
+  display: grid;
+  grid-template-columns: minmax(180px, 232px) 1fr;
+  gap: clamp(18px, 2.4vw, 28px);
+  background: var(--bg-alt);
+  border: 1px solid var(--line);
+  border-radius: 24px;
+  padding: clamp(16px, 1.8vw, 20px);
+  box-shadow: 0 22px 44px -32px rgba(26, 39, 51, 0.38);
+  transition: transform 0.32s cubic-bezier(0.2, 0.7, 0.2, 1),
+              box-shadow 0.32s ease,
+              border-color 0.32s ease;
+}
+.tl-item:hover .tl-card,
+.tl-item:focus-within .tl-card {
+  transform: translateY(-4px);
+  border-color: rgba(14, 90, 167, 0.22);
+  box-shadow: 0 32px 56px -30px rgba(26, 39, 51, 0.40);
+}
+
+/* свечение точки на hover карточки */
+.tl-item:hover .tl-item__dot,
+.tl-item:focus-within .tl-item__dot {
+  transform: scale(1.18);
+  box-shadow: 0 0 0 4px var(--bg), 0 0 0 9px rgba(14, 90, 167, 0.18);
+}
+.tl-item--latest:hover .tl-item__dot,
+.tl-item--latest:focus-within .tl-item__dot {
+  box-shadow: 0 0 0 4px var(--bg), 0 0 0 10px rgba(245, 135, 31, 0.28);
+}
+
+/* ---------- Медиа карточки ---------- */
+.tl-card__media {
   position: relative;
-  min-height: 200px;
-  border-radius: var(--radius);
+  min-height: 168px;
+  border-radius: 16px;
   overflow: hidden;
   background: linear-gradient(135deg, #FBD9B4 0%, #F5871F 55%, #C6620E 100%);
 }
-.news-post__media::before {
+/* реальное изображение — аккуратный кроп без искажений */
+.tl-card__img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+.tl-card__media--grid::before {
   content: "";
   position: absolute;
   inset: 0;
@@ -45,7 +227,7 @@
   opacity: 0.8;
   pointer-events: none;
 }
-.news-post__media-icon {
+.tl-card__media-icon {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -55,13 +237,14 @@
   align-items: center;
   gap: 8px;
   color: #fff;
+  text-align: center;
 }
-.news-post__media-icon svg {
-  width: 32px;
-  height: 32px;
-  filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.15));
+.tl-card__media-icon svg {
+  width: 30px;
+  height: 30px;
+  filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.18));
 }
-.news-post__media-label {
+.tl-card__media-label {
   font-size: 11px;
   font-weight: 700;
   letter-spacing: 0.16em;
@@ -69,46 +252,54 @@
   color: rgba(255, 255, 255, 0.92);
 }
 
-/* ---------- Контент ---------- */
-.news-post__content { min-width: 0; }
-
-.news-post__date {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 5px 12px;
-  border-radius: 999px;
-  background: var(--bg);
-  border: 1px solid var(--line);
-  color: var(--muted);
-  font-size: 12.5px;
-  font-weight: 600;
+/* ---------- Контент карточки ---------- */
+.tl-card__content {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  padding: clamp(2px, 0.6vw, 8px) clamp(2px, 0.8vw, 10px) 4px 0;
 }
-.news-post__date svg { width: 13px; height: 13px; flex: none; }
 
-.news-post__title {
-  margin: 14px 0 0;
-  font-size: clamp(1.3rem, 2vw, 1.7rem);
-  line-height: 1.22;
+.tl-card__title {
+  margin: 0;
+  font-size: clamp(1.12rem, 1.6vw, 1.38rem);
+  line-height: 1.26;
   letter-spacing: -0.02em;
   font-weight: 700;
   color: var(--ink);
 }
 
-.news-post__body {
+.tl-card__excerpt {
+  margin: 10px 0 0;
+  color: var(--ink-2);
+  font-size: 0.95rem;
+  line-height: 1.6;
+  /* краткий текст — 3 строки */
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+/* display: -webkit-box перебивает UA-правило [hidden] — гасим явно */
+.tl-card__excerpt[hidden] { display: none; }
+
+/* ---------- Полный текст новости ---------- */
+.tl-card__full {
   margin-top: 14px;
   color: var(--ink-2);
-  font-size: clamp(0.96rem, 1.05vw, 1.02rem);
-  line-height: 1.65;
+  font-size: 0.96rem;
+  line-height: 1.68;
 }
-.news-post__body p { margin: 0 0 14px; }
-.news-post__body p:last-child { margin-bottom: 0; }
-.news-post__subhead {
-  margin: 18px 0 4px;
-  font-weight: 700;
-  color: var(--ink);
+.tl-card__full[hidden] { display: none; }
+.tl-card__full p { margin: 0 0 13px; }
+.tl-card__full p:last-child { margin-bottom: 0; }
+.tl-card__full ul {
+  margin: 12px 0;
+  padding-left: 22px;
 }
-.news-post__body a {
+.tl-card__full li { margin-bottom: 4px; }
+.tl-card__full a {
   color: var(--brand);
   font-weight: 600;
   text-decoration: underline;
@@ -117,43 +308,141 @@
   transition: color 0.2s ease;
   overflow-wrap: anywhere;
 }
-.news-post__body a:hover { color: var(--accent); }
+.tl-card__full a:hover { color: var(--accent); }
 
-.news-post__signoff {
-  margin-top: 16px;
+.tl-card__subhead {
+  margin: 16px 0 4px;
+  font-weight: 700;
+  color: var(--ink);
+}
+.tl-card__list {
+  margin: 12px 0;
+  padding-left: 18px;
+  line-height: 1.8;
+  border-left: 2px solid rgba(14, 90, 167, 0.16);
+}
+.tl-card__signoff {
+  margin-top: 14px;
   color: var(--muted);
-  font-size: 0.92rem;
+  font-size: 0.9rem;
   font-style: italic;
 }
 
 /* ---------- Хэштеги ---------- */
-.news-post__tags {
+.tl-card__tags {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
-  margin-top: 18px;
+  margin-top: 16px;
 }
-.news-post__tag {
-  padding: 5px 13px;
+.tl-card__tag {
+  padding: 4px 12px;
   border-radius: 999px;
   background: rgba(245, 135, 31, 0.12);
   border: 1px solid rgba(245, 135, 31, 0.32);
   color: var(--accent-2);
-  font-size: 12.5px;
+  font-size: 12px;
   font-weight: 600;
-  transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
 }
-.news-post__tag:hover {
+
+/* ---------- «Читать подробнее» ---------- */
+.tl-more {
+  align-self: flex-start;
+  margin-top: 16px;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0;
+  background: none;
+  border: 0;
+  color: var(--brand);
+  font-size: 0.92rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  transition: color 0.2s ease;
+}
+.tl-more:hover { color: var(--accent-2); }
+.tl-more:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+  border-radius: 6px;
+}
+
+/* стрелка-чип */
+.tl-more__arrow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: rgba(14, 90, 167, 0.09);
+  border: 1px solid rgba(14, 90, 167, 0.18);
+  color: var(--brand);
+  transition: background 0.25s ease, border-color 0.25s ease,
+              color 0.25s ease, transform 0.25s ease;
+}
+.tl-more__arrow svg {
+  width: 14px;
+  height: 14px;
+  transition: transform 0.3s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.tl-more:hover .tl-more__arrow {
   background: var(--accent);
   border-color: var(--accent);
   color: #fff;
+  transform: translateX(3px);
+}
+/* развёрнутое состояние — стрелка вверх */
+.tl-more[aria-expanded="true"] .tl-more__arrow svg { transform: rotate(-90deg); }
+.tl-more[aria-expanded="true"]:hover .tl-more__arrow { transform: none; }
+
+/* ---------- Scroll-reveal ---------- */
+.timeline.is-reveal .tl-item,
+.timeline.is-reveal .tl-year {
+  opacity: 0;
+  transform: translateY(26px);
+  transition: opacity 0.6s cubic-bezier(0.2, 0.7, 0.2, 1),
+              transform 0.6s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.timeline.is-reveal .tl-item.is-in,
+.timeline.is-reveal .tl-year.is-in {
+  opacity: 1;
+  transform: none;
 }
 
 /* ---------- Адаптив ---------- */
-@media (max-width: 960px) {
-  .news-post { grid-template-columns: 1fr; }
-  .news-post__media { min-height: 160px; }
+@media (max-width: 860px) {
+  .tl-card { grid-template-columns: 1fr; }
+  .tl-card__media { min-height: 150px; }
+  .tl-card__content { padding-right: 2px; }
 }
+
 @media (max-width: 560px) {
-  .news-post { padding: 18px; border-radius: 16px; }
+  /* линия у левого края, карточки во всю ширину */
+  .timeline {
+    --rail: 5px;
+    --shift: 30px;
+  }
+  .tl-year::before { height: 58px; }
+  .tl-card {
+    border-radius: 18px;
+    padding: 14px;
+  }
+  .tl-card__media { min-height: 132px; border-radius: 14px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tl-card,
+  .tl-item__dot,
+  .tl-more,
+  .tl-more__arrow,
+  .tl-more__arrow svg,
+  .timeline.is-reveal .tl-item,
+  .timeline.is-reveal .tl-year { transition: none; }
+  .tl-item:hover .tl-card,
+  .tl-item:focus-within .tl-card { transform: none; }
+  .tl-item:hover .tl-item__dot,
+  .tl-item:focus-within .tl-item__dot { transform: none; }
+  .tl-more:hover .tl-more__arrow { transform: none; }
 }
