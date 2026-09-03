@@ -1671,6 +1671,23 @@ a.info-card__value:hover { color: var(--accent); }
   margin: 0;
   color: var(--ink);
 }
+.section-head__lead {
+  margin: 14px 0 0;
+  font-size: clamp(0.98rem, 1.15vw, 1.08rem);
+  line-height: 1.6;
+  color: var(--ink-2);
+  max-width: 640px;
+}
+
+/* ---------- Несколько блоков тарифов на одной странице (tariffs.html) ---------- */
+.tariff-section + .tariff-section {
+  margin-top: clamp(56px, 8vh, 88px);
+}
+.tariffs-note {
+  margin: 18px 0 0;
+  font-size: 12.5px;
+  color: var(--muted);
+}
 
 /* ---------- Карточки тарифов ---------- */
 .tariffs {
