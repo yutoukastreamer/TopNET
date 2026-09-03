@@ -121,6 +121,64 @@
   <!-- ================= PAGE BODY ================= -->
   <section class="page-body page-body--soft">
     <div class="container">
+
+      <!-- ---------- Легенда и зоны покрытия ---------- -->
+      <div class="section-head">
+        <h2 class="section-head__title">Зона покрытия сети TOPNET Live-Россия</h2>
+      </div>
+
+      <div class="coverage-legend">
+
+        <!-- Схема зон -->
+        <div class="zone-scheme">
+          <svg class="zone-scheme__svg" viewBox="0 0 480 400" role="img"
+               aria-label="Схема зон покрытия: внешняя зона RTK и внутренняя зона по типу средств измерения">
+            <circle class="zone-scheme__circle zone-scheme__circle--outer" cx="200" cy="190" r="130" />
+            <circle class="zone-scheme__circle zone-scheme__circle--inner" cx="200" cy="190" r="64" />
+
+            <!-- выноска: внешняя зона -->
+            <line class="zone-scheme__leader" x1="306.5" y1="115.4" x2="351.6" y2="83.9" />
+            <circle class="zone-scheme__dot" cx="306.5" cy="115.4" r="4" />
+            <foreignObject x="352" y="46" width="120" height="76">
+              <div xmlns="http://www.w3.org/1999/xhtml" class="zone-scheme__label">Зона покрытия RTK</div>
+            </foreignObject>
+
+            <!-- выноска: внутренняя зона -->
+            <line class="zone-scheme__leader" x1="147.6" y1="226.7" x2="98.5" y2="261.1" />
+            <circle class="zone-scheme__dot" cx="147.6" cy="226.7" r="4" />
+            <foreignObject x="6" y="258" width="204" height="112">
+              <div xmlns="http://www.w3.org/1999/xhtml" class="zone-scheme__label zone-scheme__label--inner">Зона покрытия в соответствии с описанием Типа средств измерения (СИ)</div>
+            </foreignObject>
+
+            <!-- станция в центре зон -->
+            <path class="zone-scheme__marker" d="M200 182 L208 197 L192 197 Z" />
+          </svg>
+        </div>
+
+        <!-- Легенда -->
+        <ul class="legend-list">
+          <li class="legend-chip">
+            <svg class="legend-chip__icon" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M12 3 L21.5 20 L2.5 20 Z" fill="#EFC53B" />
+            </svg>
+            <span class="legend-chip__text">ГНСС станция</span>
+          </li>
+          <li class="legend-chip">
+            <svg class="legend-chip__icon" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M12 3 L21.5 20 L2.5 20 Z" fill="#0E5AA7" />
+            </svg>
+            <span class="legend-chip__text">Пункт СДГС, определенный в ГСК-2011</span>
+          </li>
+          <li class="legend-chip">
+            <svg class="legend-chip__icon" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M12 3 L21.5 20 L2.5 20 Z" fill="#2E9E5B" />
+            </svg>
+            <span class="legend-chip__text">Пункт СДГС, определенный в МСК и ГСК-2011</span>
+          </li>
+        </ul>
+
+      </div>
+
       <div class="page-placeholder page-placeholder--map">
         <!-- ЗАМЕНИТЕ этот iframe на готовую карту конструктора -->
         <iframe
