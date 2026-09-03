@@ -1,0 +1,159 @@
+/* =============================================================
+   TopNET GSI — «Новости» (news.html).
+   Подключается ПОСЛЕ css/style.css и использует его токены.
+   ============================================================= */
+
+/* ---------- Лента новостей ---------- */
+.news-feed {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(24px, 3vw, 36px);
+}
+
+.news-post {
+  display: grid;
+  grid-template-columns: minmax(220px, 280px) 1fr;
+  gap: clamp(22px, 3vw, 36px);
+  background: var(--bg-alt);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  padding: clamp(20px, 2.4vw, 28px);
+  box-shadow: 0 20px 40px -30px rgba(26, 39, 51, 0.35);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+.news-post:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 24px 48px -26px rgba(26, 39, 51, 0.32);
+}
+
+/* ---------- Заглушка изображения (оранжевый акцент вместо фото) ---------- */
+.news-post__media {
+  position: relative;
+  min-height: 200px;
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: linear-gradient(135deg, #FBD9B4 0%, #F5871F 55%, #C6620E 100%);
+}
+.news-post__media::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.16) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.16) 1px, transparent 1px);
+  background-size: 24px 24px;
+  opacity: 0.8;
+  pointer-events: none;
+}
+.news-post__media-icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  color: #fff;
+}
+.news-post__media-icon svg {
+  width: 32px;
+  height: 32px;
+  filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.15));
+}
+.news-post__media-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.92);
+}
+
+/* ---------- Контент ---------- */
+.news-post__content { min-width: 0; }
+
+.news-post__date {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 12px;
+  border-radius: 999px;
+  background: var(--bg);
+  border: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 12.5px;
+  font-weight: 600;
+}
+.news-post__date svg { width: 13px; height: 13px; flex: none; }
+
+.news-post__title {
+  margin: 14px 0 0;
+  font-size: clamp(1.3rem, 2vw, 1.7rem);
+  line-height: 1.22;
+  letter-spacing: -0.02em;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.news-post__body {
+  margin-top: 14px;
+  color: var(--ink-2);
+  font-size: clamp(0.96rem, 1.05vw, 1.02rem);
+  line-height: 1.65;
+}
+.news-post__body p { margin: 0 0 14px; }
+.news-post__body p:last-child { margin-bottom: 0; }
+.news-post__subhead {
+  margin: 18px 0 4px;
+  font-weight: 700;
+  color: var(--ink);
+}
+.news-post__body a {
+  color: var(--brand);
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-color: rgba(14, 90, 167, 0.35);
+  transition: color 0.2s ease;
+  overflow-wrap: anywhere;
+}
+.news-post__body a:hover { color: var(--accent); }
+
+.news-post__signoff {
+  margin-top: 16px;
+  color: var(--muted);
+  font-size: 0.92rem;
+  font-style: italic;
+}
+
+/* ---------- Хэштеги ---------- */
+.news-post__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 18px;
+}
+.news-post__tag {
+  padding: 5px 13px;
+  border-radius: 999px;
+  background: rgba(245, 135, 31, 0.12);
+  border: 1px solid rgba(245, 135, 31, 0.32);
+  color: var(--accent-2);
+  font-size: 12.5px;
+  font-weight: 600;
+  transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+.news-post__tag:hover {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+}
+
+/* ---------- Адаптив ---------- */
+@media (max-width: 960px) {
+  .news-post { grid-template-columns: 1fr; }
+  .news-post__media { min-height: 160px; }
+}
+@media (max-width: 560px) {
+  .news-post { padding: 18px; border-radius: 16px; }
+}
