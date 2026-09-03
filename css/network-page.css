@@ -469,6 +469,7 @@
   margin-bottom: 18px;
 }
 .who__icon svg { width: 24px; height: 24px; }
+.who__icon img { width: 30px; height: 30px; object-fit: contain; display: block; }
 .who__title {
   margin: 0 0 8px;
   font-size: 1.05rem;
