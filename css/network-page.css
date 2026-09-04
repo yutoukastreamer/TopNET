@@ -197,8 +197,8 @@
   margin-top: 6px;
   padding: 8px 14px;
   border-radius: 999px;
-  background: #FEEDDD;
-  color: #8A4B08;
+  background: var(--accent-soft);
+  color: var(--accent-soft-ink);
   font-size: 13px;
   font-weight: 600;
 }
@@ -209,7 +209,7 @@
   border-radius: 16px;
   background:
     radial-gradient(ellipse at 50% 40%, rgba(14, 90, 167, 0.07) 0%, transparent 65%),
-    #F2F6FA;
+    var(--bg);
   border: 1px solid var(--line);
 }
 .scheme svg { display: block; width: 100%; height: auto; }
@@ -345,7 +345,7 @@
 .mount__seg--msk  { color: var(--brand); }
 .mount__seg--zone { color: var(--accent-2); }
 .mount__seg--tech { color: var(--success); }
-.mount__seg--plus { color: #6B5BD2; }
+.mount__seg--plus { color: var(--brand); }
 .mount__seg.is-active.mount__seg--msk  { background: rgba(14, 90, 167, 0.12);  border-color: rgba(14, 90, 167, 0.35); }
 .mount__seg.is-active.mount__seg--zone { background: rgba(245, 135, 31, 0.14); border-color: rgba(245, 135, 31, 0.4); }
 .mount__seg.is-active.mount__seg--tech { background: rgba(46, 158, 91, 0.12);  border-color: rgba(46, 158, 91, 0.4); }
@@ -464,7 +464,7 @@
   justify-content: center;
   width: 48px; height: 48px;
   border-radius: 14px;
-  background: #FEEDDD;
+  background: var(--accent-soft);
   color: var(--accent);
   margin-bottom: 18px;
 }

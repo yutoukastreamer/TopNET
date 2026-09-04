@@ -9,6 +9,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/tokens.css" />
   <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
@@ -134,49 +135,76 @@
 
         <div class="tariffs">
           <article class="tariff">
-            <p class="tariff__period">RTK 1 сутки</p>
-            <p class="tariff__price">
-              427.00&nbsp;₽ <span class="tariff__price-alt">/ 290.00&nbsp;₽<span class="tariff__star">*</span></span>
-            </p>
-            <p class="tariff__vat">включая НДС</p>
-            <div class="tariff__cta">
-              <a href="register.html" class="btn btn--accent btn--wide">Подключиться</a>
+            <div class="tariff__head">
+              <p class="tariff__kicker">Тариф</p>
+              <p class="tariff__period">RTK 1 сутки</p>
+            </div>
+            <div class="tariff__body">
+              <p class="tariff__price">427.00&nbsp;₽ <span class="tariff__price-alt">/ 290.00&nbsp;₽<span class="tariff__star">*</span></span></p>
+              <p class="tariff__vat">включая НДС</p>
+              <div class="tariff__cta">
+                <a href="register.html" class="btn btn--primary btn--wide">Подключиться</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="tariff tariff--featured">
+            <div class="tariff__head">
+              <span class="tariff__badge">Популярный</span>
+              <p class="tariff__kicker">Тариф</p>
+              <p class="tariff__period">RTK 1 месяц</p>
+            </div>
+            <div class="tariff__body">
+              <p class="tariff__price">4&nbsp;148.00&nbsp;₽</p>
+              <p class="tariff__vat">включая НДС</p>
+              <div class="tariff__cta">
+                <a href="register.html" class="btn btn--primary btn--wide">Подключиться</a>
+              </div>
             </div>
           </article>
 
           <article class="tariff">
-            <p class="tariff__period">RTK 1 месяц</p>
-            <p class="tariff__price">4&nbsp;148.00&nbsp;₽</p>
-            <p class="tariff__vat">включая НДС</p>
-            <div class="tariff__cta">
-              <a href="register.html" class="btn btn--accent btn--wide">Подключиться</a>
+            <div class="tariff__head">
+              <p class="tariff__kicker">Тариф</p>
+              <p class="tariff__period">RTK 3 месяца</p>
+            </div>
+            <div class="tariff__body">
+              <p class="tariff__price">11&nbsp;590.00&nbsp;₽</p>
+              <p class="tariff__vat">включая НДС</p>
+              <p class="tariff__permonth">≈ 3 863 ₽/мес</p>
+              <div class="tariff__cta">
+                <a href="register.html" class="btn btn--primary btn--wide">Подключиться</a>
+              </div>
             </div>
           </article>
 
           <article class="tariff">
-            <p class="tariff__period">RTK 3 месяца</p>
-            <p class="tariff__price">11&nbsp;590.00&nbsp;₽</p>
-            <p class="tariff__vat">включая НДС</p>
-            <div class="tariff__cta">
-              <a href="register.html" class="btn btn--accent btn--wide">Подключиться</a>
+            <div class="tariff__head">
+              <p class="tariff__kicker">Тариф</p>
+              <p class="tariff__period">RTK 6 месяцев</p>
+            </div>
+            <div class="tariff__body">
+              <p class="tariff__price">21&nbsp;990.00&nbsp;₽</p>
+              <p class="tariff__vat">включая НДС</p>
+              <p class="tariff__permonth">≈ 3 665 ₽/мес</p>
+              <div class="tariff__cta">
+                <a href="register.html" class="btn btn--primary btn--wide">Подключиться</a>
+              </div>
             </div>
           </article>
 
           <article class="tariff">
-            <p class="tariff__period">RTK 6 месяцев</p>
-            <p class="tariff__price">21&nbsp;990.00&nbsp;₽</p>
-            <p class="tariff__vat">включая НДС</p>
-            <div class="tariff__cta">
-              <a href="register.html" class="btn btn--accent btn--wide">Подключиться</a>
+            <div class="tariff__head">
+              <p class="tariff__kicker">Тариф</p>
+              <p class="tariff__period">RTK 12 месяцев</p>
             </div>
-          </article>
-
-          <article class="tariff">
-            <p class="tariff__period">RTK 12 месяцев</p>
-            <p class="tariff__price">35&nbsp;990.00&nbsp;₽</p>
-            <p class="tariff__vat">включая НДС</p>
-            <div class="tariff__cta">
-              <a href="register.html" class="btn btn--accent btn--wide">Подключиться</a>
+            <div class="tariff__body">
+              <p class="tariff__price">35&nbsp;990.00&nbsp;₽</p>
+              <p class="tariff__vat">включая НДС</p>
+              <p class="tariff__permonth">≈ 2 999 ₽/мес</p>
+              <div class="tariff__cta">
+                <a href="register.html" class="btn btn--primary btn--wide">Подключиться</a>
+              </div>
             </div>
           </article>
         </div>
@@ -193,20 +221,32 @@
 
         <div class="tariffs">
           <article class="tariff">
-            <p class="tariff__period">RTK без МСК 6 месяцев</p>
-            <p class="tariff__price">19&nbsp;886.00&nbsp;₽</p>
-            <p class="tariff__vat">включая НДС</p>
-            <div class="tariff__cta">
-              <a href="register.html" class="btn btn--accent btn--wide">Подключиться</a>
+            <div class="tariff__head">
+              <p class="tariff__kicker">Тариф</p>
+              <p class="tariff__period">RTK без МСК 6 месяцев</p>
+            </div>
+            <div class="tariff__body">
+              <p class="tariff__price">19&nbsp;886.00&nbsp;₽</p>
+              <p class="tariff__vat">включая НДС</p>
+              <p class="tariff__permonth">≈ 3 314 ₽/мес</p>
+              <div class="tariff__cta">
+                <a href="register.html" class="btn btn--primary btn--wide">Подключиться</a>
+              </div>
             </div>
           </article>
 
           <article class="tariff">
-            <p class="tariff__period">RTK без МСК 12 месяцев</p>
-            <p class="tariff__price">31&nbsp;964.00&nbsp;₽</p>
-            <p class="tariff__vat">включая НДС</p>
-            <div class="tariff__cta">
-              <a href="register.html" class="btn btn--accent btn--wide">Подключиться</a>
+            <div class="tariff__head">
+              <p class="tariff__kicker">Тариф</p>
+              <p class="tariff__period">RTK без МСК 12 месяцев</p>
+            </div>
+            <div class="tariff__body">
+              <p class="tariff__price">31&nbsp;964.00&nbsp;₽</p>
+              <p class="tariff__vat">включая НДС</p>
+              <p class="tariff__permonth">≈ 2 664 ₽/мес</p>
+              <div class="tariff__cta">
+                <a href="register.html" class="btn btn--primary btn--wide">Подключиться</a>
+              </div>
             </div>
           </article>
         </div>
@@ -221,38 +261,61 @@
 
         <div class="tariffs">
           <article class="tariff">
-            <p class="tariff__period">Rinex 1 месяц</p>
-            <p class="tariff__price">976.00&nbsp;₽</p>
-            <p class="tariff__vat">включая НДС</p>
-            <div class="tariff__cta">
-              <a href="register.html" class="btn btn--accent btn--wide">Подключиться</a>
+            <div class="tariff__head">
+              <p class="tariff__kicker">Услуга</p>
+              <p class="tariff__period">Rinex 1 месяц</p>
+            </div>
+            <div class="tariff__body">
+              <p class="tariff__price">976.00&nbsp;₽</p>
+              <p class="tariff__vat">включая НДС</p>
+              <div class="tariff__cta">
+                <a href="register.html" class="btn btn--primary btn--wide">Подключиться</a>
+              </div>
             </div>
           </article>
 
           <article class="tariff">
-            <p class="tariff__period">Rinex 3 месяца</p>
-            <p class="tariff__price">2&nbsp;440.00&nbsp;₽</p>
-            <p class="tariff__vat">включая НДС</p>
-            <div class="tariff__cta">
-              <a href="register.html" class="btn btn--accent btn--wide">Подключиться</a>
+            <div class="tariff__head">
+              <p class="tariff__kicker">Услуга</p>
+              <p class="tariff__period">Rinex 3 месяца</p>
+            </div>
+            <div class="tariff__body">
+              <p class="tariff__price">2&nbsp;440.00&nbsp;₽</p>
+              <p class="tariff__vat">включая НДС</p>
+              <p class="tariff__permonth">≈ 813 ₽/мес</p>
+              <div class="tariff__cta">
+                <a href="register.html" class="btn btn--primary btn--wide">Подключиться</a>
+              </div>
             </div>
           </article>
 
           <article class="tariff">
-            <p class="tariff__period">Rinex 6 месяцев</p>
-            <p class="tariff__price">4&nbsp;453.00&nbsp;₽</p>
-            <p class="tariff__vat">включая НДС</p>
-            <div class="tariff__cta">
-              <a href="register.html" class="btn btn--accent btn--wide">Подключиться</a>
+            <div class="tariff__head">
+              <p class="tariff__kicker">Услуга</p>
+              <p class="tariff__period">Rinex 6 месяцев</p>
+            </div>
+            <div class="tariff__body">
+              <p class="tariff__price">4&nbsp;453.00&nbsp;₽</p>
+              <p class="tariff__vat">включая НДС</p>
+              <p class="tariff__permonth">≈ 742 ₽/мес</p>
+              <div class="tariff__cta">
+                <a href="register.html" class="btn btn--primary btn--wide">Подключиться</a>
+              </div>
             </div>
           </article>
 
           <article class="tariff">
-            <p class="tariff__period">Rinex 12 месяцев</p>
-            <p class="tariff__price">7&nbsp;991.00&nbsp;₽</p>
-            <p class="tariff__vat">включая НДС</p>
-            <div class="tariff__cta">
-              <a href="register.html" class="btn btn--accent btn--wide">Подключиться</a>
+            <div class="tariff__head">
+              <p class="tariff__kicker">Услуга</p>
+              <p class="tariff__period">Rinex 12 месяцев</p>
+            </div>
+            <div class="tariff__body">
+              <p class="tariff__price">7&nbsp;991.00&nbsp;₽</p>
+              <p class="tariff__vat">включая НДС</p>
+              <p class="tariff__permonth">≈ 666 ₽/мес</p>
+              <div class="tariff__cta">
+                <a href="register.html" class="btn btn--primary btn--wide">Подключиться</a>
+              </div>
             </div>
           </article>
         </div>
@@ -273,23 +336,23 @@
         <div class="footer__cols">
           <div class="footer__col">
             <h4 class="footer__col-title">Навигация</h4>
-            <a href="#">Тарифы</a>
-            <a href="#">Услуги</a>
-            <a href="#">О компании</a>
+            <a href="tariffs.html">Тарифы</a>
+            <a href="tariffs.html">Услуги</a>
+            <a href="network.html">О компании</a>
             <a href="news.html">Новости</a>
             <a href="contacts.html">Контакты</a>
           </div>
           <div class="footer__col">
             <h4 class="footer__col-title">Клиентам</h4>
             <a href="login.html">Личный кабинет</a>
-            <a href="#">Оплата</a>
-            <a href="#">Поддержка</a>
-            <a href="#">Документы</a>
+            <a href="payment.html">Оплата</a>
+            <a href="contacts.html">Поддержка</a>
+            <a href="docs.html">Документы</a>
           </div>
           <div class="footer__col">
             <h4 class="footer__col-title">Контакты</h4>
             <a href="tel:+74991165624">+7 (499) 116-56-24</a>
-            <a href="mailto:info@topnet-gsi.ru">info@topnet-gsi.ru</a>
+            <a href="mailto:topnet@gsi.ru">topnet@gsi.ru</a>
             <span>г. Москва, ул. Малая Семеновская, д. 9, стр. 6</span>
             <span>Пн–Вс: 09:00 — 21:00</span>
           </div>

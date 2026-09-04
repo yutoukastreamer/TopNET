@@ -205,7 +205,7 @@
   min-height: 168px;
   border-radius: 16px;
   overflow: hidden;
-  background: linear-gradient(135deg, #FBD9B4 0%, #F5871F 55%, #C6620E 100%);
+  background: linear-gradient(135deg, var(--accent-soft) 0%, var(--accent) 55%, var(--accent-2) 100%);
 }
 /* реальное изображение — аккуратный кроп без искажений */
 .tl-card__img {

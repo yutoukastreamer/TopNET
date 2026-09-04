@@ -11,6 +11,25 @@
   const timeline = document.querySelector('.timeline');
   if (!timeline) return;
 
+  /* ---------- Переход по прямой ссылке на конкретную новость ----------
+     Напр. с карусели на главной: news.html#post-slug. Браузер уже сделал
+     свой нативный прыжок к элементу — здесь только поправляем позицию,
+     чтобы карточка не пряталась под фиксированной шапкой (для последней
+     карточки ленты native-прыжок вместе с scroll-margin-top уводил
+     скролл в самый низ страницы, поэтому оффсет считаем в JS). */
+  if (location.hash) {
+    let target;
+    try { target = document.querySelector(location.hash); } catch (e) { target = null; }
+    if (target && target.classList.contains('tl-item')) {
+      const header = document.getElementById('site-header');
+      const offset = (header ? header.offsetHeight : 0) + 20;
+      requestAnimationFrame(() => {
+        const y = target.getBoundingClientRect().top + window.scrollY - offset;
+        window.scrollTo(0, Math.max(0, y));
+      });
+    }
+  }
+
   /* ---------- Scroll-reveal ---------- */
   const items = Array.from(timeline.querySelectorAll('.tl-item, .tl-year'));
 

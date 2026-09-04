@@ -54,40 +54,9 @@ label:has(> input[type="radio"]), label:has(> input[type="radio"]) * {
 }
 
 :root {
-  /* palette — заданная брендом */
-  --brand:   #0E5AA7;      /* primary  */
-  --accent:  #F5871F;      /* accent   */
-  --success: #2E9E5B;      /* success  */
-  --bg:      #F7F9FB;      /* background */
-  --bg-alt:  #ffffff;
-  --ink:     #1A2733;      /* text     */
-  --ink-2:   #4A5763;
-  --muted:   #8B95A1;
-
-  --brand-2: #0a3d70;
-  --accent-2: #d97010;
-  --accent-glow: rgba(245, 135, 31, 0.35);
-  --brand-glow: rgba(14, 90, 167, 0.28);
-
-  --line:       rgba(26, 39, 51, 0.10);
-  --line-strong: rgba(26, 39, 51, 0.18);
-  --line-light: rgba(255, 255, 255, 0.14);
-
-  /* type */
-  --h1: clamp(2.8rem, 6vw, 5.4rem);
-  --h2: clamp(2rem, 4vw, 3.4rem);
-  --h3: 1.5rem;
-
-  /* dark section (см. референс) — brand rule: тёмные секции = Text */
-  --dark:    #1A2733;
-  --dark-2:  #111921;
-
-  /* layout */
-  --radius: 10px;
-  --radius-lg: 20px;
-  --container: 1200px;
-  /* общий отступ от краёв экрана — текст никогда не прилипает к краю */
-  --gutter: clamp(20px, 5vw, 72px);
+  /* палитра, радиусы и тени — в css/tokens.css (подключается первым) */
+  /* здесь остаются только значения, специфичные для лендинга */
+  --radius-hero: 44px;   /* скруглённый переход в светлую секцию */
 }
 
 .container {
@@ -129,7 +98,12 @@ label:has(> input[type="radio"]), label:has(> input[type="radio"]) * {
   /* выше всех слоёв страницы, включая подвал и canvas-сети */
   z-index: 1000;
   padding: 20px 0;
-  transition: background 0.35s ease, backdrop-filter 0.35s ease, padding 0.35s ease;
+  transition: background 0.35s ease, backdrop-filter 0.35s ease, padding 0.35s ease,
+              transform 0.35s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+/* шапка уезжает вверх у подвала, возвращается при скролле вверх */
+.header.is-hidden {
+  transform: translateY(-100%);
 }
 .header.is-scrolled {
   background: rgba(26, 39, 51, 0.78);
@@ -414,6 +388,8 @@ label:has(> input[type="radio"]), label:has(> input[type="radio"]) * {
   to   { opacity: 1; transform: translateY(0); }
 }
 @media (prefers-reduced-motion: reduce) {
+  .header,
+  .header.is-hidden { transition: none; }
   .header.is-menu-open .nav { animation: none; }
   .burger span { transition: none; }
 }
@@ -453,7 +429,7 @@ label:has(> input[type="radio"]), label:has(> input[type="radio"]) * {
     /* actual hero photo */
     url('../assets/images/hero.jpg') center/cover no-repeat,
     /* fallback if image missing */
-    linear-gradient(160deg, #111921 0%, #1A2733 40%, #223449 100%);
+    linear-gradient(160deg, var(--dark-2) 0%, var(--dark) 40%, var(--dark-3) 100%);
   /* fixed overscale: JS only translates, so the layer is rasterized once
      instead of re-rasterizing on every new scale value */
   transform: scale(1.08);
@@ -535,38 +511,81 @@ label:has(> input[type="radio"]), label:has(> input[type="radio"]) * {
   display: flex; gap: 14px; flex-wrap: wrap;
 }
 
+/* =============================================================
+   КНОПКИ — единая система на весь сайт
+   primary   — пилюля Accent  (главное действие)
+   secondary — пилюля Primary (второстепенное действие)
+   outline   — контурная: на светлом фоне и модификатор --on-dark
+   ============================================================= */
 .btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   padding: 16px 30px;
-  border-radius: 999px;
+  border-radius: var(--radius-pill);
   font-weight: 600;
   font-size: 15px;
   letter-spacing: 0.01em;
-  transition: transform 0.25s ease, background 0.25s ease, color 0.25s ease, box-shadow 0.25s ease;
+  transition: transform 0.25s ease, background 0.25s ease, color 0.25s ease,
+              box-shadow 0.25s ease, border-color 0.25s ease;
   border: 1px solid transparent;
   white-space: nowrap;
 }
-.btn--primary {
+
+/* --- primary: Accent (.btn--accent оставлен алиасом) --- */
+.btn--primary,
+.btn--accent {
+  background: var(--accent);
+  color: #fff;
+  box-shadow: 0 10px 26px -10px var(--accent-glow);
+}
+.btn--primary:hover,
+.btn--accent:hover {
+  background: var(--accent-2);
+  color: #fff;
+  transform: translateY(-2px);
+  box-shadow: 0 18px 36px -12px var(--accent-glow);
+}
+
+/* --- secondary: Primary --- */
+.btn--secondary {
   background: var(--brand);
-  color: #ffffff;
+  color: #fff;
   box-shadow: 0 10px 30px -6px var(--brand-glow);
 }
-.btn--primary:hover {
+.btn--secondary:hover {
+  background: var(--brand-2);
+  color: #fff;
   transform: translateY(-2px);
-  background: var(--accent);
-  color: #ffffff;
-  box-shadow: 0 18px 40px -8px var(--accent-glow);
+  box-shadow: 0 18px 40px -8px var(--brand-glow);
 }
+
+/* --- outline на светлом фоне --- */
+.btn--outline {
+  color: var(--ink);
+  border-color: var(--line-strong);
+  background: transparent;
+}
+.btn--outline:hover {
+  background: rgba(26, 39, 51, 0.04);
+  border-color: var(--brand);
+  color: var(--brand);
+  transform: translateY(-2px);
+}
+
+/* --- outline на тёмном фоне (.btn--ghost — алиас) --- */
+.btn--outline-on-dark,
 .btn--ghost {
   color: #fff;
-  border-color: rgba(255,255,255,0.24);
-  background: rgba(255,255,255,0.04);
+  border-color: rgba(255, 255, 255, 0.24);
+  background: rgba(255, 255, 255, 0.04);
 }
+.btn--outline-on-dark:hover,
 .btn--ghost:hover {
-  background: rgba(255,255,255,0.12);
-  border-color: rgba(255,255,255,0.4);
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.4);
+  color: #fff;
+  transform: translateY(-2px);
 }
 
 .hero__scroll {
@@ -669,7 +688,7 @@ label:has(> input[type="radio"]), label:has(> input[type="radio"]) * {
   width: 40px;
   height: 40px;
   border-radius: 14px;
-  background: #FEEDDD;
+  background: var(--accent-soft);
   /* accent tint at rest, matching .news-card__arrow's chip family */
   color: var(--accent);
   transition: background 0.3s ease, color 0.3s ease;
@@ -690,7 +709,7 @@ label:has(> input[type="radio"]), label:has(> input[type="radio"]) * {
   border-radius: var(--radius-lg);
   overflow: hidden;
   /* подложка на случай, если картинка ещё не загрузилась */
-  background: linear-gradient(135deg, var(--brand) 0%, #4A83BD 60%, #7AA4CF 100%);
+  background: linear-gradient(135deg, var(--brand) 0%, var(--brand-3) 60%, var(--brand-4) 100%);
   aspect-ratio: 3 / 2;
 }
 .split__img {
@@ -761,7 +780,7 @@ label:has(> input[type="radio"]), label:has(> input[type="radio"]) * {
   top: 0;
   height: 100vh;
   overflow: hidden;
-  background: radial-gradient(ellipse at 50% 50%, #153B61 0%, var(--ink) 70%);
+  background: radial-gradient(ellipse at 50% 50%, var(--brand-2) 0%, var(--ink) 70%);
 }
 .network__canvas {
   position: absolute;
@@ -807,7 +826,7 @@ label:has(> input[type="radio"]), label:has(> input[type="radio"]) * {
 .network__progress-bar {
   position: absolute;
   inset: 0 100% 0 0;
-  background: linear-gradient(90deg, var(--accent), #F9B16D);
+  background: linear-gradient(90deg, var(--accent), var(--accent-3));
   border-radius: 2px;
   transition: right 0.05s linear;
 }
@@ -962,6 +981,11 @@ label:has(> input[type="radio"]), label:has(> input[type="radio"]) * {
   cursor: not-allowed;
 }
 
+.news__footer {
+  margin-top: clamp(32px, 5vh, 48px);
+  text-align: center;
+}
+
 /* Project card = one slide (3 visible on desktop) */
 .news-card {
   flex: 0 0 calc((100% - 2 * clamp(16px, 2vw, 28px)) / 3);
@@ -979,7 +1003,7 @@ label:has(> input[type="radio"]), label:has(> input[type="radio"]) * {
   aspect-ratio: 3 / 4;
   border-radius: var(--radius-lg);
   overflow: hidden;
-  background: linear-gradient(135deg, #CFDEED 0%, #93B5D7 55%, #568CC1 100%);
+  background: linear-gradient(135deg, var(--brand-tint) 0%, var(--brand-4) 55%, var(--brand-3) 100%);
   box-shadow: 0 20px 40px -24px rgba(26, 39, 51, 0.35);
 }
 /* subtle grid pattern on the placeholder */
@@ -1040,7 +1064,7 @@ label:has(> input[type="radio"]), label:has(> input[type="radio"]) * {
   height: clamp(52px, 4.4vw, 64px);
   border-radius: 20px;
   /* flat, fully opaque fill — the photo must not show through */
-  background: #FEEDDD;
+  background: var(--accent-soft);
   box-shadow: 0 0 0 9px var(--bg);
   color: var(--accent);
   display: inline-flex;
@@ -1297,7 +1321,7 @@ label:has(> input[type="radio"]), label:has(> input[type="radio"]) * {
   width: 44px;
   height: 44px;
   border-radius: 14px;
-  background: #FEEDDD;
+  background: var(--accent-soft);
   color: var(--accent);
 }
 .info-card__icon svg {
@@ -1356,7 +1380,7 @@ a.info-card__value:hover { color: var(--accent); }
 
 /* ---------- тёмная CTA-плашка ---------- */
 .cta-band {
-  background: var(--dark, #1A2733);
+  background: var(--dark);
   color: #fff;
   padding: clamp(52px, 8vh, 88px) 0;
 }
@@ -1446,7 +1470,7 @@ a.info-card__value:hover { color: var(--accent); }
   justify-content: center;
   width: 56px; height: 56px;
   border-radius: 16px;
-  background: #FEEDDD;
+  background: var(--accent-soft);
   color: var(--accent);
   margin-bottom: 22px;
 }
@@ -1624,7 +1648,7 @@ a.info-card__value:hover { color: var(--accent); }
 .crumbs--pill .crumbs__current {
   background: rgba(245, 135, 31, 0.14);
   border-color: rgba(245, 135, 31, 0.35);
-  color: #FFCF9E;
+  color: var(--accent-on-dark);
 }
 
 .page-hero__title--xl {
@@ -1671,6 +1695,15 @@ a.info-card__value:hover { color: var(--accent); }
   margin: 0;
   color: var(--ink);
 }
+/* подзаголовок секции — когда H1 в hero уже назвал раздел (coverage.html) */
+.section-subhead {
+  margin: 0 0 clamp(24px, 4vh, 36px);
+  font-size: clamp(1.05rem, 1.5vw, 1.25rem);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+}
+
 .section-head__lead {
   margin: 14px 0 0;
   font-size: clamp(0.98rem, 1.15vw, 1.08rem);
@@ -1689,35 +1722,93 @@ a.info-card__value:hover { color: var(--accent); }
   color: var(--muted);
 }
 
-/* ---------- Карточки тарифов ---------- */
+/* =============================================================
+   КАРТОЧКИ ТАРИФОВ — цветная шапка периода, крупная цена,
+   цена за месяц, бейдж «Популярный», подъём на hover
+   ============================================================= */
 .tariffs {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: clamp(16px, 2vw, 24px);
+  align-items: stretch;
 }
+
 .tariff {
+  position: relative;
   display: flex;
   flex-direction: column;
+  overflow: hidden;
   background: var(--bg-alt);
   border: 1px solid var(--line);
-  border-radius: var(--radius-lg);
-  padding: clamp(26px, 3vw, 34px);
-  box-shadow: 0 20px 40px -32px rgba(26, 39, 51, 0.4);
-  transition: transform 0.3s cubic-bezier(0.2, 0.7, 0.2, 1), box-shadow 0.3s ease, border-color 0.3s ease;
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-md);
+  transition: transform 0.3s cubic-bezier(0.2, 0.7, 0.2, 1),
+              box-shadow 0.3s ease, border-color 0.3s ease;
 }
 .tariff:hover {
-  transform: translateY(-4px);
+  transform: translateY(-6px);
   border-color: rgba(245, 135, 31, 0.35);
-  box-shadow: 0 30px 50px -30px rgba(26, 39, 51, 0.45);
+  box-shadow: var(--shadow-lg);
 }
-.tariff__period {
-  font-size: 12px;
+
+/* ---------- Цветная шапка карточки ---------- */
+.tariff__head {
+  position: relative;
+  padding: 18px clamp(22px, 2.6vw, 28px) 20px;
+  background: linear-gradient(135deg, rgba(14, 90, 167, 0.10), rgba(14, 90, 167, 0.04));
+  border-bottom: 1px solid var(--line);
+}
+/* акцентная шапка — для выделенного тарифа */
+.tariff--featured .tariff__head {
+  background: linear-gradient(135deg, rgba(245, 135, 31, 0.16), rgba(245, 135, 31, 0.05));
+}
+.tariff--featured { border-color: rgba(245, 135, 31, 0.32); }
+
+.tariff__kicker {
+  margin: 0 0 4px;
+  font-size: 11.5px;
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  font-weight: 600;
-  color: var(--accent);
-  margin: 0 0 18px;
+  font-weight: 700;
+  color: var(--brand);
 }
+.tariff--featured .tariff__kicker { color: var(--accent-2); }
+
+.tariff__period {
+  margin: 0;
+  font-size: clamp(1.1rem, 1.5vw, 1.3rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  color: var(--ink);
+}
+
+/* бейдж «Популярный» */
+.tariff__badge {
+  position: absolute;
+  top: 16px;
+  right: clamp(18px, 2.4vw, 24px);
+  display: inline-flex;
+  align-items: center;
+  padding: 5px 12px;
+  border-radius: var(--radius-pill);
+  background: var(--accent);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  box-shadow: 0 8px 18px -8px var(--accent-glow);
+}
+
+/* ---------- Тело карточки ---------- */
+.tariff__body {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding: clamp(22px, 2.6vw, 28px);
+}
+
 .tariff__price {
   font-size: clamp(1.7rem, 2.6vw, 2.3rem);
   font-weight: 800;
@@ -1739,22 +1830,33 @@ a.info-card__value:hover { color: var(--accent); }
   font-size: 13px;
   color: var(--muted);
 }
+
+/* ≈ N ₽/мес — для тарифов от 3 месяцев */
+.tariff__permonth {
+  display: inline-flex;
+  align-items: center;
+  align-self: flex-start;
+  margin: 14px 0 0;
+  padding: 6px 13px;
+  border-radius: var(--radius-pill);
+  background: rgba(14, 90, 167, 0.08);
+  color: var(--brand);
+  font-size: 13px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+.tariff--featured .tariff__permonth {
+  background: rgba(245, 135, 31, 0.12);
+  color: var(--accent-2);
+}
+
 .tariff__cta {
   margin-top: auto;
-  padding-top: clamp(24px, 3vw, 32px);
+  padding-top: clamp(22px, 3vw, 30px);
 }
-.btn--accent {
-  background: var(--accent);
-  color: #fff;
-  box-shadow: 0 10px 26px -10px var(--accent-glow);
-}
-.btn--accent:hover {
-  background: var(--accent-2);
-  color: #fff;
-  transform: translateY(-2px);
-  box-shadow: 0 18px 36px -12px var(--accent-glow);
-}
-.btn--wide { width: 100%; }
+
+.btn--wide,
+.btn--block { width: 100%; }
 
 @media (max-width: 960px) {
   .tariffs { grid-template-columns: 1fr; }

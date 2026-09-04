@@ -10,11 +10,27 @@
     const ease  = t => t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2;
     const easeInOutCubic = t => t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
   
-    /* ---------- Header: toggle scrolled state ---------- */
+    /* ---------- Header: фон при скролле + скрытие у подвала ----------
+       Шапка уезжает вверх, когда пользователь докрутил до подвала и
+       продолжает листать вниз; при скролле вверх — возвращается. */
     const header = document.getElementById('site-header');
+    const siteFooter = document.querySelector('.footer');
+    let headerLastY = window.scrollY;
+
     const onScrollHeader = () => {
-      if (window.scrollY > 40) header.classList.add('is-scrolled');
+      const y = window.scrollY;
+      if (y > 40) header.classList.add('is-scrolled');
       else header.classList.remove('is-scrolled');
+
+      // подвал во вьюпорте — значит докрутили до низа страницы
+      const atFooter = siteFooter
+        ? siteFooter.getBoundingClientRect().top <= window.innerHeight
+        : y + window.innerHeight >= document.documentElement.scrollHeight - 4;
+
+      if (atFooter && y > headerLastY + 2) header.classList.add('is-hidden');
+      else if (y < headerLastY - 2 || !atFooter) header.classList.remove('is-hidden');
+
+      headerLastY = y;
     };
     onScrollHeader();
 

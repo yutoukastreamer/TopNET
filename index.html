@@ -9,6 +9,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/tokens.css" />
   <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
@@ -16,7 +17,7 @@
   <!-- ================= HEADER ================= -->
   <header class="header" id="site-header">
     <div class="header__inner">
-      <a href="#" class="logo" aria-label="TopNET GSI">
+      <a href="index.html" class="logo" aria-label="TopNET GSI — на главную">
         <img src="assets/images/logo.png" alt="TopNET GSI" class="logo__img" />
       </a>
       <nav class="nav" aria-label="Главное меню">
@@ -137,8 +138,8 @@
             </p>
             <div class="hero__actions">
               <a href="register.html" class="btn btn--primary">Подключиться</a>
-              <a href="coverage.html" class="btn btn--ghost">Зона покрытия сети</a>
-              <a href="network.html" class="btn btn--ghost">Узнать больше</a>
+              <a href="coverage.html" class="btn btn--outline-on-dark">Зона покрытия сети</a>
+              <a href="network.html" class="btn btn--outline-on-dark">Узнать больше</a>
             </div>
           </div>
         </div>
@@ -263,49 +264,7 @@
       <div class="news__viewport" data-news-viewport>
         <div class="news__track" data-news-track>
           <article class="news-card">
-            <a href="#" class="news-card__link" aria-label="Расширение сети в новом жилом квартале">
-              <div class="news-card__media">
-                <img src="assets/images/News1.png" alt="Расширение сети в жилом квартале" class="news-card__img" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;">
-              </div>
-              <span class="news-card__arrow" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="none">
-                  <path d="M8 16 16 8M16 8H9.4M16 8v6.6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-              </span>
-              <div class="news-card__content">
-                <h3 class="news-card__title">Расширение сети<br>в жилом квартале</h3>
-                <div class="news-card__excerpt-wrap">
-                  <p class="news-card__excerpt">
-                    Подключили новостройки к магистрали — до 1 Гбит/с в каждой квартире
-                  </p>
-                </div>
-              </div>
-            </a>
-          </article>
-
-          <article class="news-card">
-            <a href="#" class="news-card__link" aria-label="Модернизация ядра сети">
-              <div class="news-card__media">
-                <img src="assets/images/News2.png" alt="Модернизация ядра сети" class="news-card__img" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;">
-              </div>
-              <span class="news-card__arrow" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="none">
-                  <path d="M8 16 16 8M16 8H9.4M16 8v6.6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-              </span>
-              <div class="news-card__content">
-                <h3 class="news-card__title">Модернизация<br>ядра сети</h3>
-                <div class="news-card__excerpt-wrap">
-                  <p class="news-card__excerpt">
-                    Обновили ядро сети: IPv6 и BGP-Anycast снизили задержки и повысили отказоустойчивость
-                  </p>
-                </div>
-              </div>
-            </a>
-          </article>
-
-          <article class="news-card">
-            <a href="#" class="news-card__link" aria-label="TopNET GSI — партнёр городского IT-форума">
+            <a href="news.html#post-kaliningrad" class="news-card__link" aria-label="Развитие сети в Калининградской области">
               <div class="news-card__media">
                 <span class="news-card__placeholder">Фото проекта</span>
               </div>
@@ -315,10 +274,10 @@
                 </svg>
               </span>
               <div class="news-card__content">
-                <h3 class="news-card__title">Партнёрство<br>с IT-форумом</h3>
+                <h3 class="news-card__title">Развитие сети<br>в Калининградской области</h3>
                 <div class="news-card__excerpt-wrap">
                   <p class="news-card__excerpt">
-                    Выступили на отраслевой конференции с докладом о цифровой инфраструктуре региона
+                    Завершено создание сети дифференциальных геодезических станций в Калининградской области
                   </p>
                 </div>
               </div>
@@ -326,7 +285,7 @@
           </article>
 
           <article class="news-card">
-            <a href="#" class="news-card__link" aria-label="Новая базовая станция ГНСС">
+            <a href="news.html#post-tariffs" class="news-card__link" aria-label="Изменения тарифов">
               <div class="news-card__media">
                 <span class="news-card__placeholder">Фото проекта</span>
               </div>
@@ -336,10 +295,52 @@
                 </svg>
               </span>
               <div class="news-card__content">
-                <h3 class="news-card__title">Новая базовая<br>станция ГНСС</h3>
+                <h3 class="news-card__title">Изменения<br>тарифов</h3>
                 <div class="news-card__excerpt-wrap">
                   <p class="news-card__excerpt">
-                    Запустили станцию с полной поддержкой GPS, ГЛОНАСС, Galileo и BeiDou
+                    Снизили стоимость тарифов RTK и добавили новый тариф «RTK без МСК»
+                  </p>
+                </div>
+              </div>
+            </a>
+          </article>
+
+          <article class="news-card">
+            <a href="news.html#post-march-2025" class="news-card__link" aria-label="Развитие сети Topnet Live Россия. Март 2025.">
+              <div class="news-card__media">
+                <img src="assets/images/News1.png" alt="Развитие сети Topnet Live Россия. Март 2025." class="news-card__img" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;">
+              </div>
+              <span class="news-card__arrow" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none">
+                  <path d="M8 16 16 8M16 8H9.4M16 8v6.6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </span>
+              <div class="news-card__content">
+                <h3 class="news-card__title">Развитие сети<br>в марте 2025</h3>
+                <div class="news-card__excerpt-wrap">
+                  <p class="news-card__excerpt">
+                    Карта покрытия пополнилась станциями в Луховицах, Кобани, Туймазах и Студенцах
+                  </p>
+                </div>
+              </div>
+            </a>
+          </article>
+
+          <article class="news-card">
+            <a href="news.html#post-nn-sdgs" class="news-card__link" aria-label="Сеть на территории Нижегородской области получила статус СДГС">
+              <div class="news-card__media">
+                <span class="news-card__placeholder">Фото проекта</span>
+              </div>
+              <span class="news-card__arrow" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none">
+                  <path d="M8 16 16 8M16 8H9.4M16 8v6.6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </span>
+              <div class="news-card__content">
+                <h3 class="news-card__title">Статус СДГС<br>в Нижегородской области</h3>
+                <div class="news-card__excerpt-wrap">
+                  <p class="news-card__excerpt">
+                    Станции сети получили статус пунктов СДГС и приняты в Федеральный фонд пространственных данных
                   </p>
                 </div>
               </div>
@@ -354,6 +355,10 @@
         </svg>
       </button>
     </div>
+
+    <div class="container news__footer">
+      <a href="news.html" class="btn btn--outline">Все новости</a>
+    </div>
   </section>
 
   <!-- ================= BLOCK 6 — FOOTER ================= -->
@@ -361,7 +366,7 @@
     <div class="container">
       <div class="footer__top">
         <div class="footer__brand">
-          <a href="#" class="logo logo--footer">
+          <a href="index.html" class="logo logo--footer">
             <img src="assets/images/logo.png" alt="TopNET GSI" class="logo__img" />
           </a>
           <p class="footer__tag">Оператор связи. Интернет и сетевая инфраструктура.</p>
@@ -369,23 +374,23 @@
         <div class="footer__cols">
           <div class="footer__col">
             <h4 class="footer__col-title">Навигация</h4>
-            <a href="#">Тарифы</a>
-            <a href="#">Услуги</a>
-            <a href="#">О компании</a>
+            <a href="tariffs.html">Тарифы</a>
+            <a href="tariffs.html">Услуги</a>
+            <a href="network.html">О компании</a>
             <a href="news.html">Новости</a>
-            <a href="#">Контакты</a>
+            <a href="contacts.html">Контакты</a>
           </div>
           <div class="footer__col">
             <h4 class="footer__col-title">Клиентам</h4>
-            <a href="#">Личный кабинет</a>
-            <a href="#">Оплата</a>
-            <a href="#">Поддержка</a>
-            <a href="#">Документы</a>
+            <a href="login.html">Личный кабинет</a>
+            <a href="payment.html">Оплата</a>
+            <a href="contacts.html">Поддержка</a>
+            <a href="docs.html">Документы</a>
           </div>
           <div class="footer__col">
             <h4 class="footer__col-title">Контакты</h4>
             <a href="tel:+74991165624">+7 (499) 116-56-24</a>
-            <a href="mailto:info@topnet-gsi.ru">info@topnet-gsi.ru</a>
+            <a href="mailto:topnet@gsi.ru">topnet@gsi.ru</a>
             <span>г. Москва, ул. Малая Семеновская, д. 9, стр. 6</span>
             <span>Пн–Вс: 09:00 — 21:00</span>
           </div>

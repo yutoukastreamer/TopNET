@@ -10,23 +10,10 @@
 /* базовый курсор — как на главной */
 * { cursor: default; }
 
+/* палитра и радиусы — в css/tokens.css */
 :root {
-  --brand:   #0E5AA7;
-  --accent:  #F5871F;
-  --success: #2E9E5B;
-  --bg:      #F7F9FB;
-  --ink:     #1A2733;
-
-  --accent-glow: rgba(245, 135, 31, 0.35);
-  --brand-glow:  rgba(14, 90, 167, 0.28);
-
-  /* карточка чуть светлее фона страницы */
-  --card:      #22303E;
+  --card:      var(--card-dark);
   --card-line: rgba(255, 255, 255, 0.10);
-
-  --radius:    10px;
-  --radius-lg: 20px;
-  --gutter: clamp(20px, 5vw, 72px);
 }
 
 html, body {
@@ -159,32 +146,63 @@ summary, summary *,
 }
 .field__input:invalid { box-shadow: none; }
 
-/* ---------- Кнопки (в стиле .btn--primary с главной) ---------- */
+/* ---------- Кнопки ----------
+   Система кнопок теперь общая (см. css/style.css). Здесь — только
+   локальная копия базовых стилей: ЛК и регистрация не подключают style.css. */
 .btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   padding: 16px 30px;
-  border-radius: 999px;
+  border-radius: var(--radius-pill);
   font-weight: 600;
   font-size: 15px;
   letter-spacing: 0.01em;
   border: 1px solid transparent;
   white-space: nowrap;
-  transition: transform 0.25s ease, background 0.25s ease, color 0.25s ease, box-shadow 0.25s ease;
+  transition: transform 0.25s ease, background 0.25s ease, color 0.25s ease,
+              box-shadow 0.25s ease, border-color 0.25s ease;
 }
-.btn--primary {
+/* primary — пилюля Accent, как на всём сайте */
+.btn--primary,
+.btn--accent {
+  background: var(--accent);
+  color: #ffffff;
+  box-shadow: 0 10px 26px -10px var(--accent-glow);
+}
+.btn--primary:hover,
+.btn--accent:hover {
+  transform: translateY(-2px);
+  background: var(--accent-2);
+  color: #ffffff;
+  box-shadow: 0 18px 36px -12px var(--accent-glow);
+}
+/* secondary — пилюля Primary */
+.btn--secondary {
   background: var(--brand);
   color: #ffffff;
   box-shadow: 0 10px 30px -6px var(--brand-glow);
 }
-.btn--primary:hover {
+.btn--secondary:hover {
   transform: translateY(-2px);
-  background: var(--accent);
+  background: var(--brand-2);
   color: #ffffff;
-  box-shadow: 0 18px 40px -8px var(--accent-glow);
+  box-shadow: 0 18px 40px -8px var(--brand-glow);
 }
-.btn--block { width: 100%; margin-top: 6px; }
+/* outline на тёмном фоне ЛК */
+.btn--outline-on-dark,
+.btn--ghost {
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.24);
+  background: rgba(255, 255, 255, 0.04);
+}
+.btn--outline-on-dark:hover,
+.btn--ghost:hover {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.4);
+}
+.btn--block,
+.btn--wide { width: 100%; margin-top: 6px; }
 
 /* «Забыли пароль?» — текстовая кнопка */
 .auth__forgot {
@@ -213,12 +231,12 @@ summary, summary *,
 .msg--error {
   background: rgba(245, 135, 31, 0.12);
   border-color: rgba(245, 135, 31, 0.4);
-  color: #FFCF9E;
+  color: var(--accent-on-dark);
 }
 .msg--ok {
   background: rgba(46, 158, 91, 0.14);
   border-color: rgba(46, 158, 91, 0.45);
-  color: #9FE3BC;
+  color: var(--success-on-dark);
 }
 
 /* ---------- Модальное окно «Забыли пароль?» ---------- */
