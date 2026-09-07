@@ -147,47 +147,50 @@ summary, summary *,
 .field__input:invalid { box-shadow: none; }
 
 /* ---------- Кнопки ----------
-   Система кнопок теперь общая (см. css/style.css). Здесь — только
-   локальная копия базовых стилей: ЛК и регистрация не подключают style.css. */
+   Система общая (см. css/style.css). Здесь локальная копия:
+   ЛК, регистрация и оплата не подключают style.css. */
 .btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 16px 30px;
+  padding: 12px 26px;
   border-radius: var(--radius-pill);
   font-weight: 600;
   font-size: 15px;
+  line-height: 1.25;
   letter-spacing: 0.01em;
   border: 1px solid transparent;
   white-space: nowrap;
   transition: transform 0.25s ease, background 0.25s ease, color 0.25s ease,
               box-shadow 0.25s ease, border-color 0.25s ease;
 }
-/* primary — пилюля Accent, как на всём сайте */
-.btn--primary,
+.btn--sm {
+  padding: 10px 24px;
+  font-size: 14.5px;
+}
+/* primary — Primary, как на всём сайте */
+.btn--primary {
+  background: var(--brand);
+  color: #ffffff;
+  box-shadow: 0 8px 22px -10px var(--brand-glow);
+}
+.btn--primary:hover {
+  transform: translateY(-2px);
+  background: var(--brand-2);
+  color: #ffffff;
+  box-shadow: 0 14px 30px -12px var(--brand-glow);
+}
+/* accent — отдельный акцент */
 .btn--accent {
   background: var(--accent);
   color: #ffffff;
-  box-shadow: 0 10px 26px -10px var(--accent-glow);
+  box-shadow: 0 8px 22px -10px var(--accent-glow);
 }
-.btn--primary:hover,
 .btn--accent:hover {
   transform: translateY(-2px);
   background: var(--accent-2);
   color: #ffffff;
-  box-shadow: 0 18px 36px -12px var(--accent-glow);
-}
-/* secondary — пилюля Primary */
-.btn--secondary {
-  background: var(--brand);
-  color: #ffffff;
-  box-shadow: 0 10px 30px -6px var(--brand-glow);
-}
-.btn--secondary:hover {
-  transform: translateY(-2px);
-  background: var(--brand-2);
-  color: #ffffff;
-  box-shadow: 0 18px 40px -8px var(--brand-glow);
+  box-shadow: 0 14px 30px -12px var(--accent-glow);
 }
 /* outline на тёмном фоне ЛК */
 .btn--outline-on-dark,
