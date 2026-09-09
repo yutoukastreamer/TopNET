@@ -151,20 +151,24 @@
     </div>
   </section>
 
-  <!-- ================= BLOCK 2 — ABOUT (светлый: текст слева + фото справа) ================= -->
+  <!-- ================= BLOCK 2 — ABOUT (фото на всю ширину, текст поверх слева) ================= -->
   <section class="about" id="about">
-    <div class="container">
-      <div class="split split--light">
-        <div class="split__text">
-          <h2 class="split__title">
+    <div class="showcase">
+      <div class="showcase__blur" aria-hidden="true"></div>
+      <img src="assets/images/img-wight.png" alt="Базовая станция ГНСС сети ГСИ на крыше здания" class="showcase__img" loading="lazy" />
+      <div class="showcase__scrim" aria-hidden="true"></div>
+      <div class="container">
+        <div class="showcase__content">
+          <span class="showcase__eyebrow">Развиваем сеть с 2008 года</span>
+          <h2 class="showcase__title">
             Сеть ГНСС <br>станций ГСИ
           </h2>
-          <p class="split__lead">
+          <p class="showcase__lead">
             Начиная с 2008 года, компанией ООО «ГЕОСТРОЙИЗЫСКАНИЯ» развивался проект постоянно действующих базовых станций ГНСС,
             который был создан для привлечения внимания геодезистов к современным технологиям выполнения ГНСС измерений
             в режиме реального времени и помощи при выполнении работ.
           </p>
-          <p class="split__lead">
+          <p class="showcase__lead">
             На текущий момент компания ООО «ГЕОСТРОЙИЗЫСКАНИЯ» готова предложить исполнителям новый сервис,
             позволяющий расширить возможности по работе в режиме реального времени и постобработки —
             Topnet Live-Россия (ранее «Сеть постоянно действующих дифференциальных станций ГСИ»).
@@ -178,9 +182,6 @@
             Подробнее о компании
           </a>
         </div>
-        <figure class="split__media">
-          <img src="assets/images/img-wight.png" alt="" class="split__img" loading="lazy" />
-        </figure>
       </div>
     </div>
   </section>
@@ -188,9 +189,6 @@
   <!-- ================= BLOCK 3 — STATS ================= -->
   <section class="stats" id="stats">
     <div class="container">
-      <div class="stats__head">
-        <h2 class="stats__title">Цифры, которым можно доверять</h2>
-      </div>
       <div class="stats__grid">
         <div class="stat">
           <div class="stat__value" data-count="314">0</div>
@@ -250,7 +248,7 @@
   <section class="news" id="news">
     <div class="container">
       <div class="news__head">
-        <h2 class="news__title">Последние<br>Новости</h2>
+        <h2 class="news__title">Последние новости</h2>
       </div>
     </div>
 

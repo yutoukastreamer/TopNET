@@ -492,30 +492,99 @@
   
     if (newsViewport && newsTrack && newsPrev && newsNext) {
       const cards = Array.from(newsTrack.children);
-      let index = 0;
-  
+      const carousel = newsViewport.closest('.news__carousel') || newsViewport;
+
+      // Позиция ленты в пикселях — общая и для стрелок, и для автопрокрутки
+      let offset = 0;
+
       const gap = () => parseFloat(getComputedStyle(newsTrack).columnGap || getComputedStyle(newsTrack).gap) || 0;
       const cardStep = () => (cards[0] ? cards[0].getBoundingClientRect().width + gap() : 0);
-      const visibleCount = () => {
-        if (!cards[0]) return 1;
-        const w = cards[0].getBoundingClientRect().width + gap();
-        return Math.max(1, Math.round((newsViewport.getBoundingClientRect().width + gap()) / w));
+      const maxOffset = () => Math.max(0, newsTrack.scrollWidth - newsViewport.clientWidth);
+
+      const render = () => {
+        offset = clamp(offset, 0, maxOffset());
+        newsTrack.style.transform = `translate3d(${-offset}px, 0, 0)`;
+        newsPrev.disabled = offset <= 0.5;
+        newsNext.disabled = offset >= maxOffset() - 0.5;
       };
-      const maxIndex = () => Math.max(0, cards.length - visibleCount());
-  
-      const apply = () => {
-        index = clamp(index, 0, maxIndex());
-        newsTrack.style.transform = `translate3d(${-index * cardStep()}px, 0, 0)`;
-        newsPrev.disabled = index <= 0;
-        newsNext.disabled = index >= maxIndex();
+
+      // Стрелки — шаг на карточку, с плавным CSS-переходом
+      const step = (dir) => {
+        newsTrack.style.transition = '';
+        const s = cardStep();
+        offset = s ? (Math.round(offset / s) + dir) * s : offset;
+        render();
       };
-  
-      newsPrev.addEventListener('click', () => { index -= 1; apply(); });
-      newsNext.addEventListener('click', () => { index += 1; apply(); });
-      window.addEventListener('resize', apply);
-      apply();
+      newsPrev.addEventListener('click', () => step(-1));
+      newsNext.addEventListener('click', () => step(1));
+      window.addEventListener('resize', render);
+
+      /* ---- Автопрокрутка при наведении на края карусели ----
+         Курсор у левого края — лента едет вправо (показывает предыдущие),
+         у правого — влево. Скорость нарастает по мере приближения к краю. */
+      const EDGE = 0.18;          // доля ширины, считающаяся «краем»
+      const MAX_SPEED = 620;      // px/сек в самом углу
+      let speed = 0;
+      let rafId = null;
+      let lastTs = 0;
+
+      const tick = (ts) => {
+        if (!lastTs) lastTs = ts;
+        const dt = Math.min((ts - lastTs) / 1000, 0.05);
+        lastTs = ts;
+        if (speed) {
+          offset += speed * dt;
+          const before = offset;
+          render();
+          if (before !== offset) speed = 0;   // упёрлись в край — гасим
+        }
+        rafId = speed ? requestAnimationFrame(tick) : null;
+        if (!rafId) lastTs = 0;
+      };
+
+      const startAuto = () => {
+        if (rafId) return;
+        newsTrack.style.transition = 'none';   // непрерывное движение, без лага
+        lastTs = 0;
+        rafId = requestAnimationFrame(tick);
+      };
+      const stopAuto = () => {
+        speed = 0;
+        if (rafId) { cancelAnimationFrame(rafId); rafId = null; }
+        lastTs = 0;
+        newsTrack.style.transition = '';
+        carousel.classList.remove('is-edge-left', 'is-edge-right');
+      };
+
+      const onMove = (ev) => {
+        const r = newsViewport.getBoundingClientRect();
+        const x = (ev.clientX - r.left) / r.width;
+        let dir = 0;
+        let intensity = 0;
+        if (x < EDGE)            { dir = -1; intensity = (EDGE - x) / EDGE; }
+        else if (x > 1 - EDGE)   { dir =  1; intensity = (x - (1 - EDGE)) / EDGE; }
+
+        // подсвечиваем край только если в эту сторону есть куда ехать
+        const canGo = dir === -1 ? offset > 0 : dir === 1 ? offset < maxOffset() : false;
+        carousel.classList.toggle('is-edge-left',  dir === -1 && canGo);
+        carousel.classList.toggle('is-edge-right', dir ===  1 && canGo);
+
+        if (!dir || !canGo) { speed = 0; return; }
+        // мягкий разгон к самому краю
+        speed = dir * MAX_SPEED * Math.min(1, intensity * intensity + 0.15);
+        startAuto();
+      };
+
+      // тонкие устройства (тач) — без автопрокрутки
+      if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+        newsViewport.addEventListener('mousemove', onMove);
+        newsViewport.addEventListener('mouseleave', stopAuto);
+        carousel.addEventListener('mouseleave', stopAuto);
+      }
+
+      render();
     }
-  
+
     /* ---------- Master scroll handler ---------- */
     let ticking = false;
     const onScroll = () => {
