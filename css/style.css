@@ -371,6 +371,8 @@ label:has(> input[type="radio"]), label:has(> input[type="radio"]) * {
   .header.is-hidden { transition: none; }
   .header.is-menu-open .nav { animation: none; }
   .burger span { transition: none; }
+  .btn--shine::after,
+  .nav__link--cta::after { animation: none; opacity: 0; }
 }
 
 /* =============================================================
@@ -515,6 +517,45 @@ label:has(> input[type="radio"]), label:has(> input[type="radio"]) * {
   border: 1px solid transparent;
   white-space: nowrap;
 }
+/* --- Блик: раз в несколько секунд по кнопке пробегает световая полоса.
+   Вешается на кнопки «Подключиться» (класс btn--shine, шапка — nav__link--cta). --- */
+.btn--shine,
+.nav__link--cta {
+  position: relative;
+  overflow: hidden;
+  /* блик не должен вылезать за скруглённые края */
+  isolation: isolate;
+}
+.btn--shine::after,
+.nav__link--cta::after {
+  content: "";
+  position: absolute;
+  top: -60%;
+  left: 0;
+  width: 26%;
+  height: 220%;
+  background: linear-gradient(100deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.28) 38%,
+    rgba(255, 255, 255, 0.72) 50%,
+    rgba(255, 255, 255, 0.28) 62%,
+    rgba(255, 255, 255, 0) 100%);
+  transform: translateX(-170%) skewX(-18deg);
+  pointer-events: none;
+  z-index: 1;
+  animation: btnShine 6s linear infinite;
+}
+/* Пауза заложена в keyframes: полоса стоит вплотную за левым краем ~70% цикла
+   (≈3.8 с) и равномерно проходит кнопку за оставшиеся ≈2.2 с. Диапазон сдвига
+   держим близким к ширине кнопки — иначе блик тратит время вне кадра
+   и кажется, что он «проскакивает». */
+@keyframes btnShine {
+  0%, 64%  { transform: translateX(-170%) skewX(-18deg); }
+  100%     { transform: translateX(440%)  skewX(-18deg); }
+}
+/* соседние кнопки бликуют вразнобой, а не хором */
+.nav__link--cta::after { animation-delay: 1.2s; }
+
 /* компактный размер — кнопки внутри карточек */
 .btn--sm {
   padding: 10px 24px;

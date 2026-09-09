@@ -11,6 +11,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/tokens.css" />
   <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/docs-page.css" />
 </head>
 <body>
 
@@ -95,20 +96,132 @@
       <h1 class="page-hero__title page-hero__title--xl">
         Вся <span class="page-hero__accent">документация</span>
       </h1>
-      <p class="page-hero__lead">Договор-публичная оферта, акты и инструкции для работы с сетью.</p>
+      <p class="page-hero__lead">
+        Договор-оферта, акты приёмо-передачи, инструкции по настройке ПО и модели геоида —
+        всё, что нужно для работы с сетью Topnet Live-Россия. Файлы открываются в новой вкладке.
+      </p>
     </div>
   </section>
 
-  <!-- ================= PAGE BODY ================= -->
+  <!-- ================= PAGE BODY — КАРТОТЕКА ================= -->
   <section class="page-body page-body--soft">
     <div class="container">
-      <div class="page-placeholder">
-        <span class="page-placeholder__icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none"><path d="M7 3h7l4 4v14H7V3Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M14 3v4h4M9.5 12h5M9.5 15.5h5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
-        </span>
-        <h3 class="page-placeholder__title">Раздел наполняется</h3>
-        <p class="page-placeholder__text">Здесь появятся договор, акты и инструкции для клиентов сети.</p>
+
+      <div class="docs-bar">
+        <div class="docs-filters" role="group" aria-label="Фильтр по типу документа">
+          <button type="button" class="docs-filter is-active" data-filter="all" aria-pressed="true">Все<span class="docs-filter__num">6</span></button>
+          <button type="button" class="docs-filter" data-filter="contract" aria-pressed="false">Договор<span class="docs-filter__num">1</span></button>
+          <button type="button" class="docs-filter" data-filter="acts" aria-pressed="false">Акты<span class="docs-filter__num">1</span></button>
+          <button type="button" class="docs-filter" data-filter="manual" aria-pressed="false">Инструкции<span class="docs-filter__num">3</span></button>
+          <button type="button" class="docs-filter" data-filter="geoid" aria-pressed="false">Модели геоида<span class="docs-filter__num">1</span></button>
+        </div>
+        <p class="docs-count" aria-live="polite">Показано <b data-docs-shown>6</b> из 6</p>
       </div>
+
+      <ul class="docs-grid" data-docs-grid>
+        <li data-cat="contract">
+          <a class="doc" href="https://disk.360.yandex.ru/client/aa/d_qRyoBKIoiCdsxA/" target="_blank" rel="noopener noreferrer">
+            <span class="doc__head">
+              <span class="doc__index">01</span>
+              <span class="doc__kind doc__kind--disk"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3 7.5A2.5 2.5 0 0 1 5.5 5h4L11 7h7.5A2.5 2.5 0 0 1 21 9.5v8A2.5 2.5 0 0 1 18.5 20h-13A2.5 2.5 0 0 1 3 17.5v-10Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>Яндекс.Диск</span>
+            </span>
+            <p class="doc__cat">Договор</p>
+            <h2 class="doc__title">Договор&nbsp;— публичная оферта</h2>
+            <p class="doc__desc">Условия оказания услуг доступа к сети постоянно действующих базовых станций.</p>
+            <span class="doc__foot">
+              <span class="doc__action">Открыть папку</span>
+              <span class="doc__arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M8 16 16 8M16 8H9.4M16 8v6.6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            </span>
+          </a>
+        </li>
+        <li data-cat="acts">
+          <a class="doc" href="https://disk.360.yandex.ru/client/aa/d_0KSWMglkQiWNTQ/" target="_blank" rel="noopener noreferrer">
+            <span class="doc__head">
+              <span class="doc__index">02</span>
+              <span class="doc__kind doc__kind--disk"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3 7.5A2.5 2.5 0 0 1 5.5 5h4L11 7h7.5A2.5 2.5 0 0 1 21 9.5v8A2.5 2.5 0 0 1 18.5 20h-13A2.5 2.5 0 0 1 3 17.5v-10Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>Яндекс.Диск</span>
+            </span>
+            <p class="doc__cat">Акты</p>
+            <h2 class="doc__title">Акты приёмо-передачи отчётов</h2>
+            <p class="doc__desc">Отчёты о создании СДГС, переданные в Федеральный фонд пространственных данных.</p>
+            <span class="doc__foot">
+              <span class="doc__action">Открыть папку</span>
+              <span class="doc__arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M8 16 16 8M16 8H9.4M16 8v6.6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            </span>
+          </a>
+        </li>
+        <li data-cat="manual">
+          <a class="doc" href="https://www.gsi.ru/file/instruction/Sozdanie_proekta_MAGNET_Field_i_vipolnenie_semki_tochek_v_rejime_RTK_GNSS_ot_bazovih_stancii_GSI.pdf" target="_blank" rel="noopener noreferrer">
+            <span class="doc__head">
+              <span class="doc__index">03</span>
+              <span class="doc__kind"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 3h7l4 4v14H7V3Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M14 3v4h4" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>PDF</span>
+            </span>
+            <p class="doc__cat">Инструкция</p>
+            <h2 class="doc__title">MAGNET Field</h2>
+            <p class="doc__desc">Настройка ПО для работы от сети Topnet Live-Россия: создание проекта и съёмка точек в режиме RTK.</p>
+            <span class="doc__foot">
+              <span class="doc__action">Скачать PDF</span>
+              <span class="doc__arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M8 16 16 8M16 8H9.4M16 8v6.6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            </span>
+          </a>
+        </li>
+        <li data-cat="manual">
+          <a class="doc" href="https://topnet-gsi.ru/file/Survey_Master_Manual_for_Topnet_Live_SIM_in_controller.pdf" target="_blank" rel="noopener noreferrer">
+            <span class="doc__head">
+              <span class="doc__index">04</span>
+              <span class="doc__kind"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 3h7l4 4v14H7V3Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M14 3v4h4" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>PDF</span>
+            </span>
+            <p class="doc__cat">Инструкция</p>
+            <h2 class="doc__title">Survey Master — SIM в контроллере</h2>
+            <p class="doc__desc">Настройка ПО Survey Master для работы от сети Topnet Live, когда SIM-карта установлена в контроллер.</p>
+            <span class="doc__foot">
+              <span class="doc__action">Скачать PDF</span>
+              <span class="doc__arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M8 16 16 8M16 8H9.4M16 8v6.6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            </span>
+          </a>
+        </li>
+        <li data-cat="manual">
+          <a class="doc" href="https://topnet-gsi.ru/file/Survey_Master_Manual_for_Topnet_Live_SIM_in_controller.pdf" target="_blank" rel="noopener noreferrer">
+            <span class="doc__head">
+              <span class="doc__index">05</span>
+              <span class="doc__kind"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 3h7l4 4v14H7V3Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M14 3v4h4" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>PDF</span>
+            </span>
+            <p class="doc__cat">Инструкция</p>
+            <h2 class="doc__title">Survey Master — SIM в приёмнике</h2>
+            <p class="doc__desc">Настройка ПО Survey Master для работы от сети Topnet Live, когда SIM-карта установлена в приёмник.</p>
+            <span class="doc__foot">
+              <span class="doc__action">Скачать PDF</span>
+              <span class="doc__arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M8 16 16 8M16 8H9.4M16 8v6.6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            </span>
+          </a>
+        </li>
+        <li data-cat="geoid">
+          <a class="doc" href="https://disk.360.yandex.ru/client/aa/d_iUi9fyIgQ4LmHA/" target="_blank" rel="noopener noreferrer">
+            <span class="doc__head">
+              <span class="doc__index">06</span>
+              <span class="doc__kind doc__kind--disk"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3 7.5A2.5 2.5 0 0 1 5.5 5h4L11 7h7.5A2.5 2.5 0 0 1 21 9.5v8A2.5 2.5 0 0 1 18.5 20h-13A2.5 2.5 0 0 1 3 17.5v-10Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>Яндекс.Диск</span>
+            </span>
+            <p class="doc__cat">Модели геоида</p>
+            <h2 class="doc__title">Модели геоида</h2>
+            <p class="doc__desc">Файлы моделей геоида для корректного пересчёта высот в ваших измерениях.</p>
+            <span class="doc__foot">
+              <span class="doc__action">Открыть папку</span>
+              <span class="doc__arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M8 16 16 8M16 8H9.4M16 8v6.6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            </span>
+          </a>
+        </li>
+      </ul>
+
+      <div class="docs-help">
+        <div>
+          <h2 class="docs-help__title">Не нашли нужный документ?</h2>
+          <p class="docs-help__text">Напишите или позвоните — вышлем актуальную версию и поможем с настройкой.</p>
+        </div>
+        <div class="docs-help__actions">
+          <a href="mailto:topnet@gsi.ru" class="btn btn--primary">Написать в поддержку</a>
+          <a href="contacts.html" class="btn btn--outline-on-dark">Контакты</a>
+        </div>
+      </div>
+
     </div>
   </section>
 
@@ -159,5 +272,6 @@
   <script src="js/main.js" defer></script>
   <!-- network.js — только фоновая сеть: элементов формы ЛК на странице нет -->
   <script src="js/network.js" defer></script>
+  <script src="js/docs-page.js" defer></script>
 </body>
 </html>

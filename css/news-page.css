@@ -179,7 +179,14 @@
   box-shadow: 0 22px 44px -32px rgba(26, 39, 51, 0.38);
   transition: transform 0.32s cubic-bezier(0.2, 0.7, 0.2, 1),
               box-shadow 0.32s ease,
-              border-color 0.32s ease;
+              border-color 0.32s ease,
+              grid-template-columns 0.45s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+/* Раскрытая новость: фото уезжает наверх и растягивается во всю ширину
+   карточки, текст встаёт под ним. Порядок в разметке уже такой
+   (медиа → контент), поэтому достаточно схлопнуть сетку в одну колонку. */
+.tl-card.is-open {
+  grid-template-columns: 1fr;
 }
 .tl-item:hover .tl-card,
 .tl-item:focus-within .tl-card {
@@ -206,6 +213,16 @@
   border-radius: 16px;
   overflow: hidden;
   background: linear-gradient(135deg, var(--accent-soft) 0%, var(--accent) 55%, var(--accent-2) 100%);
+  transition: min-height 0.45s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+/* в развёрнутом виде кадру нужно больше воздуха по высоте */
+.tl-card.is-open .tl-card__media {
+  min-height: clamp(240px, 30vw, 400px);
+}
+/* у карточек без фотографии это просто градиентная заглушка —
+   ей столько высоты не нужно */
+.tl-card.is-open .tl-card__media--grid {
+  min-height: clamp(180px, 18vw, 240px);
 }
 /* реальное изображение — аккуратный кроп без искажений */
 .tl-card__img {
@@ -259,6 +276,11 @@
   flex-direction: column;
   padding: clamp(2px, 0.6vw, 8px) clamp(2px, 0.8vw, 10px) 4px 0;
 }
+/* текст на всю ширину карточки — держим комфортную длину строки */
+.tl-card.is-open .tl-card__content {
+  padding: clamp(6px, 1vw, 12px) clamp(2px, 0.8vw, 10px) 4px clamp(2px, 0.8vw, 10px);
+}
+.tl-card.is-open .tl-card__full { max-width: 78ch; }
 
 .tl-card__title {
   margin: 0;
@@ -434,6 +456,7 @@
 
 @media (prefers-reduced-motion: reduce) {
   .tl-card,
+  .tl-card__media,
   .tl-item__dot,
   .tl-more,
   .tl-more__arrow,

@@ -1,0 +1,275 @@
+/* =============================================================
+   TopNET GSI — страница «Документация» (docs.html)
+   Картотека: карточки-листы со срезанным углом + фильтр по типам.
+   Подключается ПОСЛЕ css/style.css.
+   ============================================================= */
+
+/* ---------- Панель фильтров ---------- */
+.docs-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: clamp(16px, 3vw, 32px);
+  flex-wrap: wrap;
+  margin-bottom: clamp(28px, 4vh, 44px);
+}
+.docs-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.docs-filter {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 18px;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--line-strong);
+  background: var(--bg-alt);
+  color: var(--ink-2);
+  font-size: 0.92rem;
+  font-weight: 600;
+  transition: background 0.25s ease, border-color 0.25s ease,
+              color 0.25s ease, transform 0.25s ease;
+}
+.docs-filter:hover {
+  border-color: rgba(245, 135, 31, 0.45);
+  color: var(--ink);
+  transform: translateY(-1px);
+}
+.docs-filter.is-active {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: #fff;
+}
+/* счётчик внутри чипа */
+.docs-filter__num {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--muted);
+  transition: color 0.25s ease;
+}
+.docs-filter.is-active .docs-filter__num { color: var(--accent-on-dark); }
+
+.docs-count {
+  font-size: 0.9rem;
+  color: var(--ink-2);
+  white-space: nowrap;
+}
+.docs-count b { color: var(--ink); font-weight: 700; }
+
+/* ---------- Сетка картотеки ---------- */
+.docs-grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(18px, 2.2vw, 28px);
+}
+/* тень навешена на обёртку: filter повторяет срезанный угол карточки,
+   тогда как box-shadow обвёл бы её прямоугольником */
+.docs-grid li {
+  filter: drop-shadow(0 22px 34px rgba(26, 39, 51, 0.14));
+  transition: filter 0.35s ease, opacity 0.3s ease, transform 0.3s ease;
+}
+.docs-grid li:hover { filter: drop-shadow(0 30px 46px rgba(26, 39, 51, 0.22)); }
+/* скрытые фильтром карточки */
+.docs-grid li[hidden] { display: none; }
+
+/* ---------- Карточка-лист ---------- */
+.doc {
+  --cut: 42px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 250px;
+  padding: clamp(26px, 2.6vw, 32px);
+  background: var(--bg-alt);
+  color: var(--ink);
+  /* срезанный правый верхний угол — «загнутая страница» */
+  clip-path: polygon(0 0, calc(100% - var(--cut)) 0, 100% var(--cut), 100% 100%, 0 100%);
+  transition: transform 0.35s cubic-bezier(0.2, 0.7, 0.2, 1), background 0.35s ease;
+}
+.doc:hover,
+.doc:focus-visible { transform: translateY(-6px); }
+.doc:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.docs-filter:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+/* «сгиб» в срезанном углу */
+.doc::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: var(--cut);
+  height: var(--cut);
+  background: linear-gradient(45deg, var(--accent-soft) 50%, transparent 50%);
+  transition: background 0.35s ease;
+}
+.doc:hover::after,
+.doc:focus-visible::after { background: linear-gradient(45deg, var(--accent) 50%, transparent 50%); }
+
+/* тонкая акцентная линия слева, растёт при наведении */
+.doc::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: var(--accent);
+  transform: scaleY(0);
+  transform-origin: top;
+  transition: transform 0.4s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.doc:hover::before,
+.doc:focus-visible::before { transform: scaleY(1); }
+
+.doc__head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: clamp(18px, 2.4vw, 26px);
+}
+.doc__index {
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+}
+/* чип формата: PDF / Яндекс.Диск */
+.doc__kind {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 5px 12px;
+  border-radius: var(--radius-pill);
+  background: var(--accent-soft);
+  color: var(--accent-soft-ink);
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.doc__kind svg { width: 13px; height: 13px; display: block; }
+.doc__kind--disk {
+  background: rgba(14, 90, 167, 0.10);
+  color: var(--brand);
+}
+
+.doc__cat {
+  margin: 0 0 8px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+.doc__title {
+  margin: 0 0 10px;
+  font-size: clamp(1.06rem, 1.3vw, 1.22rem);
+  font-weight: 700;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+}
+.doc__desc {
+  margin: 0;
+  font-size: 0.9rem;
+  line-height: 1.55;
+  color: var(--ink-2);
+}
+
+/* подвал карточки со стрелкой */
+.doc__foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  margin-top: auto;
+  padding-top: clamp(20px, 2.4vw, 26px);
+}
+.doc__action {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--brand);
+  transition: color 0.25s ease;
+}
+.doc:hover .doc__action,
+.doc:focus-visible .doc__action { color: var(--accent); }
+.doc__arrow {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 14px;
+  background: var(--accent-soft);
+  color: var(--accent);
+  transition: background 0.3s ease, color 0.3s ease;
+}
+.doc__arrow svg {
+  width: 19px;
+  height: 19px;
+  display: block;
+  transition: transform 0.35s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.doc:hover .doc__arrow,
+.doc:focus-visible .doc__arrow { background: var(--accent); color: #fff; }
+.doc:hover .doc__arrow svg,
+.doc:focus-visible .doc__arrow svg { transform: translate(3px, -3px); }
+
+/* ---------- Тёмная плашка помощи ---------- */
+.docs-help {
+  margin-top: clamp(48px, 7vh, 80px);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: clamp(20px, 4vw, 48px);
+  flex-wrap: wrap;
+  padding: clamp(32px, 4vw, 48px);
+  border-radius: var(--radius-xl);
+  background: linear-gradient(135deg, var(--dark) 0%, var(--dark-3) 100%);
+  color: #fff;
+  box-shadow: var(--shadow-lg);
+}
+.docs-help__title {
+  margin: 0 0 8px;
+  font-size: clamp(1.3rem, 2vw, 1.7rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+.docs-help__text {
+  margin: 0;
+  font-size: 0.98rem;
+  color: rgba(255, 255, 255, 0.7);
+}
+.docs-help__actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+/* ---------- Адаптив ---------- */
+@media (max-width: 1100px) {
+  .docs-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 640px) {
+  .docs-grid { grid-template-columns: 1fr; }
+  .docs-bar { align-items: flex-start; }
+  .docs-help { flex-direction: column; align-items: flex-start; }
+  .docs-help__actions .btn { width: 100%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .doc,
+  .doc::before,
+  .doc::after,
+  .doc__arrow svg,
+  .docs-filter,
+  .docs-grid li { transition: none; }
+  .doc:hover { transform: none; }
+  .doc:hover::before { transform: scaleY(1); }
+}

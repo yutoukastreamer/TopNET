@@ -70,6 +70,10 @@
     const label = btn.querySelector('.tl-more__label');
     if (label) label.textContent = expanded ? 'Читать подробнее' : 'Свернуть';
 
+    // раскрытая карточка перестраивается: фото наверх во всю ширину, текст под ним
+    const cardEl = btn.closest('.tl-card');
+    if (cardEl) cardEl.classList.toggle('is-open', !expanded);
+
     // краткий текст показываем только в свёрнутом виде
     const content = panel.closest('.tl-card__content');
     const excerpt = content && content.querySelector('.tl-card__excerpt');
