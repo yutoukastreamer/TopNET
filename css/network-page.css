@@ -441,9 +441,28 @@
 /* =============================================================
    5 — Для кого
    ============================================================= */
+/* секция отдана под полукруг: карточки справа, снимок слева выходит за край */
+.np-section--arc { overflow: hidden; }
+.np-section--arc .arcsec {
+  --arc: clamp(440px, 50vw, 720px);
+  min-height: calc(var(--arc) + clamp(48px, 7vh, 90px));
+  padding: clamp(40px, 6vh, 72px) 0;
+}
+/* блок «Для кого»: круг слева, видна правая половина квадрата — сдвиг через
+   translateX безопасен, обнажаемая сторона снимка уходит за край экрана */
+.np-section--arc .arc__img {
+  object-position: 50% 42%;
+  transform: translateX(25%);
+}
+.np-section--arc .arc:hover .arc__img { transform: translateX(25%) scale(1.05); }
+/* колонка с карточками шире стандартной текстовой */
+.who-side { max-width: 640px; }
+.who-side .np-head { margin-bottom: clamp(20px, 3vh, 32px); }
+
 .who-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  /* две строки по две карточки рядом с полукругом */
+  grid-template-columns: repeat(2, 1fr);
   gap: clamp(14px, 1.6vw, 20px);
 }
 .who {
@@ -546,11 +565,18 @@
    Адаптив
    ============================================================= */
 @media (max-width: 1100px) {
-  .odo-grid,
-  .who-grid { grid-template-columns: repeat(2, 1fr); }
+  .odo-grid { grid-template-columns: repeat(2, 1fr); }
+  /* круг поменьше, чтобы карточки не поджимались */
+  .np-section--arc .arcsec { --arc: clamp(400px, 46vw, 560px); }
+  .who-side { max-width: 560px; }
 }
 @media (max-width: 960px) {
   .np-anchors { top: 58px; }
+  /* узкий экран: арка сверху (правила .arc — в style.css), карточки под ней */
+  .np-section--arc .arcsec { --arc: auto; min-height: 0; padding: 0 0 clamp(32px, 5vh, 56px); }
+  .np-section--arc .arc__img { transform: none; object-position: 50% 45%; }
+  .np-section--arc .arc:hover .arc__img { transform: scale(1.05); }
+  .who-side { max-width: none; }
   .tech,
   .ntrip { grid-template-columns: 1fr; }
   .promo { grid-template-columns: 1fr; }
