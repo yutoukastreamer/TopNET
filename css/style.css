@@ -675,6 +675,8 @@ label:has(> input[type="radio"]), label:has(> input[type="radio"]) * {
   /* диаметр круга; видимая часть = половина */
   --arc: clamp(560px, 68vw, 980px);
   --arc-ring: 14px;
+  /* насколько круг выезжает из-за края экрана при наведении */
+  --arc-peek: clamp(24px, 3.5vw, 56px);
   position: relative;
   display: flex;
   align-items: center;
@@ -696,6 +698,9 @@ label:has(> input[type="radio"]), label:has(> input[type="radio"]) * {
   box-shadow:
     0 0 0 var(--arc-ring) rgba(255, 255, 255, 0.72),
     0 40px 90px -50px rgba(26, 39, 51, 0.65);
+  transition: transform 0.5s cubic-bezier(0.22, 0.61, 0.36, 1),
+              box-shadow 0.5s ease;
+  will-change: transform;
 }
 .arc__img {
   width: 100%;
@@ -706,12 +711,30 @@ label:has(> input[type="radio"]), label:has(> input[type="radio"]) * {
   display: block;
   transition: transform 0.9s cubic-bezier(0.2, 0.7, 0.2, 1);
 }
-.arc:hover .arc__img { transform: scale(1.05); }
 /* ---------- Зеркальная версия: полукруг справа, текст слева ---------- */
 .arcsec--right .arc {
   left: auto;
   right: 0;
   transform: translate(50%, -50%);
+}
+
+/* ---------- Наведение: круг выезжает из-за края, показывая скрытую половину.
+   Прижат к левому краю — едет вправо, к правому — влево. Только для мыши. --- */
+@media (hover: hover) and (pointer: fine) {
+  .arc:hover {
+    transform: translate(calc(-50% + var(--arc-peek)), -50%);
+    box-shadow:
+      0 0 0 var(--arc-ring) rgba(255, 255, 255, 0.86),
+      0 46px 100px -50px rgba(26, 39, 51, 0.75);
+  }
+  .arcsec--right .arc:hover {
+    transform: translate(calc(50% - var(--arc-peek)), -50%);
+  }
+  .arcsec--dark .arc:hover {
+    box-shadow:
+      0 0 0 var(--arc-ring) rgba(255, 255, 255, 0.18),
+      0 46px 100px -50px rgba(0, 0, 0, 0.9);
+  }
 }
 .arcsec--right .arcsec__text {
   margin-left: 0;
@@ -722,17 +745,24 @@ label:has(> input[type="radio"]), label:has(> input[type="radio"]) * {
    обнажается при сдвиге, приходится на левую половину квадрата, а она
    в этой раскладке и так спрятана за краем экрана. */
 .feature .arc__img { transform: translateX(30%); }
-.feature .arc:hover .arc__img { transform: translateX(30%) scale(1.05); }
 /* блок 2 (круг справа, видна ЛЕВАЯ/ближняя половина квадрата): здесь та же
    translateX-обнажаемая сторона снимка как раз попадает в видимую половину,
    поэтому сдвигаем не сам слой, а окно кадрирования через object-position —
    оно всегда покрывает контейнер целиком, без пустот. */
 .about .arc__img { object-position: 30% 42%; }
 
-.arcsec .container { position: relative; z-index: 1; }
+/* Контейнер лежит поверх круга и растянут на всю ширину секции: если он
+   ловит курсор, наведение на изображение срабатывает через раз. Отдаём клики
+   сквозь него, а сам текстовый блок остаётся интерактивным. */
+.arcsec .container {
+  position: relative;
+  z-index: 1;
+  pointer-events: none;
+}
 .arcsec__text {
   max-width: 560px;
   margin-left: auto;      /* текст прижат к правой половине сетки */
+  pointer-events: auto;
 }
 .arcsec__eyebrow {
   display: inline-block;
@@ -1287,13 +1317,16 @@ label:has(> input[type="radio"]), label:has(> input[type="radio"]) * {
     right: auto;
     transform: translateX(-50%);
   }
+  /* арка занимает всю ширину — выезжать некуда, ховер-сдвиг отключаем
+     (иначе он сработал бы на планшете с мышью и сломал позицию) */
+  .arc:hover,
+  .arcsec--right .arc:hover { transform: translateX(-50%); }
   .arcsec--right .arcsec__text { margin-right: 0; }
   .arcsec--dark .arc { box-shadow: 0 30px 60px -45px rgba(0, 0, 0, 0.8); }
   /* арка во всю ширину — виден почти весь кадр, сдвиг не нужен */
   .arc__img,
   .about .arc__img,
   .feature .arc__img { object-position: 50% 42%; transform: none; }
-  .feature .arc:hover .arc__img { transform: scale(1.05); }
   .arcsec__text { max-width: none; margin-left: 0; margin-right: 0; }
   .stats__grid { grid-template-columns: repeat(3, 1fr); }
   .news-card { flex-basis: calc((100% - clamp(16px, 2vw, 28px)) / 2); }

@@ -454,7 +454,6 @@
   object-position: 50% 42%;
   transform: translateX(25%);
 }
-.np-section--arc .arc:hover .arc__img { transform: translateX(25%) scale(1.05); }
 /* колонка с карточками шире стандартной текстовой */
 .who-side { max-width: 640px; }
 .who-side .np-head { margin-bottom: clamp(20px, 3vh, 32px); }
@@ -575,7 +574,6 @@
   /* узкий экран: арка сверху (правила .arc — в style.css), карточки под ней */
   .np-section--arc .arcsec { --arc: auto; min-height: 0; padding: 0 0 clamp(32px, 5vh, 56px); }
   .np-section--arc .arc__img { transform: none; object-position: 50% 45%; }
-  .np-section--arc .arc:hover .arc__img { transform: scale(1.05); }
   .who-side { max-width: none; }
   .tech,
   .ntrip { grid-template-columns: 1fr; }

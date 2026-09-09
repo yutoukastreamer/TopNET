@@ -27,6 +27,7 @@
   <!-- ================= ФОРМА ВХОДА ================= -->
   <main class="auth__main">
     <div class="auth__card">
+      <img src="assets/images/topnet_logo.png" alt="Topnet Live" class="auth__brand" />
       <h1 class="auth__title">Личный кабинет</h1>
       <p class="auth__subtitle">Войдите, чтобы управлять услугами и доступом к сети.</p>
 
@@ -75,6 +76,17 @@
     </div>
   </div>
 
+  <!-- ================= КНОПКА «НАЗАД» (закреплена в правом нижнем углу) ================= -->
+  <a href="index.html" class="back-fab" data-back>
+    <span class="back-fab__icon" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none">
+        <path d="M15 6l-6 6 6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </span>
+    Назад
+  </a>
+
   <script src="js/network.js" defer></script>
+  <script src="js/auth-back.js" defer></script>
 </body>
 </html>
