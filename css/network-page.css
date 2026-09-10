@@ -518,6 +518,9 @@
   border: 1px solid var(--line);
   box-shadow: 0 26px 50px -38px rgba(26, 39, 51, 0.45);
 }
+/* плашка стоит первым блоком страницы — верхний отступ даёт сама секция */
+.np-section--promo .promo { margin-top: 0; }
+
 .promo__title {
   margin: 0 0 8px;
   font-size: clamp(1.4rem, 2.2vw, 1.9rem);

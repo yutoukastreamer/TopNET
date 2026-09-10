@@ -1655,6 +1655,8 @@ a.info-card__value:hover { color: var(--accent); }
   max-width: none;
   padding: 0;
   overflow: hidden;
+  /* карта идёт первой, схема зон и легенда — под ней */
+  margin-bottom: clamp(40px, 6vw, 64px);
 }
 .page-placeholder--map .map-embed {
   display: block;
@@ -1671,7 +1673,6 @@ a.info-card__value:hover { color: var(--accent); }
   grid-template-columns: minmax(280px, 440px) 1fr;
   gap: clamp(20px, 3vw, 32px);
   align-items: stretch;
-  margin-bottom: clamp(40px, 6vw, 64px);
 }
 
 /* ---------- Схема зон: белая скруглённая карточка ---------- */
