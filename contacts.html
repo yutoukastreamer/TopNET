@@ -108,83 +108,78 @@
     </div>
   </section>
 
-  <!-- ================= КОНТАКТЫ + КАРТА ================= -->
-  <main class="page-body page-body--soft">
-    <div class="container">
-      <div class="section-head">
-        <h2 class="section-head__title">Как нас найти</h2>
-      </div>
+  <!-- ============ КОНТАКТЫ (полукруг с фото справа, как на главной) ============ -->
+  <main class="page-body page-body--soft page-body--arc">
+    <div class="arcsec arcsec--right contacts-arc">
 
-      <div class="contacts-layout">
+      <figure class="arc">
+        <img src="assets/images/Contacts.png" alt="Специалист технической поддержки TopNET GSI на связи" class="arc__img" loading="lazy" />
+      </figure>
 
-        <!-- ---------- карточки контактов ---------- -->
-        <div class="contacts-stack">
-
-          <div class="info-card">
-            <span class="info-card__icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none">
-                <path d="M12 21s7-6.1 7-11a7 7 0 1 0-14 0c0 4.9 7 11 7 11Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
-                <circle cx="12" cy="10" r="2.4" stroke="currentColor" stroke-width="1.8"/>
-              </svg>
-            </span>
-            <div class="info-card__body">
-              <span class="info-card__label">Адрес</span>
-              <span class="info-card__value">г. Москва, ул. Малая Семеновская, д. 9, стр. 6</span>
-              <span class="info-card__note">Главный офис</span>
-            </div>
+      <div class="container">
+        <div class="arcsec__text contacts-side">
+          <div class="section-head">
+            <h2 class="section-head__title">Техподдержка</h2>
           </div>
 
-          <div class="info-card">
-            <span class="info-card__icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none">
-                <path d="M6.5 3.5h3l1.5 4-2 1.5a11 11 0 0 0 6 6l1.5-2 4 1.5v3a2 2 0 0 1-2.2 2A16.5 16.5 0 0 1 4.5 5.7 2 2 0 0 1 6.5 3.5Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
-              </svg>
-            </span>
-            <div class="info-card__body">
-              <span class="info-card__label">Телефон</span>
-              <a class="info-card__value" href="tel:+74991165624">+7 (499) 116-56-24</a>
-            </div>
-          </div>
+          <!-- ---------- карточки контактов ---------- -->
+          <div class="contacts-stack">
 
-          <div class="info-card">
-            <span class="info-card__icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none">
-                <rect x="3" y="5" width="18" height="14" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
-                <path d="m4 7.5 8 5.5 8-5.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
-            </span>
-            <div class="info-card__body">
-              <span class="info-card__label">Почта</span>
-              <a class="info-card__value" href="mailto:topnet@gsi.ru">topnet@gsi.ru</a>
+            <div class="info-card">
+              <span class="info-card__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none">
+                  <path d="M12 21s7-6.1 7-11a7 7 0 1 0-14 0c0 4.9 7 11 7 11Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+                  <circle cx="12" cy="10" r="2.4" stroke="currentColor" stroke-width="1.8"/>
+                </svg>
+              </span>
+              <div class="info-card__body">
+                <span class="info-card__label">Адрес</span>
+                <span class="info-card__value">г. Москва, ул. Малая Семеновская, д. 9, стр. 6</span>
+                <span class="info-card__note">Главный офис</span>
+              </div>
             </div>
-          </div>
 
-          <div class="info-card">
-            <span class="info-card__icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none">
-                <circle cx="12" cy="12" r="8.5" stroke="currentColor" stroke-width="1.8"/>
-                <path d="M12 7.5V12l3.2 2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
-            </span>
-            <div class="info-card__body">
-              <span class="info-card__label">Режим работы</span>
-              <span class="info-card__value">Пн–Вс: 09:00 — 21:00</span>
+            <div class="info-card">
+              <span class="info-card__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none">
+                  <path d="M6.5 3.5h3l1.5 4-2 1.5a11 11 0 0 0 6 6l1.5-2 4 1.5v3a2 2 0 0 1-2.2 2A16.5 16.5 0 0 1 4.5 5.7 2 2 0 0 1 6.5 3.5Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+                </svg>
+              </span>
+              <div class="info-card__body">
+                <span class="info-card__label">Телефон</span>
+                <a class="info-card__value" href="tel:+74991165624">+7 (499) 116-56-24</a>
+              </div>
             </div>
+
+            <div class="info-card">
+              <span class="info-card__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none">
+                  <rect x="3" y="5" width="18" height="14" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+                  <path d="m4 7.5 8 5.5 8-5.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </span>
+              <div class="info-card__body">
+                <span class="info-card__label">Почта</span>
+                <a class="info-card__value" href="mailto:topnet@gsi.ru">topnet@gsi.ru</a>
+              </div>
+            </div>
+
+            <div class="info-card">
+              <span class="info-card__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none">
+                  <circle cx="12" cy="12" r="8.5" stroke="currentColor" stroke-width="1.8"/>
+                  <path d="M12 7.5V12l3.2 2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </span>
+              <div class="info-card__body">
+                <span class="info-card__label">Режим работы</span>
+                <span class="info-card__value">Пн–Вс: 09:00 — 21:00</span>
+              </div>
+            </div>
+
           </div>
 
         </div>
-
-        <!-- ---------- карта ---------- -->
-        <div class="map-card">
-          <iframe
-            title="Карта филиалов"
-            src="https://yandex.ru/map-widget/v1/?um=constructor%3A83c7553878eeecd3cc812e6cc62157b9de612009a204140b6bd220bf5f4b015c&amp;source=constructor"
-            width="100%"
-            height="357"
-            frameborder="0"
-            style="display: block"></iframe>
-        </div>
-
       </div>
     </div>
   </main>
