@@ -12,6 +12,7 @@
   <link rel="stylesheet" href="css/tokens.css" />
   <link rel="stylesheet" href="css/style.css" />
   <link rel="stylesheet" href="css/docs-page.css" />
+  <link rel="stylesheet" href="css/cookie.css" />
 </head>
 <body>
 
@@ -257,16 +258,27 @@
       <div class="footer__bottom">
         <span>© 2026 TopNET GSI. Все права защищены.</span>
         <div class="footer__legal">
-          <a href="#">Политика конфиденциальности</a>
+          <a href="privacy.html">Политика конфиденциальности</a>
           <a href="#">Публичная оферта</a>
         </div>
       </div>
     </div>
   </footer>
 
+
+  <!-- ================= СОГЛАСИЕ НА COOKIE ================= -->
+  <aside class="cookie" data-cookie role="region" aria-label="Согласие на обработку cookie" hidden>
+    <p class="cookie__text">
+      Продолжая использовать наш сайт, Вы соглашаетесь с
+      <a href="privacy.html">условиями обработки cookie и данных о поведении на сайте</a>,
+      нужных нам для аналитики. Запретить обработку cookie Вы можете через браузер.
+    </p>
+    <button type="button" class="cookie__btn" data-cookie-accept>ОК</button>
+  </aside>
   <script src="js/main.js" defer></script>
   <!-- network.js — только фоновая сеть: элементов формы ЛК на странице нет -->
   <script src="js/network.js" defer></script>
   <script src="js/docs-page.js" defer></script>
+  <script src="js/cookie.js" defer></script>
 </body>
 </html>

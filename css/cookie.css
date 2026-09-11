@@ -1,0 +1,102 @@
+/* =============================================================
+   TopNET GSI — плашка согласия на обработку cookie.
+   Автономный компонент: подключается на всех страницах, включая ЛК
+   (там свой css/login.css), поэтому не опирается на .btn и .container.
+   ============================================================= */
+
+.cookie {
+  position: fixed;
+  left: clamp(16px, 3vw, 36px);
+  bottom: clamp(16px, 3vw, 36px);
+  z-index: 900;
+  width: min(560px, calc(100vw - 2 * clamp(16px, 3vw, 36px)));
+  display: flex;
+  align-items: center;
+  gap: clamp(16px, 2vw, 26px);
+  padding: clamp(18px, 2vw, 24px) clamp(20px, 2.2vw, 28px);
+  border-radius: var(--radius-xl);
+  background: rgba(26, 39, 51, 0.94);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  backdrop-filter: saturate(140%) blur(14px);
+  -webkit-backdrop-filter: saturate(140%) blur(14px);
+  color: rgba(255, 255, 255, 0.82);
+  box-shadow: 0 30px 60px -30px rgba(0, 0, 0, 0.75);
+  /* до инициализации скрипта плашки не видно: без JS согласие не запросить */
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(16px);
+  transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.2, 0.7, 0.2, 1),
+              visibility 0.4s;
+}
+.cookie.is-shown {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.cookie__text {
+  margin: 0;
+  font-size: 0.88rem;
+  line-height: 1.55;
+}
+.cookie__text a {
+  color: #fff;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-color: rgba(245, 135, 31, 0.65);
+  transition: color 0.2s ease, text-decoration-color 0.2s ease;
+}
+.cookie__text a:hover {
+  color: var(--accent-on-dark);
+  text-decoration-color: var(--accent);
+}
+
+.cookie__btn {
+  flex: none;
+  align-self: center;
+  padding: 11px 30px;
+  border: 1px solid var(--accent);
+  border-radius: var(--radius-pill);
+  background: var(--accent);
+  color: #fff;
+  font-family: inherit;
+  font-size: 0.95rem;
+  font-weight: 600;
+  line-height: 1.2;
+  box-shadow: 0 10px 24px -12px var(--accent-glow);
+  transition: background 0.25s ease, border-color 0.25s ease,
+              transform 0.25s ease, box-shadow 0.25s ease;
+}
+.cookie__btn:hover {
+  background: var(--accent-2);
+  border-color: var(--accent-2);
+  transform: translateY(-2px);
+  box-shadow: 0 16px 30px -14px var(--accent-glow);
+}
+.cookie__btn:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 3px;
+}
+
+/* На широком экране плашка прижата влево, а кнопка «Назад» в ЛК — вправо,
+   они не пересекаются. На узком плашка занимает всю ширину, поэтому кнопку
+   поднимаем над ней: фактическую высоту плашки скрипт кладёт в --cookie-h. */
+
+@media (max-width: 640px) {
+  .cookie {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 14px;
+    text-align: left;
+  }
+  .cookie__btn { width: 100%; }
+  body.has-cookie .back-fab {
+    bottom: calc(var(--cookie-h, 200px) + clamp(16px, 3vw, 36px) + 14px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cookie,
+  .cookie__btn { transition: none; }
+  .cookie__btn:hover { transform: none; }
+}

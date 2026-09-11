@@ -1,0 +1,207 @@
+/* =============================================================
+   TopNET GSI — правовые документы (privacy.html)
+   Липкое оглавление + колонка текста. Подключается после style.css.
+   ============================================================= */
+
+.legal-layout {
+  display: grid;
+  grid-template-columns: minmax(220px, 280px) minmax(0, 1fr);
+  gap: clamp(28px, 4vw, 64px);
+  align-items: start;
+}
+
+/* ---------- Оглавление ---------- */
+.legal-toc {
+  position: sticky;
+  /* ниже фиксированной шапки */
+  top: 104px;
+  padding: clamp(20px, 2vw, 26px);
+  border-radius: var(--radius-lg);
+  background: var(--bg-alt);
+  border: 1px solid var(--line);
+  box-shadow: 0 20px 40px -34px rgba(26, 39, 51, 0.4);
+}
+.legal-toc__title {
+  margin: 0 0 14px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.legal-toc__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.legal-toc__link {
+  display: flex;
+  gap: 10px;
+  padding: 9px 12px;
+  border-radius: 12px;
+  font-size: 0.86rem;
+  line-height: 1.4;
+  color: var(--ink-2);
+  transition: background 0.22s ease, color 0.22s ease;
+}
+.legal-toc__link:hover { background: var(--bg); color: var(--ink); }
+.legal-toc__link.is-active {
+  background: var(--accent-soft);
+  color: var(--accent-soft-ink);
+  font-weight: 600;
+}
+.legal-toc__num {
+  flex: none;
+  min-width: 24px;
+  font-weight: 700;
+  color: var(--accent);
+}
+
+/* ---------- Текст документа ---------- */
+.legal-doc {
+  max-width: 78ch;
+  color: var(--ink-2);
+  font-size: clamp(0.94rem, 1.05vw, 1rem);
+  line-height: 1.72;
+}
+.legal-doc__intro {
+  margin: 0 0 clamp(28px, 4vh, 40px);
+  padding-bottom: clamp(20px, 3vh, 28px);
+  border-bottom: 1px solid var(--line);
+  font-size: clamp(1.05rem, 1.5vw, 1.25rem);
+  font-weight: 700;
+  line-height: 1.35;
+  color: var(--ink);
+}
+
+.legal-sec { scroll-margin-top: 110px; }
+.legal-sec + .legal-sec { margin-top: clamp(34px, 5vh, 52px); }
+.legal-sec__title {
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+  margin: 0 0 18px;
+  font-size: clamp(1.18rem, 1.9vw, 1.5rem);
+  font-weight: 700;
+  line-height: 1.28;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+}
+.legal-sec__num {
+  flex: none;
+  min-width: 42px;
+  padding: 4px 10px;
+  border-radius: 10px;
+  background: var(--accent-soft);
+  color: var(--accent-soft-ink);
+  font-size: 0.72em;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-align: center;
+}
+
+.legal-doc p { margin: 0 0 16px; }
+.legal-doc p:last-child { margin-bottom: 0; }
+.legal-doc b { color: var(--ink); font-weight: 700; }
+.legal-doc a {
+  color: var(--brand);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-color: rgba(14, 90, 167, 0.35);
+  transition: color 0.2s ease, text-decoration-color 0.2s ease;
+}
+.legal-doc a:hover { color: var(--accent); text-decoration-color: var(--accent); }
+
+/* списки: маркер-акцент вместо стандартной точки */
+.legal-doc ul {
+  list-style: none;
+  margin: 0 0 16px;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.legal-doc li {
+  position: relative;
+  padding-left: 24px;
+}
+.legal-doc li::before {
+  content: "";
+  position: absolute;
+  left: 4px;
+  top: 0.66em;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+/* вложенный уровень — светлее и с отступом */
+.legal-doc li ul {
+  margin: 12px 0 0;
+  gap: 10px;
+}
+.legal-doc li li::before {
+  width: 5px;
+  height: 5px;
+  background: var(--brand-4);
+}
+
+/* ---------- Плашка «Внимание» ---------- */
+.legal-note {
+  margin: 0;
+  padding: 14px 18px;
+  border-radius: 14px;
+  border: 1px solid rgba(245, 135, 31, 0.28);
+  background: var(--accent-soft);
+  color: var(--ink);
+  font-size: 0.92em;
+}
+.legal-doc li > .legal-note { margin-top: 4px; }
+.legal-note__label {
+  display: block;
+  margin-bottom: 4px;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--accent-soft-ink);
+}
+
+/* ---------- Подпись под документом ---------- */
+.legal-foot {
+  margin-top: clamp(40px, 6vh, 64px);
+  padding-top: clamp(24px, 3vh, 32px);
+  border-top: 1px solid var(--line);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+.legal-foot__text { margin: 0; font-size: 0.92rem; }
+
+/* ---------- Адаптив ---------- */
+@media (max-width: 900px) {
+  .legal-layout { grid-template-columns: 1fr; gap: clamp(24px, 4vh, 36px); }
+  /* оглавление перестаёт быть липким и превращается в обычный блок сверху */
+  .legal-toc { position: static; }
+  .legal-toc__list {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .legal-toc__link { border: 1px solid var(--line); }
+  .legal-doc { max-width: none; }
+}
+@media (max-width: 560px) {
+  .legal-foot { flex-direction: column; align-items: stretch; }
+  .legal-foot .btn { width: 100%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .legal-toc__link,
+  .legal-doc a { transition: none; }
+}
