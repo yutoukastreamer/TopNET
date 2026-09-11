@@ -61,6 +61,47 @@
     onScroll();
   }
 
+  /* ---------- Состояния липкой панели якорей ----------
+     1) is-stuck — панель прилипла при скролле. В покое она стоит первой
+        в .np-plate и своими скруглёнными углами рисует «крышку» блока;
+        прилипнув, она уезжает от края плашки, и те же углы начинают
+        вырезать светлый фон, обнажая тёмную шапку за ним — выпрямляем.
+     2) is-flush — шапка сайта скрылась у подвала (см. main.js), значит
+        резервировать под неё 64px больше не нужно: панель поднимается
+        вплотную к краю экрана, иначе сверху зияет пустая полоса. */
+  const npAnchors = document.querySelector('.np-anchors');
+  const siteHeader = document.getElementById('site-header');
+
+  if (npAnchors) {
+    const syncStuck = () => {
+      // «прилипла» = верх панели упёрся в заданный для sticky отступ
+      const stickyTop = parseFloat(getComputedStyle(npAnchors).top) || 0;
+      npAnchors.classList.toggle('is-stuck', npAnchors.getBoundingClientRect().top <= stickyTop + 1);
+    };
+
+    let stuckTicking = false;
+    const onStuckScroll = () => {
+      if (stuckTicking) return;
+      stuckTicking = true;
+      requestAnimationFrame(() => { syncStuck(); stuckTicking = false; });
+    };
+
+    window.addEventListener('scroll', onStuckScroll, { passive: true });
+    window.addEventListener('resize', onStuckScroll);
+
+    if (siteHeader) {
+      const syncFlush = () => {
+        npAnchors.classList.toggle('is-flush', siteHeader.classList.contains('is-hidden'));
+        // высота sticky-отступа изменилась — пересчитываем факт прилипания
+        syncStuck();
+      };
+      new MutationObserver(syncFlush).observe(siteHeader, { attributes: true, attributeFilter: ['class'] });
+      syncFlush();
+    }
+
+    syncStuck();
+  }
+
   /* ---------- Одометры ---------- */
   const easeOut = t => 1 - Math.pow(1 - t, 3);
 

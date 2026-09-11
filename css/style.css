@@ -719,8 +719,6 @@ label:has(> input[type="radio"]), label:has(> input[type="radio"]) * {
   /* диаметр круга; видимая часть = половина */
   --arc: clamp(560px, 68vw, 980px);
   --arc-ring: 14px;
-  /* насколько круг выезжает из-за края экрана при наведении */
-  --arc-peek: clamp(24px, 3.5vw, 56px);
   position: relative;
   display: flex;
   align-items: center;
@@ -738,13 +736,16 @@ label:has(> input[type="radio"]), label:has(> input[type="radio"]) * {
   transform: translate(-50%, -50%);
   border-radius: 50%;
   overflow: hidden;
-  /* «рамка» полукруга — светлое кольцо + мягкая тень под ним */
+  /* «рамка» полукруга — светлое кольцо + мягкая тень под ним.
+     Настоящая причина «стыка»: у кольца (первый слой) blur=0 — это
+     математически ЖЁСТКИЙ край, а тень под ним (второй слой) мягкая.
+     Жёсткий край кольца всегда виден отдельной линией на фоне мягкого
+     растекания тени, независимо от смещения/spread — слои разного
+     характера просто не сливаются. Даём кольцу свой небольшой blur,
+     чтобы оба слоя гасли одинаково плавно и стыка не было в принципе. */
   box-shadow:
-    0 0 0 var(--arc-ring) rgba(255, 255, 255, 0.72),
-    0 40px 90px -50px rgba(26, 39, 51, 0.65);
-  transition: transform 0.5s cubic-bezier(0.22, 0.61, 0.36, 1),
-              box-shadow 0.5s ease;
-  will-change: transform;
+    0 0 8px var(--arc-ring) rgba(255, 255, 255, 0.78),
+    0 0 32px rgba(26, 39, 51, 0.24);
 }
 .arc__img {
   width: 100%;
@@ -762,24 +763,6 @@ label:has(> input[type="radio"]), label:has(> input[type="radio"]) * {
   transform: translate(50%, -50%);
 }
 
-/* ---------- Наведение: круг выезжает из-за края, показывая скрытую половину.
-   Прижат к левому краю — едет вправо, к правому — влево. Только для мыши. --- */
-@media (hover: hover) and (pointer: fine) {
-  .arc:hover {
-    transform: translate(calc(-50% + var(--arc-peek)), -50%);
-    box-shadow:
-      0 0 0 var(--arc-ring) rgba(255, 255, 255, 0.86),
-      0 46px 100px -50px rgba(26, 39, 51, 0.75);
-  }
-  .arcsec--right .arc:hover {
-    transform: translate(calc(50% - var(--arc-peek)), -50%);
-  }
-  .arcsec--dark .arc:hover {
-    box-shadow:
-      0 0 0 var(--arc-ring) rgba(255, 255, 255, 0.18),
-      0 46px 100px -50px rgba(0, 0, 0, 0.9);
-  }
-}
 .arcsec--right .arcsec__text {
   margin-left: 0;
   margin-right: auto;
@@ -842,8 +825,8 @@ label:has(> input[type="radio"]), label:has(> input[type="radio"]) * {
 /* ---------- Тёмная версия (блок 4) ---------- */
 .arcsec--dark .arc {
   box-shadow:
-    0 0 0 var(--arc-ring) rgba(255, 255, 255, 0.10),
-    0 40px 90px -50px rgba(0, 0, 0, 0.85);
+    0 0 8px var(--arc-ring) rgba(255, 255, 255, 0.14),
+    0 0 32px rgba(0, 0, 0, 0.32);
 }
 .arcsec--dark .arcsec__title { color: #fff; }
 .arcsec--dark .arcsec__lead  { color: rgba(255, 255, 255, 0.82); }
@@ -971,11 +954,6 @@ label:has(> input[type="radio"]), label:has(> input[type="radio"]) * {
   border: 1px solid var(--line);
   position: relative;
   overflow: hidden;
-  transition: transform 0.35s ease, box-shadow 0.35s ease;
-}
-.stat:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 20px 40px -20px rgba(26, 39, 51, 0.25);
 }
 .stat__value {
   font-size: clamp(2.6rem, 4vw, 3.6rem);
@@ -1343,6 +1321,10 @@ label:has(> input[type="radio"]), label:has(> input[type="radio"]) * {
     min-height: 0;
     padding: 0 0 clamp(48px, 8vh, 72px);
   }
+  /* блок 4 (feature): своя секция с равным верх/низ отступом — на мобильном
+     арка должна начинаться сразу от края блока, как и в блоке 2 (about),
+     а не после лишнего верхнего паддинга секции */
+  .feature { padding-top: 0; }
   .arc {
     position: relative;
     top: auto;
@@ -1353,7 +1335,7 @@ label:has(> input[type="radio"]), label:has(> input[type="radio"]) * {
     transform: translateX(-50%);
     border-radius: 0 0 50% 50% / 0 0 100% 100%;
     margin-bottom: clamp(36px, 6vh, 56px);
-    box-shadow: 0 30px 60px -45px rgba(26, 39, 51, 0.7);
+    box-shadow: 0 14px 38px -18px rgba(26, 39, 51, 0.55);
   }
   /* зеркальный вариант на узком экране раскладывается так же — аркой сверху */
   .arcsec--right .arc {
@@ -1361,12 +1343,8 @@ label:has(> input[type="radio"]), label:has(> input[type="radio"]) * {
     right: auto;
     transform: translateX(-50%);
   }
-  /* арка занимает всю ширину — выезжать некуда, ховер-сдвиг отключаем
-     (иначе он сработал бы на планшете с мышью и сломал позицию) */
-  .arc:hover,
-  .arcsec--right .arc:hover { transform: translateX(-50%); }
   .arcsec--right .arcsec__text { margin-right: 0; }
-  .arcsec--dark .arc { box-shadow: 0 30px 60px -45px rgba(0, 0, 0, 0.8); }
+  .arcsec--dark .arc { box-shadow: 0 14px 38px -18px rgba(0, 0, 0, 0.65); }
   /* арка во всю ширину — виден почти весь кадр, сдвиг не нужен */
   .arc__img,
   .about .arc__img,
@@ -1455,8 +1433,8 @@ label:has(> input[type="radio"]), label:has(> input[type="radio"]) * {
   overflow: hidden;      /* круг обрезается по краю секции и её скруглению */
   padding-bottom: 0;
 }
+/* размер круга — как на главной (переменная --arc из .arcsec выше) */
 .contacts-arc {
-  --arc: clamp(440px, 50vw, 760px);
   min-height: calc(var(--arc) + clamp(24px, 3vh, 48px));
   padding: 0 0 clamp(24px, 4vh, 56px);
 }
@@ -1566,7 +1544,11 @@ a.info-card__value:hover { color: var(--accent); }
 
 @media (max-width: 960px) {
   /* узкий экран: круг разворачивается в арку сверху (правила .arc выше),
-     карточки контактов идут под ней */
+     карточки контактов идут под ней. Верхний паддинг «плашки» (нужен на
+     десктопе для скруглённого перехода из hero) здесь ни к чему — фото
+     должно начинаться сразу от края блока; составной селектор перебивает
+     .page-body--soft независимо от порядка правил в файле. */
+  .page-body--soft.page-body--arc { padding-top: 0; }
   .contacts-arc {
     min-height: 0;
     padding-bottom: clamp(40px, 6vh, 64px);

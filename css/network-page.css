@@ -16,6 +16,9 @@
 }
 
 /* ---------- Липкая якорная навигация ---------- */
+/* Панель — первый ребёнок .np-plate, поэтому в покое именно она рисует
+   скруглённую «крышку» блока: её углы должны повторять скругление
+   плашки, иначе непрозрачный прямоугольник срезает их. */
 .np-anchors {
   position: sticky;
   top: 64px;
@@ -25,6 +28,22 @@
   backdrop-filter: saturate(150%) blur(12px);
   -webkit-backdrop-filter: saturate(150%) blur(12px);
   border-radius: 44px 44px 0 0;
+  transition: top 0.3s ease, border-radius 0.3s ease, background 0.3s ease;
+}
+/* Прилипла при скролле — подложка выпрямляется: на новом месте она уже
+   не совпадает со скруглением плашки, и её собственные углы вырезали бы
+   светлый фон, обнажая тёмную шапку за ними.
+   Класс ставится из network-page.js по факту прилипания. */
+.np-anchors.is-stuck {
+  border-radius: 0;
+}
+/* Шапка сайта скрывается у подвала (см. main.js) — тогда панель якорей
+   поднимается вплотную к краю экрана: прижатая полоса без зазора
+   выглядит как обычная панель. Класс ставится из network-page.js
+   через MutationObserver за .header. */
+.np-anchors.is-flush {
+  top: 0;
+  background: rgba(247, 249, 251, 0.94);
 }
 .np-anchors__row {
   display: flex;
@@ -94,11 +113,6 @@
   border: 1px solid var(--line);
   border-radius: var(--radius);
   padding: 32px 28px 28px;
-  transition: transform 0.35s ease, box-shadow 0.35s ease;
-}
-.odo:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 20px 40px -20px rgba(26, 39, 51, 0.25);
 }
 .odo__value {
   display: block;
@@ -443,8 +457,8 @@
    ============================================================= */
 /* секция отдана под полукруг: карточки справа, снимок слева выходит за край */
 .np-section--arc { overflow: hidden; }
+/* размер круга — как на главной (переменная --arc из .arcsec в style.css) */
 .np-section--arc .arcsec {
-  --arc: clamp(440px, 50vw, 720px);
   min-height: calc(var(--arc) + clamp(48px, 7vh, 90px));
   padding: clamp(40px, 6vh, 72px) 0;
 }
@@ -470,11 +484,6 @@
   border-radius: var(--radius-lg);
   padding: clamp(24px, 2.6vw, 30px);
   box-shadow: 0 20px 40px -34px rgba(26, 39, 51, 0.4);
-  transition: transform 0.3s cubic-bezier(0.2, 0.7, 0.2, 1), border-color 0.3s ease;
-}
-.who:hover {
-  transform: translateY(-4px);
-  border-color: rgba(245, 135, 31, 0.35);
 }
 .who__icon {
   display: inline-flex;
@@ -568,12 +577,11 @@
    ============================================================= */
 @media (max-width: 1100px) {
   .odo-grid { grid-template-columns: repeat(2, 1fr); }
-  /* круг поменьше, чтобы карточки не поджимались */
-  .np-section--arc .arcsec { --arc: clamp(400px, 46vw, 560px); }
   .who-side { max-width: 560px; }
 }
 @media (max-width: 960px) {
   .np-anchors { top: 58px; }
+  .np-anchors.is-flush { top: 0; }
   /* узкий экран: арка сверху (правила .arc — в style.css), карточки под ней */
   .np-section--arc .arcsec { --arc: auto; min-height: 0; padding: 0 0 clamp(32px, 5vh, 56px); }
   .np-section--arc .arc__img { transform: none; object-position: 50% 45%; }
