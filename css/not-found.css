@@ -1,0 +1,128 @@
+/* =============================================================
+   TopNET GSI — страница 404 (404.html).
+   Опирается на общие классы .page-hero / .page-body / .btn из
+   style.css; здесь только то, чего в общей системе нет.
+   ============================================================= */
+
+/* ---------- Hero ---------- */
+/* сети нужно меньше места, чем на обычной внутренней странице:
+   контента тут немного, пустой экран под ним выглядел бы провалом */
+.nf-hero { min-height: 58vh; }
+
+/* Крупный код ошибки. Это не заголовок, а визуальный якорь, поэтому
+   вынесен в aria-hidden: скринридеру достаточно <h1> и текста под ним. */
+.nf-code {
+  margin: 0 0 6px;
+  font-size: clamp(4.5rem, 13vw, 9rem);
+  line-height: 0.82;
+  font-weight: 800;
+  letter-spacing: -0.06em;
+  font-variant-numeric: tabular-nums;
+  /* контурные цифры: заливка съедала бы половину hero */
+  color: transparent;
+  -webkit-text-stroke: 2px rgba(255, 255, 255, 0.28);
+  user-select: none;
+}
+
+.nf-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: clamp(28px, 4vh, 40px);
+}
+
+/* ---------- Разделы сайта ---------- */
+.nf-subtitle {
+  margin: 0 0 clamp(24px, 3.5vh, 36px);
+  font-size: clamp(1.3rem, 2.4vw, 1.75rem);
+  line-height: 1.15;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+}
+
+.nf-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(14px, 1.6vw, 20px);
+}
+
+.nf-card {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: clamp(18px, 2vw, 22px);
+  background: var(--bg-alt);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  color: inherit;
+  text-decoration: none;
+  box-shadow: var(--shadow-md);
+  transition: transform 0.28s cubic-bezier(0.2, 0.7, 0.2, 1),
+              border-color 0.28s ease,
+              box-shadow 0.28s ease;
+}
+.nf-card:hover,
+.nf-card:focus-visible {
+  transform: translateY(-3px);
+  border-color: rgba(14, 90, 167, 0.24);
+  box-shadow: var(--shadow-lg);
+}
+.nf-card:focus-visible {
+  outline: 2px solid var(--brand);
+  outline-offset: 3px;
+}
+
+.nf-card__text {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  min-width: 0;
+  flex: 1 1 auto;
+}
+.nf-card__title {
+  font-size: 1.02rem;
+  font-weight: 700;
+  letter-spacing: -0.012em;
+  color: var(--ink);
+}
+.nf-card__desc {
+  font-size: 0.88rem;
+  line-height: 1.45;
+  color: var(--ink-2);
+}
+
+.nf-card__arrow {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 12px;
+  background: var(--accent-soft);
+  color: var(--accent);
+  transition: background 0.28s ease, color 0.28s ease;
+}
+.nf-card__arrow svg { width: 20px; height: 20px; display: block; }
+.nf-card:hover .nf-card__arrow,
+.nf-card:focus-visible .nf-card__arrow {
+  background: var(--accent);
+  color: #fff;
+}
+
+@media (max-width: 960px) {
+  .nf-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 560px) {
+  .nf-grid { grid-template-columns: 1fr; }
+  .nf-actions .btn { width: 100%; }
+  .nf-code { -webkit-text-stroke-width: 1.5px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nf-card,
+  .nf-card__arrow { transition: none; }
+  .nf-card:hover,
+  .nf-card:focus-visible { transform: none; }
+}
