@@ -120,7 +120,18 @@
 
           <div class="tl-card">
             <div class="tl-card__media" aria-hidden="true">
-              <img src="assets/images/24.06.2026.png" alt="" class="tl-card__img" loading="lazy" decoding="async" />
+              <img
+                class="news-media__img"
+                src="assets/images/news/kaliningrad/cover-1920.webp"
+                srcset="assets/images/news/kaliningrad/cover-640.webp 640w,
+                        assets/images/news/kaliningrad/cover-1280.webp 1280w,
+                        assets/images/news/kaliningrad/cover-1920.webp 1920w"
+                sizes="(min-width: 861px) 232px, (min-width: 561px) calc(100vw - 160px), calc(100vw - 100px)"
+                data-sizes-closed="(min-width: 861px) 232px, (min-width: 561px) calc(100vw - 160px), calc(100vw - 100px)"
+                data-sizes-open="(min-width: 861px) 966px, (min-width: 561px) calc(100vw - 160px), calc(100vw - 100px)"
+                width="1920" height="1248"
+                alt=""
+                loading="lazy" decoding="async">
             </div>
 
             <div class="tl-card__content">
@@ -158,14 +169,19 @@
           </div>
 
           <div class="tl-card">
-            <div class="tl-card__media tl-card__media--grid" aria-hidden="true">
-              <span class="tl-card__media-icon">
-                <svg viewBox="0 0 24 24" fill="none">
-                  <path d="M4 6h10l6 6-6 6H4V6Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
-                  <circle cx="8.5" cy="12" r="1.4" fill="currentColor"/>
-                </svg>
-                <span class="tl-card__media-label">Тарифы</span>
-              </span>
+            <div class="tl-card__media" aria-hidden="true">
+              <img
+                class="news-media__img"
+                src="assets/images/news/tariffs/cover-1920.webp"
+                srcset="assets/images/news/tariffs/cover-640.webp 640w,
+                        assets/images/news/tariffs/cover-1280.webp 1280w,
+                        assets/images/news/tariffs/cover-1920.webp 1920w"
+                sizes="(min-width: 861px) 232px, (min-width: 561px) calc(100vw - 160px), calc(100vw - 100px)"
+                data-sizes-closed="(min-width: 861px) 232px, (min-width: 561px) calc(100vw - 160px), calc(100vw - 100px)"
+                data-sizes-open="(min-width: 861px) 966px, (min-width: 561px) calc(100vw - 160px), calc(100vw - 100px)"
+                width="1920" height="1061"
+                alt=""
+                loading="lazy" decoding="async">
             </div>
 
             <div class="tl-card__content">
@@ -222,7 +238,17 @@
 
           <div class="tl-card">
             <div class="tl-card__media" aria-hidden="true">
-              <img src="assets/images/News1.png" alt="" class="tl-card__img" loading="lazy" decoding="async" />
+              <img
+                class="news-media__img"
+                src="assets/images/news/march-2025/cover-805.webp"
+                srcset="assets/images/news/march-2025/cover-640.webp 640w,
+                        assets/images/news/march-2025/cover-805.webp 805w"
+                sizes="(min-width: 861px) 232px, (min-width: 561px) calc(100vw - 160px), calc(100vw - 100px)"
+                data-sizes-closed="(min-width: 861px) 232px, (min-width: 561px) calc(100vw - 160px), calc(100vw - 100px)"
+                data-sizes-open="(min-width: 861px) 966px, (min-width: 561px) calc(100vw - 160px), calc(100vw - 100px)"
+                width="805" height="1073"
+                alt=""
+                loading="lazy" decoding="async">
             </div>
 
             <div class="tl-card__content">
@@ -267,7 +293,18 @@
 
           <div class="tl-card">
             <div class="tl-card__media" aria-hidden="true">
-              <img src="assets/images/16.07.2024.png" alt="" class="tl-card__img" loading="lazy" decoding="async" />
+              <img
+                class="news-media__img"
+                src="assets/images/news/nn-sdgs/cover-1920.webp"
+                srcset="assets/images/news/nn-sdgs/cover-640.webp 640w,
+                        assets/images/news/nn-sdgs/cover-1280.webp 1280w,
+                        assets/images/news/nn-sdgs/cover-1920.webp 1920w"
+                sizes="(min-width: 861px) 232px, (min-width: 561px) calc(100vw - 160px), calc(100vw - 100px)"
+                data-sizes-closed="(min-width: 861px) 232px, (min-width: 561px) calc(100vw - 160px), calc(100vw - 100px)"
+                data-sizes-open="(min-width: 861px) 966px, (min-width: 561px) calc(100vw - 160px), calc(100vw - 100px)"
+                width="1920" height="1248"
+                alt=""
+                loading="lazy" decoding="async">
             </div>
 
             <div class="tl-card__content">
@@ -300,6 +337,36 @@
             </div>
           </div>
         </article>
+
+      </div>
+
+      <!-- =====================================================================
+           СПОЙЛЕР — заготовка для админки.
+
+           Отдельный объект: на странице НЕ отображается (атрибут hidden у
+           обёртки), но разметка и стили .spoiler уже рабочие. Чтобы включить —
+           убрать hidden у обёртки либо перенести сам <details> внутрь текста
+           новости (.tl-card__full).
+
+           Работает без JS: раскрытие/сворачивание делает нативный <details>.
+           Поля, которые заполняет админка: заголовок спойлера и его содержимое.
+           Несколько спойлеров в одной новости допустимы, ничего уникального
+           (id, name) им не требуется.
+           ===================================================================== -->
+      <div class="spoiler-template" data-spoiler-template hidden>
+
+        <details class="spoiler">
+          <summary class="spoiler__head">
+            <span class="spoiler__title">Заголовок спойлера</span>
+            <span class="spoiler__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+          </summary>
+          <div class="spoiler__body">
+            <p>Скрытый текст спойлера. Сюда админка кладёт произвольный контент:
+               абзацы, списки, ссылки, таблицы.</p>
+          </div>
+        </details>
 
       </div>
     </div>

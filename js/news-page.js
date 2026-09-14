@@ -55,6 +55,19 @@
     });
   }
 
+  /* ---------- Адаптивное фото карточки ----------
+     У картинки лежат две заготовки sizes: для свёрнутого и для раскрытого
+     состояния. Админка отдаёт обе, JS только переключает. Выбираем по самому
+     data-атрибуту, чтобы работало в обоих вариантах разметки: и когда это
+     одиночный <img> (только WebP), и когда <picture> с <source> и JPEG-дублем. */
+  function setMediaSizes(cardEl, isOpen) {
+    const key = isOpen ? 'sizesOpen' : 'sizesClosed';
+    cardEl.querySelectorAll('[data-sizes-closed], [data-sizes-open]').forEach((el) => {
+      const value = el.dataset[key];
+      if (value) el.sizes = value;
+    });
+  }
+
   /* ---------- «Читать подробнее» ---------- */
   timeline.addEventListener('click', (ev) => {
     const btn = ev.target.closest('.tl-more');
@@ -72,7 +85,13 @@
 
     // раскрытая карточка перестраивается: фото наверх во всю ширину, текст под ним
     const cardEl = btn.closest('.tl-card');
-    if (cardEl) cardEl.classList.toggle('is-open', !expanded);
+    if (cardEl) {
+      cardEl.classList.toggle('is-open', !expanded);
+      // Слот под фото меняет ширину (на десктопе 232px → 966px), поэтому
+      // пересчитываем sizes: свёрнутой карточке хватает мелкой копии,
+      // раскрытой браузер догрузит крупную из того же srcset.
+      setMediaSizes(cardEl, !expanded);
+    }
 
     // краткий текст показываем только в свёрнутом виде
     const content = panel.closest('.tl-card__content');

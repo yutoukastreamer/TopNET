@@ -207,114 +207,99 @@
     </div>
   </section>
 
-  <!-- ================= BLOCK 5 — NEWS (carousel-style tiles) ================= -->
+  <!-- ================= BLOCK 5 — NEWS (three latest posts) ================= -->
   <section class="news" id="news">
     <div class="container">
       <div class="news__head">
         <h2 class="news__title">Последние новости</h2>
       </div>
-    </div>
 
-    <div class="news__carousel">
-      <button type="button" class="news__nav news__nav--prev" aria-label="Предыдущий слайд" data-news-prev>
-        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-          <path d="M15 6l-6 6 6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-      </button>
-
-      <div class="news__viewport" data-news-viewport>
-        <div class="news__track" data-news-track>
-          <article class="news-card">
-            <a href="news.html#post-kaliningrad" class="news-card__link" aria-label="Развитие сети в Калининградской области">
-              <div class="news-card__media">
-                <img src="assets/images/24.06.2026-home.png" alt="Развитие сети в Калининградской области" class="news-card__img" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;">
+      <div class="news__grid">
+        <article class="news-card">
+          <a href="news.html#post-kaliningrad" class="news-card__link" aria-label="Развитие сети в Калининградской области">
+            <div class="news-card__media">
+              <img
+                class="news-media__img"
+                src="assets/images/news/kaliningrad/card-840.webp"
+                srcset="assets/images/news/kaliningrad/card-480.webp 480w,
+                        assets/images/news/kaliningrad/card-840.webp 840w"
+                sizes="(min-width: 1200px) 344px, (min-width: 768px) 29vw, (min-width: 480px) 420px, calc(100vw - 40px)"
+                width="840" height="1120"
+                alt="Развитие сети в Калининградской области"
+                loading="lazy" decoding="async">
+            </div>
+            <span class="news-card__arrow" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none">
+                <path d="M8 16 16 8M16 8H9.4M16 8v6.6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </span>
+            <div class="news-card__content">
+              <h3 class="news-card__title">Развитие сети<br>в Калининградской области</h3>
+              <div class="news-card__excerpt-wrap">
+                <p class="news-card__excerpt">
+                  Завершено создание сети дифференциальных геодезических станций в Калининградской области
+                </p>
               </div>
-              <span class="news-card__arrow" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="none">
-                  <path d="M8 16 16 8M16 8H9.4M16 8v6.6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-              </span>
-              <div class="news-card__content">
-                <h3 class="news-card__title">Развитие сети<br>в Калининградской области</h3>
-                <div class="news-card__excerpt-wrap">
-                  <p class="news-card__excerpt">
-                    Завершено создание сети дифференциальных геодезических станций в Калининградской области
-                  </p>
-                </div>
+            </div>
+          </a>
+        </article>
+        <article class="news-card">
+          <a href="news.html#post-tariffs" class="news-card__link" aria-label="Изменения тарифов">
+            <div class="news-card__media">
+              <img
+                class="news-media__img"
+                src="assets/images/news/tariffs/card-816.webp"
+                srcset="assets/images/news/tariffs/card-480.webp 480w,
+                        assets/images/news/tariffs/card-816.webp 816w"
+                sizes="(min-width: 1200px) 344px, (min-width: 768px) 29vw, (min-width: 480px) 420px, calc(100vw - 40px)"
+                width="816" height="1088"
+                alt="Изменения тарифов"
+                loading="lazy" decoding="async">
+            </div>
+            <span class="news-card__arrow" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none">
+                <path d="M8 16 16 8M16 8H9.4M16 8v6.6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </span>
+            <div class="news-card__content">
+              <h3 class="news-card__title">Изменения<br>тарифов</h3>
+              <div class="news-card__excerpt-wrap">
+                <p class="news-card__excerpt">
+                  Снизили стоимость тарифов RTK и добавили новый тариф «RTK без МСК»
+                </p>
               </div>
-            </a>
-          </article>
-
-          <article class="news-card">
-            <a href="news.html#post-tariffs" class="news-card__link" aria-label="Изменения тарифов">
-              <div class="news-card__media">
-                <span class="news-card__placeholder">Фото проекта</span>
+            </div>
+          </a>
+        </article>
+        <article class="news-card">
+          <a href="news.html#post-march-2025" class="news-card__link" aria-label="Развитие сети Topnet Live Россия. Март 2025.">
+            <div class="news-card__media">
+              <img
+                class="news-media__img"
+                src="assets/images/news/march-2025/card-804.webp"
+                srcset="assets/images/news/march-2025/card-480.webp 480w,
+                        assets/images/news/march-2025/card-804.webp 804w"
+                sizes="(min-width: 1200px) 344px, (min-width: 768px) 29vw, (min-width: 480px) 420px, calc(100vw - 40px)"
+                width="804" height="1072"
+                alt="Развитие сети Topnet Live Россия. Март 2025."
+                loading="lazy" decoding="async">
+            </div>
+            <span class="news-card__arrow" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none">
+                <path d="M8 16 16 8M16 8H9.4M16 8v6.6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </span>
+            <div class="news-card__content">
+              <h3 class="news-card__title">Развитие сети<br>в марте 2025</h3>
+              <div class="news-card__excerpt-wrap">
+                <p class="news-card__excerpt">
+                  Карта покрытия пополнилась станциями в Луховицах, Кобани, Туймазах и Студенцах
+                </p>
               </div>
-              <span class="news-card__arrow" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="none">
-                  <path d="M8 16 16 8M16 8H9.4M16 8v6.6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-              </span>
-              <div class="news-card__content">
-                <h3 class="news-card__title">Изменения<br>тарифов</h3>
-                <div class="news-card__excerpt-wrap">
-                  <p class="news-card__excerpt">
-                    Снизили стоимость тарифов RTK и добавили новый тариф «RTK без МСК»
-                  </p>
-                </div>
-              </div>
-            </a>
-          </article>
-
-          <article class="news-card">
-            <a href="news.html#post-march-2025" class="news-card__link" aria-label="Развитие сети Topnet Live Россия. Март 2025.">
-              <div class="news-card__media">
-                <img src="assets/images/News1.png" alt="Развитие сети Topnet Live Россия. Март 2025." class="news-card__img" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;">
-              </div>
-              <span class="news-card__arrow" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="none">
-                  <path d="M8 16 16 8M16 8H9.4M16 8v6.6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-              </span>
-              <div class="news-card__content">
-                <h3 class="news-card__title">Развитие сети<br>в марте 2025</h3>
-                <div class="news-card__excerpt-wrap">
-                  <p class="news-card__excerpt">
-                    Карта покрытия пополнилась станциями в Луховицах, Кобани, Туймазах и Студенцах
-                  </p>
-                </div>
-              </div>
-            </a>
-          </article>
-
-          <article class="news-card">
-            <a href="news.html#post-nn-sdgs" class="news-card__link" aria-label="Сеть на территории Нижегородской области получила статус СДГС">
-              <div class="news-card__media">
-                <img src="assets/images/16.07.2024-home.png" alt="Сеть на территории Нижегородской области получила статус СДГС" class="news-card__img" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;">
-              </div>
-              <span class="news-card__arrow" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="none">
-                  <path d="M8 16 16 8M16 8H9.4M16 8v6.6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-              </span>
-              <div class="news-card__content">
-                <h3 class="news-card__title">Статус СДГС<br>в Нижегородской области</h3>
-                <div class="news-card__excerpt-wrap">
-                  <p class="news-card__excerpt">
-                    Станции сети получили статус пунктов СДГС и приняты в Федеральный фонд пространственных данных
-                  </p>
-                </div>
-              </div>
-            </a>
-          </article>
-        </div>
+            </div>
+          </a>
+        </article>
       </div>
-
-      <button type="button" class="news__nav news__nav--next" aria-label="Следующий слайд" data-news-next>
-        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-          <path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-      </button>
     </div>
 
     <div class="container news__footer">

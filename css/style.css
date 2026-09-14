@@ -989,7 +989,7 @@ label:has(> input[type="radio"]), label:has(> input[type="radio"]) * {
 .stat.is-in .stat__bar span { width: 100%; }
 
 /* =============================================================
-   BLOCK 4 — NEWS (carousel-style project tiles)
+   BLOCK 4 — NEWS (three latest project tiles)
    ============================================================= */
 .news {
   padding: clamp(80px, 12vh, 140px) 0;
@@ -1008,90 +1008,21 @@ label:has(> input[type="radio"]), label:has(> input[type="radio"]) * {
   color: var(--ink);
 }
 
-/* Carousel shell — outer arrows sit next to the viewport */
-.news__carousel {
-  position: relative;
-  display: flex;
-  align-items: center;
-  gap: clamp(8px, 1.2vw, 16px);
-  padding: 0 clamp(16px, 3vw, 40px);
-  /* capped like the rest of the site's grid so cards stop growing past
-     ~1200px viewports instead of stretching to fill ultra-wide screens */
-  max-width: var(--container);
-  margin: 0 auto;
-}
-/* padding + equal negative margin widen the clipping box so the arrow chip
-   can overhang the card corner without being cut off, while the content box
-   (and therefore the card widths) stays exactly where the layout expects it */
-.news__viewport {
-  position: relative;
-  flex: 1 1 auto;
-  overflow: hidden;
-  padding: 14px 14px 0;
-  margin: -14px -14px 0;
-}
-/* Подсказка автопрокрутки: у активного края появляется мягкая заливка
-   и стрелка-указатель направления движения ленты. */
-.news__viewport::before,
-.news__viewport::after {
-  content: "";
-  position: absolute;
-  top: 14px;
-  bottom: 0;
-  width: clamp(60px, 12%, 130px);
-  pointer-events: none;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-  z-index: 2;
-}
-.news__viewport::before {
-  left: 0;
-  background: linear-gradient(90deg, rgba(247, 249, 251, 0.92) 0%, rgba(247, 249, 251, 0) 100%);
-}
-.news__viewport::after {
-  right: 0;
-  background: linear-gradient(270deg, rgba(247, 249, 251, 0.92) 0%, rgba(247, 249, 251, 0) 100%);
-}
-.news__carousel.is-edge-left  .news__viewport::before,
-.news__carousel.is-edge-right .news__viewport::after { opacity: 1; }
-.news__carousel.is-edge-left  .news__viewport,
-.news__carousel.is-edge-right .news__viewport { cursor: ew-resize; }
-.news__track {
-  display: flex;
+/* Three latest posts in a row; stacks down on narrow screens */
+.news__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
   gap: clamp(16px, 2vw, 28px);
-  transition: transform 0.55s cubic-bezier(0.2, 0.7, 0.2, 1);
-  will-change: transform;
 }
-
-/* Nav arrows — square, white, subtle */
-.news__nav {
-  flex: 0 0 auto;
-  width: 44px;
-  height: 64px;
-  border-radius: 8px;
-  border: 1px solid var(--line);
-  background: #ffffff;
-  color: var(--ink);
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 6px 18px -12px rgba(26, 39, 51, 0.35);
-  transition: background 0.25s ease, color 0.25s ease, transform 0.25s ease, border-color 0.25s ease;
-}
-.news__nav svg {
-  width: 22px;
-  height: 22px;
-  display: block;
-}
-.news__nav:hover:not(:disabled) {
-  background: var(--brand);
-  color: #fff;
-  border-color: var(--brand);
-  transform: translateY(-1px);
-}
-.news__nav:disabled {
-  opacity: 0.4;
-  cursor: not-allowed;
+/* Новостей ровно три, поэтому промежуточной раскладки в две колонки нет:
+   она оставила бы третью карточку одну во втором ряду. Узкий экран —
+   один столбец, ограниченный по ширине, чтобы карточка не вытягивалась. */
+@media (max-width: 767px) {
+  .news__grid {
+    grid-template-columns: 1fr;
+    max-width: 420px;
+    margin-inline: auto;
+  }
 }
 
 .news__footer {
@@ -1099,9 +1030,36 @@ label:has(> input[type="radio"]), label:has(> input[type="radio"]) * {
   text-align: center;
 }
 
-/* Project card = one slide (3 visible on desktop) */
+/* -------------------------------------------------------------
+   ЕДИНЫЙ МЕДИА-БЛОК НОВОСТИ — общий для карточки на главной
+   (.news-card__media) и для карточки на странице новостей
+   (.tl-card__media). Рамку задаёт родитель, картинка её заполняет.
+
+   Два варианта разметки, стили одинаковы для обоих:
+   • только WebP — одиночный <img class="news-media__img"> (так сейчас);
+   • WebP + JPEG-дубль — <picture class="news-media"> с <source>
+     и запасным <img> внутри.
+
+   Точку фокуса кропа админка задаёт инлайном на внешнем элементе:
+   style="--news-media-pos: 50% 30%"
+   ------------------------------------------------------------- */
+.news-media {
+  display: block;
+  position: absolute;
+  inset: 0;
+}
+.news-media__img {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: var(--news-media-pos, 50% 50%);
+}
+
+/* Project card */
 .news-card {
-  flex: 0 0 calc((100% - 2 * clamp(16px, 2vw, 28px)) / 3);
   position: relative;
   margin: 0;
 }
@@ -1351,7 +1309,6 @@ label:has(> input[type="radio"]), label:has(> input[type="radio"]) * {
   .feature .arc__img { object-position: 50% 42%; transform: none; }
   .arcsec__text { max-width: none; margin-left: 0; margin-right: 0; }
   .stats__grid { grid-template-columns: repeat(3, 1fr); }
-  .news-card { flex-basis: calc((100% - clamp(16px, 2vw, 28px)) / 2); }
   .footer__top { grid-template-columns: 1fr; }
   .footer__cols { grid-template-columns: 1fr 1fr; }
 }
@@ -1362,9 +1319,6 @@ label:has(> input[type="radio"]), label:has(> input[type="radio"]) * {
   .stats__grid { grid-template-columns: 1fr; }
   .footer__cols { grid-template-columns: 1fr; }
   .footer__bottom { flex-direction: column; align-items: flex-start; }
-  .news-card { flex-basis: 100%; }
-  .news__carousel { padding: 0 8px; }
-  .news__nav { width: 40px; height: 56px; }
 }
 
 /* =============================================================
