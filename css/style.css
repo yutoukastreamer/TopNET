@@ -411,7 +411,7 @@ label:has(> input[type="radio"]), label:has(> input[type="radio"]) * {
     /* darkening gradient so hero title stays readable on any photo */
     linear-gradient(180deg, rgba(26, 39, 51, 0.55) 0%, rgba(26, 39, 51, 0.35) 40%, rgba(26, 39, 51, 0.75) 100%),
     /* actual hero photo */
-    url('../assets/images/hero.jpg') center/cover no-repeat,
+    url('../assets/images/hero.webp') center/cover no-repeat,
     /* fallback if image missing */
     linear-gradient(160deg, var(--dark-2) 0%, var(--dark) 40%, var(--dark-3) 100%);
   /* fixed overscale: JS only translates, so the layer is rasterized once
@@ -859,7 +859,7 @@ label:has(> input[type="radio"]), label:has(> input[type="radio"]) * {
   inset: 0;
   background:
     linear-gradient(180deg, rgba(26, 39, 51, 0.93) 0%, rgba(17, 25, 33, 0.95) 100%),
-    url('../assets/images/img-black.png') center/cover no-repeat;
+    url('../assets/images/img-black.webp') center/cover no-repeat;
   pointer-events: none;
 }
 .feature .container { position: relative; z-index: 1; }
