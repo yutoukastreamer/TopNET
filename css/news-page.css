@@ -206,23 +206,30 @@
   box-shadow: 0 0 0 4px var(--bg), 0 0 0 10px rgba(245, 135, 31, 0.28);
 }
 
-/* ---------- Медиа карточки ---------- */
+/* ---------- Медиа карточки ----------
+   Слот №2 — миниатюра в ленте, слот №3 — разворот раскрытой новости.
+   У обоих пропорции заданы явно: высота слота известна до загрузки
+   файла, поэтому лента не прыгает, а единственная картинка новости
+   кроится под рамку через object-fit: cover (см. .news-media__img).
+   align-self: start нужен, чтобы высоту задавал aspect-ratio,
+   а не растяжение по высоте колонки с текстом. */
 .tl-card__media {
   position: relative;
-  min-height: 168px;
+  align-self: start;
+  aspect-ratio: 4 / 3;
   border-radius: 16px;
   overflow: hidden;
   background: linear-gradient(135deg, var(--accent-soft) 0%, var(--accent) 55%, var(--accent-2) 100%);
-  transition: min-height 0.45s cubic-bezier(0.2, 0.7, 0.2, 1);
+  transition: aspect-ratio 0.45s cubic-bezier(0.2, 0.7, 0.2, 1);
 }
-/* в развёрнутом виде кадру нужно больше воздуха по высоте */
+/* в развёрнутом виде кадр становится широким баннером во всю ширину карточки */
 .tl-card.is-open .tl-card__media {
-  min-height: clamp(240px, 30vw, 400px);
+  aspect-ratio: 5 / 2;
 }
 /* у карточек без фотографии это просто градиентная заглушка —
    ей столько высоты не нужно */
 .tl-card.is-open .tl-card__media--grid {
-  min-height: clamp(180px, 18vw, 240px);
+  aspect-ratio: 4 / 1;
 }
 .tl-card__media--grid::before {
   content: "";
@@ -427,7 +434,10 @@
 /* ---------- Адаптив ---------- */
 @media (max-width: 860px) {
   .tl-card { grid-template-columns: 1fr; }
-  .tl-card__media { min-height: 150px; }
+  /* одна колонка: кадр на всю ширину, поэтому пропорции более вытянутые */
+  .tl-card__media { aspect-ratio: 3 / 1; }
+  .tl-card.is-open .tl-card__media { aspect-ratio: 5 / 2; }
+  .tl-card.is-open .tl-card__media--grid { aspect-ratio: 4 / 1; }
   .tl-card__content { padding-right: 2px; }
 }
 
@@ -442,7 +452,9 @@
     border-radius: 18px;
     padding: 14px;
   }
-  .tl-card__media { min-height: 132px; border-radius: 14px; }
+  .tl-card__media { aspect-ratio: 5 / 2; border-radius: 14px; }
+  .tl-card.is-open .tl-card__media { aspect-ratio: 4 / 3; }
+  .tl-card.is-open .tl-card__media--grid { aspect-ratio: 5 / 2; }
 }
 
 @media (prefers-reduced-motion: reduce) {

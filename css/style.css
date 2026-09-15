@@ -1035,10 +1035,11 @@ label:has(> input[type="radio"]), label:has(> input[type="radio"]) * {
    (.news-card__media) и для карточки на странице новостей
    (.tl-card__media). Рамку задаёт родитель, картинка её заполняет.
 
-   Два варианта разметки, стили одинаковы для обоих:
-   • только WebP — одиночный <img class="news-media__img"> (так сейчас);
-   • WebP + JPEG-дубль — <picture class="news-media"> с <source>
-     и запасным <img> внутри.
+   У новости ровно ОДИН файл изображения — самый крупный, какой есть.
+   Никаких srcset/<source> и копий под разные разрешения: пропорции
+   каждого слота заданы явно через aspect-ratio, а картинка кроится
+   под них сама (object-fit: cover). Высота слота известна ещё до
+   загрузки файла, поэтому макет при загрузке не прыгает.
 
    Точку фокуса кропа админка задаёт инлайном на внешнем элементе:
    style="--news-media-pos: 50% 30%"
@@ -1055,7 +1056,7 @@ label:has(> input[type="radio"]), label:has(> input[type="radio"]) * {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: var(--news-media-pos, 50% 50%);
+  object-position: var(--news-media-pos, center);
 }
 
 /* Project card */
@@ -1069,6 +1070,8 @@ label:has(> input[type="radio"]), label:has(> input[type="radio"]) * {
   color: inherit;
   height: 100%;
 }
+/* Слот №1 — вертикальная карточка карусели на главной.
+   Пропорции жёсткие, файл кроится под них сам. */
 .news-card__media {
   position: relative;
   aspect-ratio: 3 / 4;

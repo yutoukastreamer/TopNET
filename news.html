@@ -127,12 +127,6 @@
               <img
                 class="news-media__img"
                 src="assets/images/news/kaliningrad/cover-1920.webp"
-                srcset="assets/images/news/kaliningrad/cover-640.webp 640w,
-                        assets/images/news/kaliningrad/cover-1280.webp 1280w,
-                        assets/images/news/kaliningrad/cover-1920.webp 1920w"
-                sizes="(min-width: 861px) 232px, (min-width: 561px) calc(100vw - 160px), calc(100vw - 100px)"
-                data-sizes-closed="(min-width: 861px) 232px, (min-width: 561px) calc(100vw - 160px), calc(100vw - 100px)"
-                data-sizes-open="(min-width: 861px) 966px, (min-width: 561px) calc(100vw - 160px), calc(100vw - 100px)"
                 width="1920" height="1248"
                 alt=""
                 loading="lazy" decoding="async">
@@ -177,12 +171,6 @@
               <img
                 class="news-media__img"
                 src="assets/images/news/tariffs/cover-1920.webp"
-                srcset="assets/images/news/tariffs/cover-640.webp 640w,
-                        assets/images/news/tariffs/cover-1280.webp 1280w,
-                        assets/images/news/tariffs/cover-1920.webp 1920w"
-                sizes="(min-width: 861px) 232px, (min-width: 561px) calc(100vw - 160px), calc(100vw - 100px)"
-                data-sizes-closed="(min-width: 861px) 232px, (min-width: 561px) calc(100vw - 160px), calc(100vw - 100px)"
-                data-sizes-open="(min-width: 861px) 966px, (min-width: 561px) calc(100vw - 160px), calc(100vw - 100px)"
                 width="1920" height="1061"
                 alt=""
                 loading="lazy" decoding="async">
@@ -245,11 +233,6 @@
               <img
                 class="news-media__img"
                 src="assets/images/news/march-2025/cover-805.webp"
-                srcset="assets/images/news/march-2025/cover-640.webp 640w,
-                        assets/images/news/march-2025/cover-805.webp 805w"
-                sizes="(min-width: 861px) 232px, (min-width: 561px) calc(100vw - 160px), calc(100vw - 100px)"
-                data-sizes-closed="(min-width: 861px) 232px, (min-width: 561px) calc(100vw - 160px), calc(100vw - 100px)"
-                data-sizes-open="(min-width: 861px) 966px, (min-width: 561px) calc(100vw - 160px), calc(100vw - 100px)"
                 width="805" height="1073"
                 alt=""
                 loading="lazy" decoding="async">
@@ -300,12 +283,6 @@
               <img
                 class="news-media__img"
                 src="assets/images/news/nn-sdgs/cover-1920.webp"
-                srcset="assets/images/news/nn-sdgs/cover-640.webp 640w,
-                        assets/images/news/nn-sdgs/cover-1280.webp 1280w,
-                        assets/images/news/nn-sdgs/cover-1920.webp 1920w"
-                sizes="(min-width: 861px) 232px, (min-width: 561px) calc(100vw - 160px), calc(100vw - 100px)"
-                data-sizes-closed="(min-width: 861px) 232px, (min-width: 561px) calc(100vw - 160px), calc(100vw - 100px)"
-                data-sizes-open="(min-width: 861px) 966px, (min-width: 561px) calc(100vw - 160px), calc(100vw - 100px)"
                 width="1920" height="1248"
                 alt=""
                 loading="lazy" decoding="async">
@@ -343,20 +320,7 @@
         </article>
 
       </div>
-
-      <!-- =====================================================================
-           СПОЙЛЕР — заготовка для админки.
-
-           Отдельный объект: на странице НЕ отображается (атрибут hidden у
-           обёртки), но разметка и стили .spoiler уже рабочие. Чтобы включить —
-           убрать hidden у обёртки либо перенести сам <details> внутрь текста
-           новости (.tl-card__full).
-
-           Работает без JS: раскрытие/сворачивание делает нативный <details>.
-           Поля, которые заполняет админка: заголовок спойлера и его содержимое.
-           Несколько спойлеров в одной новости допустимы, ничего уникального
-           (id, name) им не требуется.
-           ===================================================================== -->
+      
       <div class="spoiler-template" data-spoiler-template hidden>
 
         <details class="spoiler">
@@ -367,8 +331,7 @@
             </span>
           </summary>
           <div class="spoiler__body">
-            <p>Скрытый текст спойлера. Сюда админка кладёт произвольный контент:
-               абзацы, списки, ссылки, таблицы.</p>
+            <p>Скрытый текст спойлера.</p>
           </div>
         </details>
 
