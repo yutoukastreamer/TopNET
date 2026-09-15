@@ -200,18 +200,6 @@ summary, summary *,
   color: #ffffff;
   box-shadow: 0 14px 30px -12px var(--accent-glow);
 }
-/* outline на тёмном фоне ЛК */
-.btn--outline-on-dark,
-.btn--ghost {
-  color: #fff;
-  border-color: rgba(255, 255, 255, 0.24);
-  background: rgba(255, 255, 255, 0.04);
-}
-.btn--outline-on-dark:hover,
-.btn--ghost:hover {
-  background: rgba(255, 255, 255, 0.12);
-  border-color: rgba(255, 255, 255, 0.4);
-}
 .btn--block,
 .btn--wide { width: 100%; margin-top: 6px; }
 

@@ -66,29 +66,6 @@ label:has(> input[type="radio"]), label:has(> input[type="radio"]) * {
   width: 100%;
 }
 
-/* ---------- Section eyebrow ---------- */
-.section-eyebrow {
-  display: inline-block;
-  font-size: 12px;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--accent);
-  font-weight: 600;
-  margin-bottom: 18px;
-  position: relative;
-  padding-left: 24px;
-}
-.section-eyebrow::before {
-  content: "";
-  position: absolute;
-  left: 0; top: 50%;
-  width: 16px; height: 1px;
-  background: var(--accent);
-  transform: translateY(-50%);
-}
-.section-eyebrow--light { color: var(--accent); }
-.section-eyebrow--light::before { background: var(--accent); }
-
 /* =============================================================
    HEADER
    ============================================================= */
@@ -131,14 +108,6 @@ label:has(> input[type="radio"]), label:has(> input[type="radio"]) * {
   letter-spacing: 0.02em;
   color: currentColor;
 }
-.logo__mark {
-  width: 32px; height: 32px;
-  color: var(--brand);
-  filter: drop-shadow(0 0 12px var(--brand-glow));
-}
-.logo__text { line-height: 1; }
-.logo__accent { color: var(--accent); margin-left: 2px; }
-
 .logo__img {
   display: block;
   height: 40px;
@@ -468,15 +437,6 @@ label:has(> input[type="radio"]), label:has(> input[type="radio"]) * {
 .hero__title,
 .hero__subtitle,
 .hero__actions { max-width: 720px; }
-.hero__actions { justify-content: flex-end; }
-.hero__eyebrow {
-  font-size: 13px;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  color: var(--accent);
-  margin: 0 0 22px;
-  font-weight: 600;
-}
 .hero__title {
   font-size: var(--h1);
   line-height: 0.98;
@@ -493,6 +453,7 @@ label:has(> input[type="radio"]), label:has(> input[type="radio"]) * {
 }
 .hero__actions {
   display: flex; gap: 14px; flex-wrap: wrap;
+  justify-content: flex-end;
 }
 
 /* =============================================================
@@ -604,15 +565,13 @@ label:has(> input[type="radio"]), label:has(> input[type="radio"]) * {
   transform: translateY(-2px);
 }
 
-/* --- outline на тёмном фоне (.btn--ghost — алиас) --- */
-.btn--outline-on-dark,
-.btn--ghost {
+/* --- outline на тёмном фоне --- */
+.btn--outline-on-dark {
   color: #fff;
   border-color: rgba(255, 255, 255, 0.24);
   background: rgba(255, 255, 255, 0.04);
 }
-.btn--outline-on-dark:hover,
-.btn--ghost:hover {
+.btn--outline-on-dark:hover {
   background: rgba(255, 255, 255, 0.12);
   border-color: rgba(255, 255, 255, 0.4);
   color: #fff;
@@ -865,75 +824,6 @@ label:has(> input[type="radio"]), label:has(> input[type="radio"]) * {
 .feature .container { position: relative; z-index: 1; }
 
 /* =============================================================
-   NETWORK PARTICLES (Holcim-style pinned scroll)
-   ============================================================= */
-.network {
-  position: relative;
-  z-index: 2;
-  background: var(--ink);
-  color: #fff;
-}
-.network__scroll {
-  height: 260vh;      /* scroll range for particle reveal */
-  position: relative;
-}
-.network__sticky {
-  position: sticky;
-  top: 0;
-  height: 100vh;
-  overflow: hidden;
-  background: radial-gradient(ellipse at 50% 50%, var(--brand-2) 0%, var(--ink) 70%);
-}
-.network__canvas {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  display: block;
-}
-.network__content {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: 0 clamp(24px, 6vw, 96px);
-  max-width: 1240px;
-  margin: 0 auto;
-  z-index: 2;
-  pointer-events: none;
-}
-.network__title {
-  font-size: var(--h2);
-  line-height: 1.05;
-  margin: 0 0 22px;
-  font-weight: 700;
-  letter-spacing: -0.02em;
-  max-width: 720px;
-}
-.network__text {
-  font-size: clamp(1rem, 1.3vw, 1.15rem);
-  color: rgba(255,255,255,0.72);
-  max-width: 520px;
-  margin: 0 0 40px;
-}
-.network__progress {
-  width: min(320px, 60vw);
-  height: 2px;
-  background: rgba(255,255,255,0.12);
-  position: relative;
-  overflow: hidden;
-  border-radius: 2px;
-}
-.network__progress-bar {
-  position: absolute;
-  inset: 0 100% 0 0;
-  background: linear-gradient(90deg, var(--accent), var(--accent-3));
-  border-radius: 2px;
-  transition: right 0.05s linear;
-}
-
-/* =============================================================
    BLOCK 3 — STATS
    ============================================================= */
 .stats {
@@ -962,9 +852,6 @@ label:has(> input[type="radio"]), label:has(> input[type="radio"]) * {
   letter-spacing: -0.03em;
   color: var(--brand);
   font-variant-numeric: tabular-nums;
-}
-.stat__bar span {
-  background: linear-gradient(90deg, var(--brand), var(--accent));
 }
 .stat__label {
   margin-top: 12px;
@@ -1044,11 +931,6 @@ label:has(> input[type="radio"]), label:has(> input[type="radio"]) * {
    Точку фокуса кропа админка задаёт инлайном на внешнем элементе:
    style="--news-media-pos: 50% 30%"
    ------------------------------------------------------------- */
-.news-media {
-  display: block;
-  position: absolute;
-  inset: 0;
-}
 .news-media__img {
   position: absolute;
   inset: 0;
@@ -1364,18 +1246,6 @@ label:has(> input[type="radio"]), label:has(> input[type="radio"]) * {
   .net-hero { display: none; }
 }
 
-/* =============================================================
-   Шапка с постоянной тёмной подложкой (светлые подстраницы)
-   ============================================================= */
-/* на светлой странице подложка одинаковая и до, и после скролла:
-   main.js вешает .is-scrolled и там, вид шапки от этого меняться не должен */
-.header--solid,
-.header--solid.is-scrolled {
-  background: rgba(26, 39, 51, 0.92);
-  backdrop-filter: saturate(140%) blur(14px);
-  -webkit-backdrop-filter: saturate(140%) blur(14px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-}
 .nav__link.is-active {
   color: #fff;
   background: rgba(255, 255, 255, 0.14);
@@ -1561,28 +1431,6 @@ a.info-card__value:hover { color: var(--accent); }
   border-radius: var(--radius-lg);
   padding: clamp(48px, 7vw, 72px) clamp(28px, 5vw, 56px);
   box-shadow: 0 20px 40px -30px rgba(26, 39, 51, 0.35);
-}
-.page-placeholder__icon {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 56px; height: 56px;
-  border-radius: 16px;
-  background: var(--accent-soft);
-  color: var(--accent);
-  margin-bottom: 22px;
-}
-.page-placeholder__icon svg { width: 26px; height: 26px; }
-.page-placeholder__title {
-  margin: 0 0 8px;
-  font-size: 1.2rem;
-  font-weight: 700;
-  color: var(--ink);
-}
-.page-placeholder__text {
-  margin: 0;
-  font-size: 0.98rem;
-  color: var(--ink-2);
 }
 
 /* модификатор: та же скруглённая карточка, но под карту — без паддинга

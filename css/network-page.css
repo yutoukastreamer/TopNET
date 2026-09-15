@@ -123,8 +123,6 @@
   color: var(--brand);
   font-variant-numeric: tabular-nums;
 }
-/* «март 2008» длиннее прочих — держим в одну строку */
-.odo__value--date { font-size: clamp(1.9rem, 2.8vw, 2.6rem); }
 .odo__label {
   display: block;
   margin-top: 12px;
