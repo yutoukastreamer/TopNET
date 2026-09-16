@@ -483,81 +483,38 @@
 }
 
 /* =============================================================
-   СПОЙЛЕР — заготовка для админки (см. news.html).
-   Нативный <details>, JS не нужен. Обёртка .spoiler-template
-   лежит в разметке с атрибутом hidden и на странице не видна;
-   сам .spoiler работает сразу, где бы его ни разместили.
+   «Показать больше» — хвост ленты. Пилюля в стиле вторичных
+   кнопок сайта (.btn.btn--outline из style.css) плюс шеврон.
+   Только визуал: обработчика клика нет.
    ============================================================= */
-.spoiler {
-  margin: 18px 0;
-  border: 1px solid var(--line);
-  border-radius: var(--radius-md);
-  background: var(--bg-alt);
-  overflow: hidden;
-  transition: border-color 0.25s ease, box-shadow 0.25s ease;
-}
-.spoiler[open] {
-  border-color: rgba(14, 90, 167, 0.22);
-  box-shadow: var(--shadow-sm);
-}
-
-/* Шапка-переключатель */
-.spoiler__head {
+.tl-loadmore {
   display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 14px 18px;
-  cursor: pointer;
-  list-style: none;          /* убираем нативный треугольник */
-  color: var(--ink);
-  font-weight: 600;
-  font-size: 1rem;
-  line-height: 1.35;
-  user-select: none;
-  transition: background 0.25s ease, color 0.25s ease;
-}
-.spoiler__head::-webkit-details-marker { display: none; }
-.spoiler__head:hover { background: rgba(14, 90, 167, 0.05); color: var(--brand); }
-.spoiler__head:focus-visible {
-  outline: 2px solid var(--brand);
-  outline-offset: -2px;
-}
-.spoiler__title { flex: 1 1 auto; min-width: 0; }
-
-/* Шеврон: вниз в свёрнутом виде, вверх в раскрытом */
-.spoiler__icon {
-  flex: 0 0 auto;
-  display: inline-flex;
-  align-items: center;
   justify-content: center;
-  width: 28px;
-  height: 28px;
-  border-radius: 50%;
-  background: var(--accent-soft);
-  color: var(--accent-soft-ink);
-  transition: transform 0.3s cubic-bezier(0.2, 0.7, 0.2, 1), background 0.25s ease;
+  margin-top: clamp(34px, 5vw, 56px);
 }
-.spoiler__icon svg { width: 16px; height: 16px; display: block; }
-.spoiler[open] .spoiler__icon { transform: rotate(180deg); }
-
-/* Содержимое */
-.spoiler__body {
-  padding: 2px 18px 18px;
-  color: var(--ink-2);
-  font-size: 1rem;
-  line-height: 1.6;
+.tl-loadmore__btn {
+  gap: 10px;
 }
-.spoiler__body > :first-child { margin-top: 0; }
-.spoiler__body > :last-child { margin-bottom: 0; }
-.spoiler__body a { color: var(--brand); }
-
-@media (max-width: 560px) {
-  .spoiler__head { padding: 12px 14px; font-size: 0.95rem; }
-  .spoiler__body { padding: 2px 14px 14px; }
+.tl-loadmore__chev {
+  display: inline-flex;
+  flex: 0 0 auto;
+  width: 18px;
+  height: 18px;
+  transition: transform 0.3s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.tl-loadmore__chev svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+/* шеврон слегка «клюёт» вниз, пока сама кнопка приподнимается (.btn--outline:hover) */
+.tl-loadmore__btn:hover .tl-loadmore__chev,
+.tl-loadmore__btn:focus-visible .tl-loadmore__chev {
+  transform: translateY(3px);
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .spoiler,
-  .spoiler__head,
-  .spoiler__icon { transition: none; }
+  .tl-loadmore__chev { transition: none; }
+  .tl-loadmore__btn:hover .tl-loadmore__chev,
+  .tl-loadmore__btn:focus-visible .tl-loadmore__chev { transform: none; }
 }

@@ -352,21 +352,15 @@
         </article>
 
       </div>
-      
-      <div class="spoiler-template" data-spoiler-template hidden>
 
-        <details class="spoiler">
-          <summary class="spoiler__head">
-            <span class="spoiler__title">Заголовок спойлера</span>
-            <span class="spoiler__icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            </span>
-          </summary>
-          <div class="spoiler__body">
-            <p>Скрытый текст спойлера.</p>
-          </div>
-        </details>
-
+      <!-- «Показать больше» — пока только визуал, обработчика нет -->
+      <div class="tl-loadmore">
+        <button type="button" class="btn btn--outline tl-loadmore__btn">
+          Показать больше
+          <span class="tl-loadmore__chev" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+        </button>
       </div>
     </div>
   </main>
