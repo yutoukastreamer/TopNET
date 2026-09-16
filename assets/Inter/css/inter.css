@@ -93,7 +93,8 @@
 }
 @font-face {
   font-family: Inter;
-  src: url('../font/Inter-RegularItalic.woff2') format('woff2'), url('../font/Inter-RegularItalic.woff') format('woff');
+  /* fixed: имя файла в комплекте не совпадало со ссылкой */
+  src: url('../font/Inter-Italic.woff2') format('woff2'), url('../font/Inter-Italic.woff') format('woff');
   font-weight: 400;
   font-style: italic;
   font-display: swap;
