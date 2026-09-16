@@ -1046,8 +1046,7 @@ label:has(> input[type="radio"]), label:has(> input[type="radio"]) * {
   transform: translate(5px, -5px);
 }
 
-/* Text block anchored to the bottom — the excerpt expands on hover and
-   pushes the title upwards (reference: second state) */
+/* Text block anchored to the bottom — только заголовок */
 .news-card__content {
   position: absolute;
   left: clamp(18px, 2vw, 28px);
@@ -1064,25 +1063,6 @@ label:has(> input[type="radio"]), label:has(> input[type="radio"]) * {
   font-weight: 700;
   letter-spacing: -0.015em;
   text-shadow: 0 2px 12px rgba(26, 39, 51, 0.35);
-}
-.news-card__excerpt-wrap {
-  display: grid;
-  grid-template-rows: 0fr;
-  opacity: 0;
-  transition: grid-template-rows 0.45s cubic-bezier(0.2, 0.7, 0.2, 1), opacity 0.35s ease;
-}
-.news-card__link:hover .news-card__excerpt-wrap,
-.news-card__link:focus-visible .news-card__excerpt-wrap {
-  grid-template-rows: 1fr;
-  opacity: 1;
-}
-.news-card__excerpt {
-  overflow: hidden;
-  margin: 0;
-  padding-top: 16px;
-  font-size: clamp(1rem, 1.15vw, 1.12rem);
-  line-height: 1.45;
-  color: rgba(255, 255, 255, 0.92);
 }
 
 /* =============================================================
