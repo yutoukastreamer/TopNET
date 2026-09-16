@@ -231,6 +231,15 @@
 .tl-card.is-open .tl-card__media--grid {
   aspect-ratio: 4 / 1;
 }
+
+/* У новости два файла под два слота: 232×174 в ленте и 930×372 в развороте.
+   Оба <img> лежат в одном .tl-card__media и абсолютно позиционированы
+   (см. .news-media__img в style.css) — показываем тот, что подходит
+   текущему состоянию карточки. */
+.news-media__img--wide { display: none; }
+.tl-card.is-open .news-media__img--thumb { display: none; }
+.tl-card.is-open .news-media__img--wide { display: block; }
+
 .tl-card__media--grid::before {
   content: "";
   position: absolute;
